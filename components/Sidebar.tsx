@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import type { RegionId } from "@/lib/types";
 
 export type DashboardTab =
@@ -50,6 +51,17 @@ export function Sidebar({
   isOpenMobile,
   onCloseMobile
 }: SidebarProps) {
+  // ESC key listener to close mobile drawer
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpenMobile) {
+        onCloseMobile();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpenMobile, onCloseMobile]);
+
   return (
     <>
       {/* Mobile Backdrop Overlay */}

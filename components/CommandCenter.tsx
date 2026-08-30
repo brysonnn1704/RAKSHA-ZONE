@@ -53,39 +53,39 @@ export function CommandCenter({
   return (
     <div className="space-y-6">
       {/* 1. Canonical 4-Card KPI Row */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2.5 sm:gap-3 sm:grid-cols-4">
         {/* KPI 1: Origin/Affected Settlements */}
-        <div className="rounded-lg border border-slate-200 bg-white p-4 space-y-1 shadow-2xs">
-          <span className="text-xs text-slate-500 font-medium">Origin Settlements</span>
-          <p className="text-2xl font-bold font-mono text-slate-900">{originFeatures.length}</p>
-          <span className="text-[11px] text-slate-500">{corridorSubtitle}</span>
+        <div className="rounded-lg border border-slate-200 bg-white p-3.5 sm:p-4 space-y-0.5 sm:space-y-1 shadow-2xs">
+          <span className="text-[11px] sm:text-xs text-slate-500 font-medium">Origin Settlements</span>
+          <p className="text-xl sm:text-2xl font-bold font-mono text-slate-900">{originFeatures.length}</p>
+          <span className="text-[10px] sm:text-[11px] text-slate-500 line-clamp-1">{corridorSubtitle}</span>
         </div>
 
         {/* KPI 2: Displacement Target */}
-        <div className="rounded-lg border border-slate-200 bg-white p-4 space-y-1 shadow-2xs">
-          <span className="text-xs text-slate-500 font-medium">Displacement Target</span>
-          <p className="text-2xl font-bold font-mono text-slate-900">
+        <div className="rounded-lg border border-slate-200 bg-white p-3.5 sm:p-4 space-y-0.5 sm:space-y-1 shadow-2xs">
+          <span className="text-[11px] sm:text-xs text-slate-500 font-medium">Displacement Target</span>
+          <p className="text-xl sm:text-2xl font-bold font-mono text-slate-900">
             {capacityGapResult.total_requiring_relocation.toLocaleString()}
           </p>
-          <span className="text-[11px] text-slate-500">Immediate & short-term demand</span>
+          <span className="text-[10px] sm:text-[11px] text-slate-500 line-clamp-1">Immediate & short-term demand</span>
         </div>
 
         {/* KPI 3: Candidate Safe Headroom */}
-        <div className="rounded-lg border border-slate-200 bg-white p-4 space-y-1 shadow-2xs">
-          <span className="text-xs text-slate-500 font-medium">Candidate Safe Headroom</span>
-          <p className="text-2xl font-bold font-mono text-slate-900">
+        <div className="rounded-lg border border-slate-200 bg-white p-3.5 sm:p-4 space-y-0.5 sm:space-y-1 shadow-2xs">
+          <span className="text-[11px] sm:text-xs text-slate-500 font-medium">Candidate Safe Headroom</span>
+          <p className="text-xl sm:text-2xl font-bold font-mono text-slate-900">
             {capacityGapResult.total_available_capacity.toLocaleString()}
           </p>
-          <span className="text-[11px] text-slate-500">
+          <span className="text-[10px] sm:text-[11px] text-slate-500 line-clamp-1">
             Across {candidateFeatures.length} safe candidate hubs
           </span>
         </div>
 
         {/* KPI 4: Capacity Balance */}
-        <div className="rounded-lg border border-slate-200 bg-white p-4 space-y-1 shadow-2xs">
-          <span className="text-xs text-slate-500 font-medium">Capacity Balance</span>
+        <div className="rounded-lg border border-slate-200 bg-white p-3.5 sm:p-4 space-y-0.5 sm:space-y-1 shadow-2xs">
+          <span className="text-[11px] sm:text-xs text-slate-500 font-medium">Capacity Balance</span>
           <p
-            className={`text-2xl font-bold font-mono ${
+            className={`text-xl sm:text-2xl font-bold font-mono ${
               capacityGapResult.capacity_deficit > 0 ? "text-red-600" : "text-emerald-600"
             }`}
           >
@@ -93,7 +93,7 @@ export function CommandCenter({
               ? `-${capacityGapResult.capacity_deficit.toLocaleString()}`
               : "Sufficient"}
           </p>
-          <span className="text-[11px] text-slate-500">
+          <span className="text-[10px] sm:text-[11px] text-slate-500 line-clamp-1">
             {capacityGapResult.capacity_deficit > 0
               ? "Regional safe site deficit"
               : "Safe carrying capacity headroom"}
@@ -102,9 +102,9 @@ export function CommandCenter({
       </div>
 
       {/* 2. Main Content: Map (Left) + Selected Habitation Profile (Right) */}
-      <div className="grid gap-5 lg:grid-cols-[1.8fr_1.1fr]">
+      <div className="grid gap-4 sm:gap-5 lg:grid-cols-[1.8fr_1.1fr]">
         {/* Left: GIS Map */}
-        <div className="h-[520px] rounded-lg border border-slate-200 overflow-hidden bg-white shadow-2xs">
+        <div className="h-[340px] sm:h-[420px] lg:h-[520px] rounded-lg border border-slate-200 overflow-hidden bg-white shadow-2xs">
           <MapView
             features={features}
             assessments={assessments}

@@ -19,7 +19,6 @@ import { computeSiteResourceGaps } from "@/lib/resources";
 import type { RegionId, WeightSet } from "@/lib/types";
 
 import { Sidebar, type DashboardTab } from "./Sidebar";
-import { RegionSelector } from "./RegionSelector";
 import { RegionBackground } from "./RegionBackground";
 import { CommandCenter } from "./CommandCenter";
 import { HazardCascadePanel } from "./HazardCascadePanel";
@@ -139,12 +138,19 @@ export function Dashboard() {
       ? "Himalayan Relocation Priority Score"
       : "Relocation Priority Score";
 
+  const scenarioShortLabel =
+    region === "nepal"
+      ? "Nepal–Tibet • Cascade"
+      : region === "assam"
+      ? "Assam • Flood"
+      : "Wayanad • Landslide";
+
   return (
-    <div className="relative min-h-screen text-slate-900 flex">
+    <div className="relative min-h-screen text-slate-900 flex overflow-x-hidden">
       {/* Subtle Photographic Regional Background Layer */}
       <RegionBackground region={region} />
 
-      {/* 1. Left Sidebar Navigation */}
+      {/* 1. Left Sidebar Navigation (Single Source of Truth for Active Scenario) */}
       <Sidebar
         activeTab={activeTab}
         onSelectTab={setActiveTab}
@@ -165,51 +171,47 @@ export function Dashboard() {
       />
 
       {/* 2. Main Content Area */}
-      <div className="relative z-10 flex-1 flex flex-col min-w-0">
-        {/* Top Header Bar */}
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/95 backdrop-blur-xs px-4 md:px-8">
-          <div className="flex items-center gap-3">
+      <div className="relative z-10 flex-1 flex flex-col min-w-0 w-full">
+        {/* Top Header Bar — Clean Contextual Header without Duplicate Selector */}
+        <header className="sticky top-0 z-30 flex h-14 sm:h-16 items-center justify-between border-b border-slate-200 bg-white/95 backdrop-blur-xs px-3.5 sm:px-6 md:px-8">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
             {/* Mobile Hamburger Toggle */}
             <button
               type="button"
               onClick={() => setIsMobileSidebarOpen(true)}
-              className="rounded p-1.5 text-slate-600 hover:bg-slate-100 md:hidden"
+              className="rounded p-2 text-slate-700 hover:bg-slate-100 md:hidden flex-shrink-0 touch-manipulation"
               aria-label="Open navigation menu"
             >
-              ☰
+              <span className="text-base font-bold leading-none">☰</span>
             </button>
 
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="rounded bg-slate-100 border border-slate-200 px-2 py-0.5 font-bold font-mono text-[10px] uppercase text-slate-700">
-                  {region === "nepal" ? "Nepal–Tibet Corridor" : region === "assam" ? "Assam Flood Basin" : "Wayanad Landslide Zone"}
+            {/* Header Brand & Scenario Information */}
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="font-bold text-slate-900 text-sm md:hidden truncate">
+                  RAKSHA-ZONE
                 </span>
-                <span className="text-xs font-semibold text-slate-800 hidden sm:inline">
+                <span className="rounded bg-sky-50 border border-sky-200 px-2 py-0.5 font-bold font-mono text-[10px] uppercase text-sky-800 truncate">
+                  {scenarioShortLabel}
+                </span>
+                <span className="text-xs font-semibold text-slate-700 hidden md:inline truncate">
                   {region === "nepal"
-                    ? "Cascading Glacial & Flash Flood DSS"
+                    ? "Cascading Glacial & Flash Flood Decision Support"
                     : region === "assam"
-                    ? "Brahmaputra Basin Flood Inundation"
-                    : "Western Ghats Landslide Vulnerability"}
+                    ? "Brahmaputra Basin Riverine Inundation Model"
+                    : "Western Ghats Landslide Vulnerability DSS"}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Quick Scenario Selector */}
-          <RegionSelector
-            region={region}
-            onSelectRegion={(r) => {
-              setRegion(r);
-              setAffectedOverride(null);
-              setSelectedId(
-                r === "assam"
-                  ? "assam-nagaon-kaliabor"
-                  : r === "nepal"
-                  ? "nep-timure"
-                  : "mundakkai"
-              );
-            }}
-          />
+          {/* Right Header Status Indicator */}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <span className="hidden sm:flex items-center gap-1.5 rounded-full bg-slate-100/80 border border-slate-200 px-2.5 py-1 text-[11px] font-medium text-slate-600">
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              <span>Offline Engine</span>
+            </span>
+          </div>
         </header>
 
         {/* Dynamic View Body */}
