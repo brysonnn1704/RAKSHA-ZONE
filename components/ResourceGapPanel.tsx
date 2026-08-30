@@ -8,9 +8,9 @@ interface ResourceGapPanelProps {
 }
 
 const statusBadgeStyles: Record<ResourceStatus, string> = {
-  adequate: "bg-emerald-950/60 text-emerald-300 border-emerald-800/80",
-  warning: "bg-amber-950/60 text-amber-300 border-amber-800/80",
-  critical: "bg-red-950/60 text-red-300 border-red-800/80"
+  adequate: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  warning: "bg-amber-50 text-amber-700 border-amber-200",
+  critical: "bg-red-50 text-red-700 border-red-200"
 };
 
 export function ResourceGapPanel({ siteGaps }: ResourceGapPanelProps) {
@@ -42,8 +42,8 @@ export function ResourceGapPanel({ siteGaps }: ResourceGapPanelProps) {
 
   if (!currentSite) {
     return (
-      <div className="p-4 text-xs text-slate-400">
-        No candidate shelter resource inventory records available.
+      <div className="p-4 text-xs text-slate-500">
+        No candidate shelter resource inventory records available for active scenario.
       </div>
     );
   }
@@ -61,7 +61,7 @@ export function ResourceGapPanel({ siteGaps }: ResourceGapPanelProps) {
       status: currentSite.statuses.water,
       deficit: currentSite.deficits.water_litres > 0 ? `-${currentSite.deficits.water_litres.toLocaleString()} L/day` : "Surplus",
       action: currentSite.deficits.water_litres > 0
-        ? `Deploy PHE water bowsers to replenish ${currentSite.deficits.water_litres.toLocaleString()} L/day.`
+        ? `Deploy emergency water bowsers and filtration units to replenish ${currentSite.deficits.water_litres.toLocaleString()} L/day.`
         : "Current water buffer meets 7-day emergency operational standard."
     },
     {
@@ -74,7 +74,7 @@ export function ResourceGapPanel({ siteGaps }: ResourceGapPanelProps) {
       status: currentSite.statuses.food,
       deficit: currentSite.deficits.meals_per_day > 0 ? `-${currentSite.deficits.meals_per_day.toLocaleString()} Meals/day` : "Surplus",
       action: currentSite.deficits.meals_per_day > 0
-        ? `Procure ${currentSite.deficits.meals_per_day.toLocaleString()} additional daily meal rations from FCS&CA buffer.`
+        ? `Procure ${currentSite.deficits.meals_per_day.toLocaleString()} additional daily meal rations from emergency buffer.`
         : "Food ration stocks sufficient for planned intake."
     },
     {
@@ -87,7 +87,7 @@ export function ResourceGapPanel({ siteGaps }: ResourceGapPanelProps) {
       status: currentSite.statuses.medical,
       deficit: currentSite.deficits.medical_teams > 0 ? `-${currentSite.deficits.medical_teams} Teams` : "Surplus",
       action: currentSite.deficits.medical_teams > 0
-        ? `Deploy ${currentSite.deficits.medical_teams} additional medical/triage team(s) from District Civil Hospital.`
+        ? `Deploy ${currentSite.deficits.medical_teams} additional medical/triage team(s) from District Hospital.`
         : "Medical personnel deployed and operational on site."
     },
     {
@@ -100,7 +100,7 @@ export function ResourceGapPanel({ siteGaps }: ResourceGapPanelProps) {
       status: currentSite.statuses.shelter,
       deficit: currentSite.deficits.shelter_units > 0 ? `-${currentSite.deficits.shelter_units} Units` : "Surplus",
       action: currentSite.deficits.shelter_units > 0
-        ? `Mobilize ${currentSite.deficits.shelter_units} high-capacity family shelter tents from SDRF cache.`
+        ? `Mobilize ${currentSite.deficits.shelter_units} high-capacity family shelter tents from emergency cache.`
         : "Shelter structures adequate for assigned displaced capacity."
     },
     {
@@ -134,38 +134,38 @@ export function ResourceGapPanel({ siteGaps }: ResourceGapPanelProps) {
   return (
     <section className="space-y-6">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
         <div>
-          <h2 className="text-base font-semibold text-white">
+          <h2 className="text-base font-bold text-slate-900">
             Relief Resource Sufficiency Matrix
           </h2>
-          <p className="text-xs text-slate-400">
-            Sphere Minimum Standards & NDRF norms: Drinking Water (50L/p/d), Food (3 meals/d), Medical Triage, Sanitation, and Backup Power.
+          <p className="text-xs text-slate-600">
+            Sphere Minimum Standards & emergency norms: Drinking Water (50L/p/d), Food (3 meals/d), Medical Triage, Sanitation, and Backup Power.
           </p>
         </div>
 
         {/* Global Summary Badges */}
         <div className="flex items-center gap-2 text-xs">
-          <span className="rounded border border-red-800/80 bg-red-950/60 px-2 py-0.5 font-mono font-medium text-red-300">
+          <span className="rounded border border-red-200 bg-red-50 px-2 py-0.5 font-mono font-bold text-red-700">
             {criticalCount} Critical Deficits
           </span>
-          <span className="rounded border border-amber-800/80 bg-amber-950/60 px-2 py-0.5 font-mono font-medium text-amber-300">
+          <span className="rounded border border-amber-200 bg-amber-50 px-2 py-0.5 font-mono font-bold text-amber-700">
             {warningCount} Warnings
           </span>
-          <span className="rounded border border-emerald-800/80 bg-emerald-950/60 px-2 py-0.5 font-mono font-medium text-emerald-300">
+          <span className="rounded border border-emerald-200 bg-emerald-50 px-2 py-0.5 font-mono font-bold text-emerald-700">
             {adequateCount} Adequate
           </span>
         </div>
       </div>
 
       {/* Shelter Site Selector Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded border border-slate-800 bg-slate-900 p-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-3 shadow-2xs">
         <div className="flex items-center gap-2 text-xs">
-          <label className="text-slate-400">Inspect Relocation Site:</label>
+          <label className="text-slate-600 font-semibold">Inspect Relocation Site:</label>
           <select
             value={activeSiteId}
             onChange={(e) => setSelectedSiteId(e.target.value)}
-            className="rounded border border-slate-700 bg-slate-850 px-2.5 py-1 text-xs text-slate-100 focus:border-slate-500 focus:outline-none"
+            className="rounded border border-slate-300 bg-slate-50 px-2.5 py-1 text-xs text-slate-800 focus:border-sky-500 focus:outline-none"
           >
             {siteGaps.map((s) => (
               <option key={s.site_id} value={s.site_id}>
@@ -175,15 +175,15 @@ export function ResourceGapPanel({ siteGaps }: ResourceGapPanelProps) {
           </select>
         </div>
 
-        <div className="text-xs text-slate-400">
-          Intake Target: <b className="font-mono text-white">{pop.toLocaleString()} persons</b>
+        <div className="text-xs text-slate-600">
+          Intake Target: <b className="font-mono text-slate-900 font-bold">{pop.toLocaleString()} persons</b>
         </div>
       </div>
 
       {/* Operational Table */}
-      <div className="overflow-x-auto rounded border border-slate-800">
-        <table className="w-full text-left text-xs text-slate-300">
-          <thead className="bg-slate-900 text-slate-400 uppercase text-[10px] border-b border-slate-800">
+      <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-2xs">
+        <table className="w-full text-left text-xs text-slate-700">
+          <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] border-b border-slate-200">
             <tr>
               <th className="p-3">Lifeline Commodity</th>
               <th className="p-3">Required Demand</th>
@@ -194,38 +194,38 @@ export function ResourceGapPanel({ siteGaps }: ResourceGapPanelProps) {
               <th className="p-3 text-right">Logistics Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800 bg-slate-900/40">
+          <tbody className="divide-y divide-slate-100">
             {commodityRows.map((row) => {
               const isExpanded = !!expandedRows[row.id];
               return (
                 <tr
                   key={row.id}
                   onClick={() => toggleRow(row.id)}
-                  className="cursor-pointer hover:bg-slate-850/60 transition"
+                  className="cursor-pointer hover:bg-slate-50 transition"
                 >
                   <td className="p-3">
-                    <span className="font-semibold text-white block">{row.name}</span>
+                    <span className="font-bold text-slate-900 block">{row.name}</span>
                     {isExpanded && <span className="text-[11px] text-slate-500 block mt-0.5">{row.norm}</span>}
                   </td>
-                  <td className="p-3 font-mono text-slate-200">{row.required}</td>
-                  <td className="p-3 font-mono text-slate-300">{row.available}</td>
-                  <td className={`p-3 font-mono font-semibold ${row.deficit.startsWith("-") ? "text-red-400" : "text-emerald-400"}`}>
+                  <td className="p-3 font-mono text-slate-800">{row.required}</td>
+                  <td className="p-3 font-mono text-slate-600">{row.available}</td>
+                  <td className={`p-3 font-mono font-bold ${row.deficit.startsWith("-") ? "text-red-600" : "text-emerald-700"}`}>
                     {row.deficit}
                   </td>
-                  <td className="p-3 font-mono text-slate-200">{row.coverage}%</td>
+                  <td className="p-3 font-mono text-slate-800">{row.coverage}%</td>
                   <td className="p-3">
                     <span
-                      className={`rounded px-2 py-0.5 text-[9px] font-medium uppercase font-mono ${
+                      className={`rounded px-2 py-0.5 text-[9px] font-bold uppercase font-mono border ${
                         statusBadgeStyles[row.status]
                       }`}
                     >
                       {row.status}
                     </span>
                   </td>
-                  <td className="p-3 text-right text-xs text-slate-400">
+                  <td className="p-3 text-right text-xs text-slate-500">
                     <span className="block">{isExpanded ? "▲ Hide" : "▼ Action"}</span>
                     {isExpanded && (
-                      <span className="text-slate-300 text-xs block mt-1.5 text-left bg-slate-950 p-2.5 rounded border border-slate-800">
+                      <span className="text-slate-800 text-xs block mt-1.5 text-left bg-slate-50 p-2.5 rounded border border-slate-200">
                         {row.action}
                       </span>
                     )}

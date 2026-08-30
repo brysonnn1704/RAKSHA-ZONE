@@ -19,7 +19,7 @@ interface ResourceConfigState {
 }
 
 export default function ResourcesPage() {
-  const [region, setRegion] = useState<RegionId>("assam");
+  const [region, setRegion] = useState<RegionId>("nepal");
   const features = useMemo(() => getRegionFeatures(region), [region]);
   const originFeatures = useMemo(() => features.filter((f) => f.properties.role === "origin"), [features]);
 
@@ -141,27 +141,27 @@ export default function ResourcesPage() {
   }, [activePopulation, assumptions]);
 
   return (
-    <main className="min-h-screen bg-[#090d16] p-4 text-slate-200 md:p-8">
-      <div className="mx-auto max-w-7xl space-y-8">
+    <main className="min-h-screen bg-slate-50 p-4 text-slate-900 md:p-8">
+      <div className="mx-auto max-w-7xl space-y-6">
         {/* Navigation & Header */}
-        <header className="border-b border-slate-800 pb-4 space-y-4">
+        <header className="border-b border-slate-200 pb-4 space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="space-y-0.5">
-              <span className="text-[11px] font-mono uppercase text-slate-400 block tracking-wider">
+              <span className="text-[11px] font-mono uppercase text-slate-500 block tracking-wider font-bold">
                 SIH26191 • NDRF / SDMA Logistics Support
               </span>
-              <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white">
+              <h1 className="text-xl md:text-2xl font-bold tracking-tight text-slate-900">
                 Disaster Response Lifeline Resource Planning & Logistics Engine
               </h1>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-600">
                 Logistics and material requirements modeling for emergency relocation and shelter operations.
               </p>
             </div>
-            <nav className="flex items-center gap-4 text-xs text-slate-400">
-              <Link href="/" className="hover:text-white transition">
+            <nav className="flex items-center gap-4 text-xs font-semibold text-slate-600">
+              <Link href="/" className="text-sky-700 hover:underline">
                 ← Main Platform
               </Link>
-              <Link href="/capacity" className="hover:text-white transition">
+              <Link href="/capacity" className="text-sky-700 hover:underline">
                 Capacity Dashboard →
               </Link>
             </nav>
@@ -179,16 +179,15 @@ export default function ResourcesPage() {
           </div>
         </header>
 
-
         {/* Population & Scenario Selector */}
-        <section className="rounded-lg border border-slate-800 bg-slate-900 p-4 space-y-3.5">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-2.5">
+        <section className="rounded-lg border border-slate-200 bg-white p-4 space-y-3.5 shadow-2xs">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-2.5">
             <div>
-              <h2 className="text-sm font-bold uppercase tracking-wider text-slate-200">Displacement Scenario Parameters</h2>
-              <p className="text-xs text-slate-400">Select an affected origin village or input a custom disaster population.</p>
+              <h2 className="text-sm font-bold uppercase tracking-wider text-slate-800">Displacement Scenario Parameters</h2>
+              <p className="text-xs text-slate-500">Select an affected origin village or input a custom disaster population.</p>
             </div>
             <div className="flex flex-wrap items-center gap-1.5 text-xs">
-              <span className="text-slate-400 text-[11px]">Origins:</span>
+              <span className="text-slate-500 text-[11px] font-semibold">Origins:</span>
               {originFeatures.slice(0, 6).map((feat) => (
                 <button
                   key={feat.properties.id}
@@ -196,10 +195,10 @@ export default function ResourcesPage() {
                     setSelectedOriginId(feat.properties.id);
                     setCustomPopulation(null);
                   }}
-                  className={`rounded border px-2 py-0.5 text-xs transition ${
+                  className={`rounded border px-2 py-0.5 text-xs transition font-semibold ${
                     activeSelectedOriginId === feat.properties.id && customPopulation === null
-                      ? "border-sky-500 bg-sky-950 text-sky-300 font-semibold"
-                      : "border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-750"
+                      ? "border-sky-500 bg-sky-50 text-sky-900"
+                      : "border-slate-300 bg-slate-100 text-slate-700 hover:bg-slate-200"
                   }`}
                 >
                   {feat.properties.name} ({feat.properties.affected_population ?? feat.properties.current_population})
@@ -210,28 +209,28 @@ export default function ResourcesPage() {
 
           {selectedOrigin && (
             <div className="grid gap-3 md:grid-cols-3 text-xs">
-              <div className="rounded border border-slate-800 bg-slate-850 p-2.5">
-                <span className="text-[10px] uppercase font-semibold text-slate-400">Target Settlement</span>
-                <p className="text-sm font-bold text-slate-100 mt-0.5">{selectedOrigin.properties.name}</p>
-                <p className="text-[11px] text-orange-400 mt-0.5">
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-2.5">
+                <span className="text-[10px] uppercase font-bold text-slate-500">Target Settlement</span>
+                <p className="text-sm font-bold text-slate-900 mt-0.5">{selectedOrigin.properties.name}</p>
+                <p className="text-[11px] text-orange-700 font-medium mt-0.5">
                   {selectedOrigin.properties.district ? `District: ${selectedOrigin.properties.district} · ` : ""}
                   Hazard: {selectedOrigin.properties.flood_hazard_class ?? selectedOrigin.properties.hazard_class_landslide}
                 </p>
               </div>
-              <div className="rounded border border-slate-800 bg-slate-850 p-2.5">
-                <span className="text-[10px] uppercase font-semibold text-slate-400">Target Displaced Population</span>
-                <p className="text-sm font-bold font-mono text-sky-400 mt-0.5">{activePopulation.toLocaleString()} persons</p>
-                <p className="text-[11px] text-slate-400 mt-0.5">{customPopulation ? "Custom count override" : "Verified SitRep baseline"}</p>
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-2.5">
+                <span className="text-[10px] uppercase font-bold text-slate-500">Target Displaced Population</span>
+                <p className="text-sm font-bold font-mono text-sky-700 mt-0.5">{activePopulation.toLocaleString()} persons</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">{customPopulation ? "Custom count override" : "Verified SitRep baseline"}</p>
               </div>
-              <div className="rounded border border-slate-800 bg-slate-850 p-2.5">
-                <label className="text-[10px] uppercase font-semibold text-slate-400 block mb-1">Custom Population Input</label>
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-2.5">
+                <label className="text-[10px] uppercase font-bold text-slate-500 block mb-1">Custom Population Input</label>
                 <input
                   type="number"
                   min="1"
                   max="50000"
                   value={activePopulation}
                   onChange={(e) => setCustomPopulation(Math.max(1, Number(e.target.value)))}
-                  className="w-full rounded bg-slate-900 px-2 py-1 text-xs text-slate-100 border border-slate-700 focus:border-sky-500 focus:outline-none font-mono"
+                  className="w-full rounded bg-white px-2 py-1 text-xs text-slate-900 border border-slate-300 focus:border-sky-500 focus:outline-none font-mono font-bold"
                 />
               </div>
             </div>
@@ -240,26 +239,26 @@ export default function ResourcesPage() {
 
         {/* Global Resource Requirements Cards */}
         <section className="space-y-3">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300">Total Commodity & Lifeline Requirements</h2>
+          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-700">Total Commodity & Lifeline Requirements</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {dynamicEstimates.map((item) => (
               <div
                 key={item.resource}
-                className="rounded-md border border-slate-800 bg-slate-900 p-3.5 space-y-2"
+                className="rounded-lg border border-slate-200 bg-white p-3.5 space-y-2 shadow-2xs"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-800">
                     {item.assumption.name}
                   </span>
-                  <span className="rounded bg-slate-800 border border-slate-700 px-1.5 py-0.2 text-[9px] font-mono text-slate-400">
+                  <span className="rounded bg-slate-100 border border-slate-300 px-1.5 py-0.5 text-[9px] font-mono font-bold text-slate-700">
                     {item.confidence}
                   </span>
                 </div>
-                <p className="font-mono text-xl font-bold text-sky-400">
-                  {item.required.toLocaleString()} <span className="text-xs font-normal text-slate-400">{item.unit}</span>
+                <p className="font-mono text-xl font-bold text-sky-700">
+                  {item.required.toLocaleString()} <span className="text-xs font-medium text-slate-500">{item.unit}</span>
                 </p>
-                <p className="text-[11px] text-slate-400 leading-snug">{item.calculation}</p>
-                <div className="border-t border-slate-800 pt-1.5 text-[10px] text-slate-500">
+                <p className="text-[11px] text-slate-600 leading-snug">{item.calculation}</p>
+                <div className="border-t border-slate-100 pt-1.5 text-[10px] text-slate-500">
                   Norm: {item.assumption.value} {item.assumption.unit} ({item.assumption.source})
                 </div>
               </div>
@@ -271,9 +270,9 @@ export default function ResourcesPage() {
         {plan && (
           <div className="grid gap-4 lg:grid-cols-[1.2fr_1fr]">
             {/* Per-Site Relocation Breakdown */}
-            <section className="rounded-lg border border-slate-800 bg-slate-900 p-4 space-y-3">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-200">Per-Site Relocation & Commodity Breakdown</h2>
-              <p className="text-[11px] text-slate-400">
+            <section className="rounded-lg border border-slate-200 bg-white p-4 space-y-3 shadow-2xs">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-800">Per-Site Relocation & Commodity Breakdown</h2>
+              <p className="text-[11px] text-slate-500">
                 Displaced population allocated across candidate sites with site-specific daily commodity demand.
               </p>
 
@@ -285,31 +284,31 @@ export default function ResourcesPage() {
                   const mealsPerDay = pop * assumptions.meals_per_day;
 
                   return (
-                    <div key={alloc.site_id} className="rounded border border-slate-800 bg-slate-850 p-3 space-y-2">
+                    <div key={alloc.site_id} className="rounded-lg border border-slate-200 bg-slate-50 p-3 space-y-2">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div>
-                          <h3 className="text-xs font-bold text-slate-100">{alloc.site_name}</h3>
-                          <p className="text-[11px] text-slate-400">
-                            Allocated: <b className="font-mono text-emerald-400">{pop.toLocaleString()}</b> · Distance: <span className="font-mono">{alloc.distance_km} km</span>
+                          <h3 className="text-xs font-bold text-slate-900">{alloc.site_name}</h3>
+                          <p className="text-[11px] text-slate-600">
+                            Allocated: <b className="font-mono text-emerald-700 font-bold">{pop.toLocaleString()}</b> · Distance: <span className="font-mono">{alloc.distance_km} km</span>
                           </p>
                         </div>
-                        <span className="rounded bg-slate-900 border border-slate-700 px-2 py-0.5 text-[10px] font-mono text-sky-400">
+                        <span className="rounded bg-sky-50 border border-sky-300 px-2 py-0.5 text-[10px] font-mono font-bold text-sky-800">
                           Suitability: {alloc.suitability_score.toFixed(3)}
                         </span>
                       </div>
 
-                      <div className="grid grid-cols-3 gap-2 text-[11px] border-t border-slate-800 pt-2">
-                        <div className="rounded bg-slate-900 p-1.5">
-                          <span className="text-[10px] text-slate-400 block">Water / Day</span>
-                          <p className="font-mono font-semibold text-slate-200">{waterPerDay.toLocaleString()} L</p>
+                      <div className="grid grid-cols-3 gap-2 text-[11px] border-t border-slate-200 pt-2">
+                        <div className="rounded bg-white p-1.5 border border-slate-200">
+                          <span className="text-[10px] text-slate-500 block">Water / Day</span>
+                          <p className="font-mono font-bold text-slate-900">{waterPerDay.toLocaleString()} L</p>
                         </div>
-                        <div className="rounded bg-slate-900 p-1.5">
-                          <span className="text-[10px] text-slate-400 block">Shelters</span>
-                          <p className="font-mono font-semibold text-slate-200">{shelterUnits.toLocaleString()} units</p>
+                        <div className="rounded bg-white p-1.5 border border-slate-200">
+                          <span className="text-[10px] text-slate-500 block">Shelters</span>
+                          <p className="font-mono font-bold text-slate-900">{shelterUnits.toLocaleString()} units</p>
                         </div>
-                        <div className="rounded bg-slate-900 p-1.5">
-                          <span className="text-[10px] text-slate-400 block">Meals / Day</span>
-                          <p className="font-mono font-semibold text-slate-200">{mealsPerDay.toLocaleString()}</p>
+                        <div className="rounded bg-white p-1.5 border border-slate-200">
+                          <span className="text-[10px] text-slate-500 block">Meals / Day</span>
+                          <p className="font-mono font-bold text-slate-900">{mealsPerDay.toLocaleString()}</p>
                         </div>
                       </div>
                     </div>
@@ -317,9 +316,9 @@ export default function ResourcesPage() {
                 })}
 
                 {plan.allocation.unallocated_population > 0 && (
-                  <div className="rounded border border-red-800 bg-red-950/40 p-3 text-xs">
-                    <b className="text-red-300">Unallocated Demand: {plan.allocation.unallocated_population.toLocaleString()} persons</b>
-                    <p className="mt-0.5 text-[11px] text-red-200">
+                  <div className="rounded-lg border border-red-200 bg-red-50/80 p-3 text-xs">
+                    <b className="text-red-900 font-bold">Unallocated Demand: {plan.allocation.unallocated_population.toLocaleString()} persons</b>
+                    <p className="mt-0.5 text-[11px] text-red-800">
                       Existing candidate site headroom is insufficient for the full displaced target. Additional safe land or higher density assumptions required.
                     </p>
                   </div>
@@ -328,9 +327,9 @@ export default function ResourcesPage() {
             </section>
 
             {/* Configurable Assumption Sliders */}
-            <section className="rounded-lg border border-slate-800 bg-slate-900 p-4 space-y-3">
+            <section className="rounded-lg border border-slate-200 bg-white p-4 space-y-3 shadow-2xs">
               <div className="flex items-center justify-between">
-                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-200">Planning Norm Controls</h2>
+                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-800">Planning Norm Controls</h2>
                 <button
                   onClick={() =>
                     setAssumptions({
@@ -342,20 +341,20 @@ export default function ResourcesPage() {
                       sanitation_unit_coverage: RESOURCE_ASSUMPTIONS.people_per_sanitation_unit.value
                     })
                   }
-                  className="text-[11px] text-sky-400 hover:underline"
+                  className="text-[11px] text-sky-700 hover:underline font-bold"
                 >
                   Reset Defaults
                 </button>
               </div>
-              <p className="text-[11px] text-slate-400">
-                Modify standard disaster relief factors (Sphere Standards vs NDRF field scenario).
+              <p className="text-[11px] text-slate-500">
+                Modify standard disaster relief factors (Sphere Standards vs field operational scenarios).
               </p>
 
               <div className="space-y-3 text-xs">
                 <div>
-                  <div className="flex justify-between text-slate-300">
+                  <div className="flex justify-between text-slate-700">
                     <span>Water (Litres/person/day):</span>
-                    <b className="text-sky-400 font-mono">{assumptions.water_litres} L</b>
+                    <b className="text-sky-700 font-mono font-bold">{assumptions.water_litres} L</b>
                   </div>
                   <input
                     type="range"
@@ -370,9 +369,9 @@ export default function ResourcesPage() {
                 </div>
 
                 <div>
-                  <div className="flex justify-between text-slate-300">
+                  <div className="flex justify-between text-slate-700">
                     <span>Shelter Occupancy (people/unit):</span>
-                    <b className="text-sky-400 font-mono">{assumptions.shelter_occupancy}</b>
+                    <b className="text-sky-700 font-mono font-bold">{assumptions.shelter_occupancy}</b>
                   </div>
                   <input
                     type="range"
@@ -386,9 +385,9 @@ export default function ResourcesPage() {
                 </div>
 
                 <div>
-                  <div className="flex justify-between text-slate-300">
+                  <div className="flex justify-between text-slate-700">
                     <span>Meals per Person / Day:</span>
-                    <b className="text-sky-400 font-mono">{assumptions.meals_per_day}</b>
+                    <b className="text-sky-700 font-mono font-bold">{assumptions.meals_per_day}</b>
                   </div>
                   <input
                     type="range"
@@ -402,9 +401,9 @@ export default function ResourcesPage() {
                 </div>
 
                 <div>
-                  <div className="flex justify-between text-slate-300">
+                  <div className="flex justify-between text-slate-700">
                     <span>Transport Vehicle Capacity:</span>
-                    <b className="text-sky-400 font-mono">{assumptions.vehicle_capacity} people/bus</b>
+                    <b className="text-sky-700 font-mono font-bold">{assumptions.vehicle_capacity} people/bus</b>
                   </div>
                   <input
                     type="range"
@@ -418,9 +417,9 @@ export default function ResourcesPage() {
                 </div>
 
                 <div>
-                  <div className="flex justify-between text-slate-300">
+                  <div className="flex justify-between text-slate-700">
                     <span>Healthcare Unit Coverage:</span>
-                    <b className="text-sky-400 font-mono">{assumptions.healthcare_unit_coverage} people/unit</b>
+                    <b className="text-sky-700 font-mono font-bold">{assumptions.healthcare_unit_coverage} people/unit</b>
                   </div>
                   <input
                     type="range"
@@ -434,9 +433,9 @@ export default function ResourcesPage() {
                 </div>
 
                 <div>
-                  <div className="flex justify-between text-slate-300">
+                  <div className="flex justify-between text-slate-700">
                     <span>Sanitation Unit Coverage:</span>
-                    <b className="text-sky-400 font-mono">{assumptions.sanitation_unit_coverage} people/unit</b>
+                    <b className="text-sky-700 font-mono font-bold">{assumptions.sanitation_unit_coverage} people/unit</b>
                   </div>
                   <input
                     type="range"

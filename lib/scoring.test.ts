@@ -173,25 +173,32 @@ test("computeSiteResourceGaps identifies commodity deficits and generates action
   assert.ok(gaps[0].priority_actions.length > 0);
 });
 
-// 10. Region switching between Wayanad and Assam
-test("getRegionFeatures returns independent, isolated datasets for Wayanad and Assam", () => {
+// 10. Region switching between Wayanad, Assam, and Nepal
+test("getRegionFeatures returns independent, isolated datasets for Wayanad, Assam, and Nepal", () => {
   const wayanad = getRegionFeatures("wayanad");
   const assam = getRegionFeatures("assam");
+  const nepal = getRegionFeatures("nepal");
 
   assert.ok(wayanad.length > 0);
   assert.ok(assam.length > 0);
+  assert.ok(nepal.length > 0);
 
   // Wayanad contains mundakkai
   assert.ok(wayanad.some((f) => f.properties.id === "mundakkai"));
-  // Assam does not contain mundakkai
   assert.equal(assam.some((f) => f.properties.id === "mundakkai"), false);
+  assert.equal(nepal.some((f) => f.properties.id === "mundakkai"), false);
 
   // Assam contains kaliabor
   assert.ok(assam.some((f) => f.properties.id === "assam-nagaon-kaliabor"));
+  assert.equal(nepal.some((f) => f.properties.id === "assam-nagaon-kaliabor"), false);
+
+  // Nepal contains timure and syapru besi
+  assert.ok(nepal.some((f) => f.properties.id === "nep-timure"));
+  assert.ok(nepal.some((f) => f.properties.id === "nep-syaprubesi"));
 });
 
-// 11. assessVillages generates full assessment records with smart options
-test("assessVillages computes valid RPS and smart relocation matches for both regions", () => {
+// 11. assessVillages generates full assessment records with smart options across all regions
+test("assessVillages computes valid RPS and smart relocation matches for Wayanad, Assam, and Nepal", () => {
   const wayanadAssessments = assessVillages(getRegionFeatures("wayanad"), DEFAULT_WEIGHTS);
   assert.ok(wayanadAssessments.length > 0);
   assert.ok(wayanadAssessments[0].rps >= 0 && wayanadAssessments[0].rps <= 1);
@@ -199,4 +206,10 @@ test("assessVillages computes valid RPS and smart relocation matches for both re
   const assamAssessments = assessVillages(getRegionFeatures("assam"), DEFAULT_WEIGHTS);
   assert.ok(assamAssessments.length > 0);
   assert.ok(assamAssessments[0].smart_relocation_options!.length > 0);
+
+  const nepalAssessments = assessVillages(getRegionFeatures("nepal"), DEFAULT_WEIGHTS);
+  assert.ok(nepalAssessments.length > 0);
+  assert.ok(nepalAssessments[0].smart_relocation_options!.length > 0);
+  assert.ok(nepalAssessments[0].rps >= 0 && nepalAssessments[0].rps <= 1);
 });
+

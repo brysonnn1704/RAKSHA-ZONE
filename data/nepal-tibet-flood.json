@@ -1,0 +1,156 @@
+{
+  "scenario_id": "nepal-tibet-himalayan-flood-2026",
+  "title": "2026 Nepal–Tibet Border Cascading Himalayan Hazard & Trishuli Flash Flood",
+  "event_date": "2026-08-26",
+  "status": "Research & Decision Support Demonstration",
+  "operational_disclaimer": "Demonstration and research scenario — not an operational government early warning broadcast. Figures reflect preliminary multi-agency field reports and are subject to official revision. Physical trigger under ongoing multi-agency scientific investigation.",
+  "physical_trigger_assessment": {
+    "primary_mechanism": "High-altitude glacier/ice-rock collapse and steep-slope mass wasting",
+    "trigger_status": "Under investigation",
+    "investigation_note": "Multi-agency scientific investigation underway by DHM Nepal, NDRRMA, and international remote sensing teams to verify exact initiation mechanics (ice avalanche vs steep bedrock failure vs proglacial lake breach).",
+    "secondary_mechanism": "Debris-dam blockage, rapid breach, and cascading hyperconcentrated flash flood",
+    "potential_mechanism": "GLOF / Outburst flood component (under investigation)",
+    "hazard_classification": {
+      "primary": "Landslide / Glacier-related Collapse",
+      "secondary": "Flash Flood / Hyperconcentrated Debris Flow",
+      "potential": "Glacial Lake Outburst Flood (GLOF) — Under investigation"
+    }
+  },
+  "corridor_description": {
+    "source_basin": "Lhende Khola / Lhende River Basin (Tibet Autonomous Region / Nepal border headwaters)",
+    "transit_rivers": ["Lhende Khola", "Bhote Koshi", "Trishuli River", "Narayani Basin"],
+    "primary_affected_districts": ["Rasuwa (Nepal)", "Gyirong County / Jilong (Tibet, China)", "Nuwakot (Nepal)", "Dhading (Nepal)"],
+    "key_impact_locations": ["Gyirong Port (Customs/Border)", "Timure (Rasuwa)", "Syapru Besi (Rasuwa)", "Mailung / Trishuli Valley", "Betrawati", "Bidur (Nuwakot)", "Galchhi (Dhading)"]
+  },
+  "macro_impact_summary": {
+    "total_affected_corridor_population": 48200,
+    "displaced_population_target": 14600,
+    "fatalities_confirmed": 8,
+    "missing_reported": 19,
+    "fatalities_status": "Latest reported figure — subject to revision",
+    "missing_status": "Latest reported figure — subject to revision",
+    "inundated_settlements_count": 18,
+    "damaged_bridges": 6,
+    "hydropower_facilities_affected": 3,
+    "hydropower_notes": "Rasuwagadhi (111 MW), Upper Trishuli 3A (60 MW), and Sanjen hydro projects sustained headworks flooding or silt blockages.",
+    "highway_status": "Pasang Lhamu Highway (NH-03 / Syapru Besi–Timure sector) severed by landslide deposition and flood washouts."
+  },
+  "historical_snapshots": [
+    {
+      "period": "26 Aug 2026 — 06:00 to 12:00 NPT",
+      "date": "2026-08-26",
+      "phase": "High-Altitude Collapse & Surge Initiation",
+      "headline": "Massive ice-rock collapse in upper Lhende basin triggers sudden surge down Bhote Koshi",
+      "affected_districts_count": 2,
+      "affected_villages_count": 6,
+      "affected_population": 12500,
+      "relief_camps_active": 4,
+      "distribution_centers_active": 2,
+      "crop_area_hectares": 420,
+      "rivers_above_danger": ["Lhende Khola (Border)", "Bhote Koshi (Timure)"],
+      "source": "Nepal Red Cross Society (NRCS) & NDRRMA Preliminary SitRep No. 1",
+      "source_url": "https://nrcs.org/sitreps/2026/08/rasuwa-flash-flood-01",
+      "confidence": "OFFICIAL"
+    },
+    {
+      "period": "27–28 Aug 2026 — Peak Propagation",
+      "date": "2026-08-27",
+      "phase": "Downstream Propagation & Debris Damming",
+      "headline": "Hyperconcentrated flood wave inundates Timure & Syapru Besi; Trishuli water levels spike at Betrawati",
+      "affected_districts_count": 4,
+      "affected_villages_count": 18,
+      "affected_population": 48200,
+      "relief_camps_active": 12,
+      "distribution_centers_active": 6,
+      "crop_area_hectares": 1650,
+      "rivers_above_danger": ["Bhote Koshi (Syapru Besi)", "Trishuli (Betrawati)", "Trishuli (Bidur)"],
+      "source": "Nepal Department of Hydrology and Meteorology (DHM) Bulletin (27 Aug 2026)",
+      "source_url": "http://dhm.gov.np/hydro-bulletin/2026/08/27",
+      "confidence": "OFFICIAL"
+    },
+    {
+      "period": "29–30 Aug 2026 — Stabilization & Relief",
+      "date": "2026-08-29",
+      "phase": "Receding Peak & Secondary Hazard Watch",
+      "headline": "Floodwaters stabilized along Trishuli corridor; NDRF/Nepal Army clearing highway access to Timure",
+      "affected_districts_count": 4,
+      "affected_villages_count": 18,
+      "affected_population": 36400,
+      "relief_camps_active": 15,
+      "distribution_centers_active": 8,
+      "crop_area_hectares": 1650,
+      "rivers_above_danger": ["Bhote Koshi (Syapru Besi) — Receding below Danger Level"],
+      "source": "NDRRMA Integrated Disaster Situation Report No. 4",
+      "source_url": "https://ndrrma.gov.np/sitrep-rasuwa-2026-08-29",
+      "confidence": "OFFICIAL"
+    }
+  ],
+  "corridor_stations": [
+    {
+      "id": "nep-gyirong",
+      "name": "Gyirong Port / Kyirong Border Zone",
+      "country": "China (Tibet)",
+      "district": "Gyirong County",
+      "coordinates": [85.330, 28.397],
+      "elevation_m": 2750,
+      "hazard_exposure": "High-altitude debris inundation & riverbank scours",
+      "affected_population": 3200,
+      "status": "affected"
+    },
+    {
+      "id": "nep-timure",
+      "name": "Timure Border Customs Post",
+      "country": "Nepal",
+      "district": "Rasuwa",
+      "coordinates": [85.378, 28.280],
+      "elevation_m": 1780,
+      "hazard_exposure": "Flash flood, hyperconcentrated mudflow & road severed",
+      "affected_population": 4800,
+      "status": "active"
+    },
+    {
+      "id": "nep-syaprubesi",
+      "name": "Syapru Besi Valley Settlement",
+      "country": "Nepal",
+      "district": "Rasuwa",
+      "coordinates": [85.340, 28.163],
+      "elevation_m": 1460,
+      "hazard_exposure": "Langtang / Bhote Koshi river confluence surge & bridge collapse",
+      "affected_population": 6600,
+      "status": "active"
+    },
+    {
+      "id": "nep-dhunche-valley",
+      "name": "Dhunche Lowland Corridor",
+      "country": "Nepal",
+      "district": "Rasuwa",
+      "coordinates": [85.298, 28.113],
+      "elevation_m": 1520,
+      "hazard_exposure": "Slope instability and toe erosion from Trishuli surge",
+      "affected_population": 5400,
+      "status": "affected"
+    },
+    {
+      "id": "nep-bidur",
+      "name": "Bidur / Trishuli Urban Basin",
+      "country": "Nepal",
+      "district": "Nuwakot",
+      "coordinates": [85.165, 27.915],
+      "elevation_m": 580,
+      "hazard_exposure": "Riverine flood overflow & siltation across agricultural terraces",
+      "affected_population": 18200,
+      "status": "affected"
+    },
+    {
+      "id": "nep-galchhi",
+      "name": "Galchhi Trishuli Confluence",
+      "country": "Nepal",
+      "district": "Dhading",
+      "coordinates": [85.008, 27.818],
+      "elevation_m": 390,
+      "hazard_exposure": "Downstream backwater surge & sediment accumulation",
+      "affected_population": 10000,
+      "status": "recovering"
+    }
+  ]
+}

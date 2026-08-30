@@ -177,6 +177,7 @@ export function assessVillages(
         name: p.name,
         district: p.district,
         state: p.state,
+        country: p.country,
         role: p.role,
         hss: Number(hss.toFixed(3)),
         hazard_breakdown: {

@@ -11,15 +11,15 @@ import {
   useMap,
   WMSTileLayer
 } from "react-leaflet";
-import type { VillageAssessment, VillageFeature } from "@/lib/types";
+import type { RegionId, VillageAssessment, VillageFeature } from "@/lib/types";
 import type { RelocationPlan } from "@/lib/planning";
 
 const colors: Record<string, string> = {
-  Immediate: "#ef4444", // Red
-  "Short-term": "#f59e0b", // Amber
-  "Medium-term": "#22c55e", // Green
-  candidate: "#0284c7", // Blue
-  candidate_critical: "#8b5cf6" // Violet
+  Immediate: "#dc2626", // High-contrast Red
+  "Short-term": "#d97706", // Amber
+  "Medium-term": "#16a34a", // Green
+  candidate: "#0284c7", // Sky Blue
+  candidate_critical: "#7c3aed" // Violet
 };
 
 function MapViewRecenter({ center, zoom }: { center: [number, number]; zoom: number }) {
@@ -47,7 +47,7 @@ export function MapView({
   bhuvanOverlay: boolean;
   bhuvanLayer: string | null;
   plan?: RelocationPlan;
-  region?: "wayanad" | "assam";
+  region?: RegionId;
 }) {
   const assessmentById = new Map(assessments.map((a) => [a.id, a]));
   const mapbox = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -55,9 +55,14 @@ export function MapView({
     ? `https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/tiles/256/{z}/{x}/{y}?access_token=${mapbox}`
     : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
-  const isAssam = region === "assam";
-  const defaultCenter: [number, number] = isAssam ? [26.55, 93.30] : [11.535, 76.12];
-  const defaultZoom = isAssam ? 8 : 12;
+  const defaultCenter: [number, number] =
+    region === "assam"
+      ? [26.55, 93.30]
+      : region === "nepal"
+      ? [28.18, 85.30]
+      : [11.535, 76.12];
+
+  const defaultZoom = region === "assam" ? 8 : region === "nepal" ? 10 : 12;
 
   // Selected feature coordinates
   const selectedFeature = features.find((f) => f.properties.id === selectedId);
@@ -66,7 +71,6 @@ export function MapView({
   // Find destination coordinates for route line
   let routeCoords: [number, number][] | null = null;
   if (selectedFeature && selectedFeature.properties.role === "origin") {
-    // Check smart relocation option first
     const topSmart = selectedAssessment?.smart_relocation_options?.[0];
     if (topSmart) {
       routeCoords = [
@@ -90,7 +94,7 @@ export function MapView({
       center={defaultCenter}
       zoom={defaultZoom}
       scrollWheelZoom
-      className="rounded-lg border border-slate-800 h-full w-full"
+      className="rounded-lg border border-slate-200 h-full w-full shadow-2xs"
     >
       <MapViewRecenter center={defaultCenter} zoom={defaultZoom} />
 
@@ -119,9 +123,9 @@ export function MapView({
           positions={routeCoords}
           pathOptions={{
             color: "#0284c7",
-            weight: 2.5,
-            dashArray: "5, 6",
-            opacity: 0.9
+            weight: 3,
+            dashArray: "6, 6",
+            opacity: 0.95
           }}
         />
       )}
@@ -146,46 +150,50 @@ export function MapView({
             center={[feature.geometry.coordinates[1], feature.geometry.coordinates[0]]}
             radius={radius}
             pathOptions={{
-              color: isSelected ? "#ffffff" : color,
+              color: isSelected ? "#0f172a" : color,
               fillColor: color,
-              fillOpacity: 0.85,
-              weight: isSelected ? 2.5 : 1.5
+              fillOpacity: 0.9,
+              weight: isSelected ? 3 : 1.5
             }}
             eventHandlers={{ click: () => onSelect(p.id) }}
           >
             <Popup>
-              <div className="p-0.5 space-y-1.5 text-xs">
-                <div className="flex items-center justify-between gap-2 border-b border-slate-700 pb-1">
-                  <strong className="text-xs font-bold text-slate-100">{p.name}</strong>
+              <div className="p-1 space-y-1.5 text-xs text-slate-800">
+                <div className="flex items-center justify-between gap-2 border-b border-slate-200 pb-1">
+                  <strong className="text-xs font-bold text-slate-900">{p.name}</strong>
                   <span
-                    className={`rounded px-1.5 py-0.2 text-[9px] font-bold uppercase font-mono ${
+                    className={`rounded px-1.5 py-0.5 text-[9px] font-bold uppercase font-mono border ${
                       isCandidate
-                        ? "bg-sky-950 text-sky-300 border border-sky-800"
+                        ? "bg-sky-50 text-sky-700 border-sky-200"
                         : assessment?.priority_tier === "Immediate"
-                        ? "bg-red-950 text-red-300 border border-red-800"
-                        : "bg-emerald-950 text-emerald-300 border border-emerald-800"
+                        ? "bg-red-50 text-red-700 border-red-200"
+                        : "bg-emerald-50 text-emerald-700 border-emerald-200"
                     }`}
                   >
                     {isCandidate ? "Candidate Safe Zone" : assessment?.priority_tier ?? "Origin"}
                   </span>
                 </div>
 
-                {p.district && <p className="text-[11px] text-slate-400">District: {p.district}</p>}
+                {p.district && (
+                  <p className="text-[11px] text-slate-500">
+                    {p.district} {p.country ? `(${p.country})` : p.state ? `(${p.state})` : ""}
+                  </p>
+                )}
 
                 {isCandidate ? (
-                  <div className="space-y-0.5 text-slate-300 text-[11px]">
-                    <p>Safe Land: <b className="font-mono">{p.safe_land_area_hectares} ha</b></p>
-                    <p>Safe Capacity: <b className="font-mono">{Math.round(p.safe_land_area_hectares * p.max_safe_density_per_hectare).toLocaleString()}</b></p>
-                    <p>Available Headroom: <b className="font-mono text-emerald-400">{p.available_capacity?.toLocaleString() ?? "Calculated"}</b></p>
-                    <p>Flood Safety: <b className="capitalize text-sky-300">{p.flood_safety ?? "Safe"}</b></p>
+                  <div className="space-y-0.5 text-slate-700 text-[11px]">
+                    <p>Safe Land Area: <b className="font-mono text-slate-900">{p.safe_land_area_hectares} ha</b></p>
+                    <p>Safe Capacity: <b className="font-mono text-slate-900">{Math.round(p.safe_land_area_hectares * p.max_safe_density_per_hectare).toLocaleString()}</b></p>
+                    <p>Available Headroom: <b className="font-mono text-emerald-700">{p.available_capacity?.toLocaleString() ?? "Calculated"}</b></p>
+                    <p>Safety Rating: <b className="capitalize text-sky-700">{p.flood_safety ?? "Safe"}</b></p>
                   </div>
                 ) : (
-                  <div className="space-y-0.5 text-slate-300 text-[11px]">
-                    <p>Displaced Target: <b className="font-mono text-slate-100">{(p.affected_population ?? p.current_population).toLocaleString()}</b></p>
-                    <p>Hazard Level: <span className="capitalize text-orange-400 font-medium">{p.flood_hazard_class ?? p.hazard_class_flood}</span></p>
-                    <p>Priority Score (RPS): <b className="text-sky-400 font-mono">{assessment?.rps.toFixed(3) ?? "N/A"}</b></p>
+                  <div className="space-y-0.5 text-slate-700 text-[11px]">
+                    <p>Evacuation Target: <b className="font-mono text-slate-900">{(p.affected_population ?? p.current_population).toLocaleString()}</b></p>
+                    <p>Hazard Level: <span className="capitalize text-orange-700 font-semibold">{p.flood_hazard_class ?? p.hazard_class_flood ?? p.hazard_class_landslide}</span></p>
+                    <p>Priority Score (RPS): <b className="text-sky-700 font-mono">{assessment?.rps.toFixed(3) ?? "N/A"}</b></p>
                     {assessment?.smart_relocation_options?.[0] && (
-                      <div className="rounded bg-slate-850 p-1 mt-1 border border-slate-700/60 text-[10px] text-teal-300">
+                      <div className="rounded bg-sky-50 p-1.5 mt-1 border border-sky-200 text-[10px] text-sky-900 font-medium">
                         Top Rec: {assessment.smart_relocation_options[0].site_name} ({assessment.smart_relocation_options[0].distance_km} km)
                       </div>
                     )}

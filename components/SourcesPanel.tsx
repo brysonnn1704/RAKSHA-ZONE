@@ -9,10 +9,10 @@ interface SourcesPanelProps {
 }
 
 const confidenceBadge = {
-  OFFICIAL: "bg-teal-950/60 text-teal-300 border-teal-800/80",
-  "VERIFIED SECONDARY": "bg-sky-950/60 text-sky-300 border-sky-800/80",
-  ESTIMATED: "bg-amber-950/60 text-amber-300 border-amber-800/80",
-  PROTOTYPE: "bg-slate-800 text-slate-400 border-slate-700"
+  OFFICIAL: "bg-teal-50 text-teal-800 border-teal-200",
+  "VERIFIED SECONDARY": "bg-sky-50 text-sky-800 border-sky-200",
+  ESTIMATED: "bg-amber-50 text-amber-800 border-amber-200",
+  PROTOTYPE: "bg-slate-100 text-slate-700 border-slate-300"
 };
 
 export function SourcesPanel({ sourcesData }: SourcesPanelProps) {
@@ -26,54 +26,54 @@ export function SourcesPanel({ sourcesData }: SourcesPanelProps) {
   return (
     <section className="space-y-6">
       {/* Header */}
-      <div className="border-b border-slate-800 pb-3">
-        <h2 className="text-base font-semibold text-white">
+      <div className="border-b border-slate-200 pb-3">
+        <h2 className="text-base font-bold text-slate-900">
           Authoritative Sources & Data Confidence Taxonomy
         </h2>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate-600">
           Transparent operational distinction between official government situation bulletins, humanitarian planning factors, and modeled prototype estimates.
         </p>
       </div>
 
       {/* Confidence Taxonomy Reference Cards */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 text-xs">
-        <div className="rounded border border-slate-800 bg-slate-900 p-3.5 space-y-1">
-          <span className="font-semibold text-white block">OFFICIAL</span>
-          <p className="text-slate-300 font-medium">Government Bulletins</p>
-          <p className="text-[11px] text-slate-500">ASDMA SitReps, Census of India, CWC Gauge Levels.</p>
+        <div className="rounded-lg border border-slate-200 bg-white p-3.5 space-y-1 shadow-2xs">
+          <span className="font-bold text-slate-900 block">OFFICIAL</span>
+          <p className="text-slate-700 font-medium">Government Bulletins</p>
+          <p className="text-[11px] text-slate-500">ASDMA / NDRRMA SitReps, DHM / CWC River Telemetry, Census Data.</p>
         </div>
 
-        <div className="rounded border border-slate-800 bg-slate-900 p-3.5 space-y-1">
-          <span className="font-semibold text-white block">VERIFIED SECONDARY</span>
-          <p className="text-slate-300 font-medium">Humanitarian Standards</p>
-          <p className="text-[11px] text-slate-500">Sphere India WASH guidelines, NDMA camp norms.</p>
+        <div className="rounded-lg border border-slate-200 bg-white p-3.5 space-y-1 shadow-2xs">
+          <span className="font-bold text-slate-900 block">VERIFIED SECONDARY</span>
+          <p className="text-slate-700 font-medium">Humanitarian Standards</p>
+          <p className="text-[11px] text-slate-500">Sphere India / Sphere Project WASH guidelines, NDMA camp norms.</p>
         </div>
 
-        <div className="rounded border border-slate-800 bg-slate-900 p-3.5 space-y-1">
-          <span className="font-semibold text-white block">ESTIMATED</span>
-          <p className="text-slate-300 font-medium">Algorithmic Models</p>
-          <p className="text-[11px] text-slate-500">Geodesic distance, RPS scores, capacity gaps.</p>
+        <div className="rounded-lg border border-slate-200 bg-white p-3.5 space-y-1 shadow-2xs">
+          <span className="font-bold text-slate-900 block">ESTIMATED</span>
+          <p className="text-slate-700 font-medium">Algorithmic Models</p>
+          <p className="text-[11px] text-slate-500">Geodesic distance, RPS priority scores, multi-factor suitability.</p>
         </div>
 
-        <div className="rounded border border-slate-800 bg-slate-900 p-3.5 space-y-1">
-          <span className="font-semibold text-white block">PROTOTYPE</span>
-          <p className="text-slate-300 font-medium">Simulated Safe Zones</p>
-          <p className="text-[11px] text-slate-500">Modeled shelter coordinates created for spatial simulation.</p>
+        <div className="rounded-lg border border-slate-200 bg-white p-3.5 space-y-1 shadow-2xs">
+          <span className="font-bold text-slate-900 block">PROTOTYPE</span>
+          <p className="text-slate-700 font-medium">Simulated Safe Zones</p>
+          <p className="text-[11px] text-slate-500">Modeled safe land coordinates created for spatial simulation testing.</p>
         </div>
       </div>
 
       {/* Compact Operational Table with Row-level Expansion */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
             Official Source Records Registry
           </h3>
           <span className="text-xs text-slate-500">Click any row to inspect verification details</span>
         </div>
 
-        <div className="overflow-x-auto rounded border border-slate-800">
-          <table className="w-full text-left text-xs text-slate-300">
-            <thead className="bg-slate-900 text-slate-400 uppercase text-[10px] border-b border-slate-800">
+        <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-2xs">
+          <table className="w-full text-left text-xs text-slate-700">
+            <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] border-b border-slate-200">
               <tr>
                 <th className="p-3">Data Title</th>
                 <th className="p-3">Source Organization</th>
@@ -82,21 +82,21 @@ export function SourcesPanel({ sourcesData }: SourcesPanelProps) {
                 <th className="p-3 text-right">Details</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800 bg-slate-900/40">
+            <tbody className="divide-y divide-slate-100">
               {sourcesData.sources.map((src) => {
                 const isExpanded = expandedSourceId === src.id;
                 return (
                   <tr
                     key={src.id}
                     onClick={() => toggleSource(src.id)}
-                    className="cursor-pointer hover:bg-slate-850/60 transition"
+                    className="cursor-pointer hover:bg-slate-50 transition"
                   >
                     <td className="p-3">
-                      <span className="font-medium text-white block">{src.title}</span>
+                      <span className="font-bold text-slate-900 block">{src.title}</span>
                       {isExpanded && (
-                        <div className="mt-2 text-xs text-slate-400 space-y-1.5 border-t border-slate-800 pt-2">
-                          <p><b className="text-slate-300">Scope:</b> {src.notes}</p>
-                          <p><b className="text-slate-300">Metrics:</b> {src.metrics_covered.join(" • ")}</p>
+                        <div className="mt-2 text-xs text-slate-600 space-y-1.5 border-t border-slate-100 pt-2">
+                          <p><b className="text-slate-800">Scope:</b> {src.notes}</p>
+                          <p><b className="text-slate-800">Metrics:</b> {src.metrics_covered.join(" • ")}</p>
                           <div className="flex items-center gap-3 pt-1">
                             <button
                               type="button"
@@ -112,7 +112,7 @@ export function SourcesPanel({ sourcesData }: SourcesPanelProps) {
                                   metricsCovered: src.metrics_covered
                                 });
                               }}
-                              className="text-sky-400 hover:underline font-medium"
+                              className="text-sky-700 hover:underline font-semibold"
                             >
                               View Source Details Dialog ↗
                             </button>
@@ -120,14 +120,14 @@ export function SourcesPanel({ sourcesData }: SourcesPanelProps) {
                         </div>
                       )}
                     </td>
-                    <td className="p-3 text-slate-300">{src.organization}</td>
-                    <td className="p-3 font-mono text-slate-400">{src.date}</td>
+                    <td className="p-3 text-slate-700">{src.organization}</td>
+                    <td className="p-3 font-mono text-slate-600">{src.date}</td>
                     <td className="p-3">
-                      <span className={`rounded border px-2 py-0.5 text-[9px] font-medium font-mono ${confidenceBadge[src.confidence]}`}>
+                      <span className={`rounded border px-2 py-0.5 text-[9px] font-bold font-mono ${confidenceBadge[src.confidence]}`}>
                         {src.confidence}
                       </span>
                     </td>
-                    <td className="p-3 text-right text-xs text-slate-400">
+                    <td className="p-3 text-right text-xs text-slate-500">
                       {isExpanded ? "▲ Hide" : "▼ View"}
                     </td>
                   </tr>

@@ -1,0 +1,71 @@
+{
+  "region": "nepal",
+  "sources": [
+    {
+      "id": "ndrrma-sitrep-rasuwa-2026",
+      "title": "NDRRMA Integrated Flash Flood Situation Report — Rasuwa & Trishuli Corridor",
+      "organization": "National Disaster Risk Reduction and Management Authority (NDRRMA), Nepal",
+      "date": "2026-08-27",
+      "type": "official_situation_report",
+      "confidence": "OFFICIAL",
+      "metrics_covered": ["Displaced population (14,600)", "Highway severance (NH-03)", "Casualties/missing status (preliminary)"],
+      "source_url": "https://ndrrma.gov.np/sitreps/2026/08/27/rasuwa-flash-flood",
+      "notes": "Primary official disaster situation baseline for Rasuwa, Nuwakot, and Dhading districts."
+    },
+    {
+      "id": "dhm-hydro-trishuli",
+      "title": "Department of Hydrology and Meteorology (DHM) Daily River Watch — Trishuli Basin",
+      "organization": "Ministry of Energy, Water Resources and Irrigation, Govt. of Nepal",
+      "date": "2026-08-27",
+      "type": "official_hydrology_data",
+      "confidence": "OFFICIAL",
+      "metrics_covered": ["Betrawati gauge spike", "Bhote Koshi flood hydrograph", "Danger mark exceedance levels"],
+      "source_url": "http://dhm.gov.np/hydro-telemetry/trishuli-basin",
+      "notes": "River gauge telemetry and discharge surge monitoring across the Trishuli corridor."
+    },
+    {
+      "id": "nrcs-rasuwa-field-report",
+      "title": "Nepal Red Cross Society (NRCS) Emergency Relief Assessment — Timure & Syapru Besi",
+      "organization": "Nepal Red Cross Society / IFRC Nepal Delegation",
+      "date": "2026-08-28",
+      "type": "humanitarian_field_report",
+      "confidence": "OFFICIAL",
+      "metrics_covered": ["Active relief camps (12)", "Emergency potable water distributions", "WASH unit deployment"],
+      "source_url": "https://nrcs.org/emergency-operations/rasuwa-surge-2026",
+      "notes": "Field-level humanitarian shelter and relief camp tracking in upper Rasuwa district."
+    },
+    {
+      "id": "usgs-egu-cryosphere-hazard",
+      "title": "USGS / EGU Himalayan Cryosphere & Mass-Wasting Satellite Observation Archive",
+      "organization": "USGS Land Remote Sensing / European Geosciences Union (EGU)",
+      "date": "2026-08-29",
+      "type": "scientific_satellite_observation",
+      "confidence": "VERIFIED SECONDARY",
+      "metrics_covered": ["High-altitude glacier/ice-rock scar delineation", "Debris-dam volume estimates"],
+      "source_url": "https://usgs.gov/landsat/cryosphere-himalayan-monitoring",
+      "notes": "Scientific remote-sensing data confirming upper Lhende basin ice-rock detachment zone."
+    },
+    {
+      "id": "sphere-humanitarian-standards",
+      "title": "Sphere Minimum Standards in Disaster Response & Humanitarian Charter",
+      "organization": "Sphere Association / NDMA Guidelines",
+      "date": "2024",
+      "type": "humanitarian_standard",
+      "confidence": "VERIFIED SECONDARY",
+      "metrics_covered": ["Water 50L/person/day", "Shelter 5 persons/unit", "Sanitation 20 persons/toilet", "Medical 1 team/1000 pop"],
+      "source_url": "https://spherestandards.org/handbook",
+      "notes": "Global humanitarian standards utilized for emergency resource gap modeling."
+    },
+    {
+      "id": "raksha-prototype-nepal-sites",
+      "title": "RAKSHA-ZONE Himalayan Safe Highland Staging & Evacuation Site Modeling",
+      "organization": "RAKSHA-ZONE Research & Decision Support Team (SIH26191)",
+      "date": "2026-08-30",
+      "type": "prototype_model",
+      "confidence": "PROTOTYPE",
+      "metrics_covered": ["Candidate site centroid coordinates", "Safe land hectares", "Multi-criteria suitability scoring"],
+      "source_url": null,
+      "notes": "Simulated safe highland evacuation and staging clusters modeled for cross-border decision-support demonstration. Operational implementation requires ground validation by NDRRMA and District Disaster Management Committees."
+    }
+  ]
+}

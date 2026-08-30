@@ -1,12 +1,22 @@
-export type RegionId = "wayanad" | "assam";
+export type RegionId = "wayanad" | "assam" | "nepal";
 
-export const HAZARD_TYPES = ["landslide", "flood", "glof", "coastal_erosion", "cloudburst"] as const;
+export const HAZARD_TYPES = ["landslide", "flood", "glof", "coastal_erosion", "cloudburst", "glacier_collapse"] as const;
 export type HazardType = (typeof HAZARD_TYPES)[number];
 export type HazardClass = "very_high" | "high" | "moderate" | "low";
 export type InundationStatus = "active" | "affected" | "recovering" | "safe";
 export type FloodSafety = "safe" | "moderate" | "unsafe";
 export type DataConfidence = "OFFICIAL" | "VERIFIED SECONDARY" | "ESTIMATED" | "PROTOTYPE";
 export type ResourceStatus = "adequate" | "warning" | "critical";
+
+export interface CascadeStep {
+  id: string;
+  stage: string;
+  location: string;
+  description: string;
+  hazard_type: string;
+  severity: string;
+  status: string;
+}
 
 export type VillageRole = "origin" | "candidate";
 
@@ -16,6 +26,7 @@ export interface VillageProperties {
   role: VillageRole;
   district?: string;
   state?: string;
+  country?: string;
   population?: number;
   affected_population?: number;
   inundation_status?: InundationStatus;
@@ -93,6 +104,7 @@ export interface VillageAssessment {
   name: string;
   district?: string;
   state?: string;
+  country?: string;
   role?: VillageRole;
   hss: number;
   hazard_breakdown: Record<string, number>;

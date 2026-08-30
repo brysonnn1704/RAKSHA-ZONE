@@ -1,0 +1,180 @@
+{
+  "type": "FeatureCollection",
+  "name": "nepal_himalayan_corridor_settlements",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "nep-timure",
+        "name": "Timure Border Customs Post",
+        "role": "origin",
+        "district": "Rasuwa",
+        "state": "Bagmati Province, Nepal",
+        "country": "Nepal",
+        "elevation_m": 1780,
+        "hazard_class_flood": "very_high",
+        "hazard_class_landslide": "very_high",
+        "flood_hazard_class": "very_high",
+        "primary_hazard": "cloudburst",
+        "inundation_status": "active",
+        "current_population": 4800,
+        "affected_population": 4800,
+        "safe_land_area_hectares": 1.2,
+        "max_safe_density_per_hectare": 250,
+        "vulnerability_index": 0.88,
+        "resource_multiplier": 1,
+        "data_confidence": "OFFICIAL",
+        "data_sources": ["NDRRMA SitRep", "NRCS Field Bulletin", "DHM Nepal"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [85.378, 28.280]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "nep-syaprubesi",
+        "name": "Syapru Besi Valley Hub",
+        "role": "origin",
+        "district": "Rasuwa",
+        "state": "Bagmati Province, Nepal",
+        "country": "Nepal",
+        "elevation_m": 1460,
+        "hazard_class_flood": "very_high",
+        "hazard_class_landslide": "high",
+        "flood_hazard_class": "very_high",
+        "primary_hazard": "flood",
+        "inundation_status": "active",
+        "current_population": 6600,
+        "affected_population": 6600,
+        "safe_land_area_hectares": 2.1,
+        "max_safe_density_per_hectare": 280,
+        "vulnerability_index": 0.82,
+        "resource_multiplier": 1,
+        "data_confidence": "OFFICIAL",
+        "data_sources": ["NDRRMA SitRep", "DHM Gauge Report"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [85.340, 28.163]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "nep-gyirong",
+        "name": "Gyirong Port / Border Customs Zone",
+        "role": "origin",
+        "district": "Gyirong County",
+        "state": "Tibet Autonomous Region, China",
+        "country": "China (Tibet)",
+        "elevation_m": 2750,
+        "hazard_class_flood": "high",
+        "hazard_class_landslide": "very_high",
+        "flood_hazard_class": "high",
+        "primary_hazard": "landslide",
+        "inundation_status": "affected",
+        "current_population": 3200,
+        "affected_population": 3200,
+        "safe_land_area_hectares": 3.0,
+        "max_safe_density_per_hectare": 200,
+        "vulnerability_index": 0.74,
+        "resource_multiplier": 1,
+        "data_confidence": "OFFICIAL",
+        "data_sources": ["Regional Disaster Management Bulletin", "Cross-Border Coordination Desk"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [85.330, 28.397]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "nep-dhunche-valley",
+        "name": "Dhunche Lowland Corridor",
+        "role": "origin",
+        "district": "Rasuwa",
+        "state": "Bagmati Province, Nepal",
+        "country": "Nepal",
+        "elevation_m": 1520,
+        "hazard_class_flood": "high",
+        "hazard_class_landslide": "high",
+        "flood_hazard_class": "high",
+        "primary_hazard": "landslide",
+        "inundation_status": "affected",
+        "current_population": 5400,
+        "affected_population": 5400,
+        "safe_land_area_hectares": 3.5,
+        "max_safe_density_per_hectare": 300,
+        "vulnerability_index": 0.68,
+        "resource_multiplier": 1,
+        "data_confidence": "OFFICIAL",
+        "data_sources": ["Rasuwa District Disaster Plan", "DHM Telemetry"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [85.298, 28.113]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "nep-bidur",
+        "name": "Bidur / Trishuli Urban Basin",
+        "role": "origin",
+        "district": "Nuwakot",
+        "state": "Bagmati Province, Nepal",
+        "country": "Nepal",
+        "elevation_m": 580,
+        "hazard_class_flood": "moderate",
+        "hazard_class_landslide": "low",
+        "flood_hazard_class": "moderate",
+        "primary_hazard": "flood",
+        "inundation_status": "affected",
+        "current_population": 18200,
+        "affected_population": 12000,
+        "safe_land_area_hectares": 12.0,
+        "max_safe_density_per_hectare": 400,
+        "vulnerability_index": 0.52,
+        "resource_multiplier": 1,
+        "data_confidence": "OFFICIAL",
+        "data_sources": ["Nuwakot DDMA Bulletin", "DHM Flood Forecasting Desk"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [85.165, 27.915]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "nep-galchhi",
+        "name": "Galchhi Trishuli Confluence",
+        "role": "origin",
+        "district": "Dhading",
+        "state": "Bagmati Province, Nepal",
+        "country": "Nepal",
+        "elevation_m": 390,
+        "hazard_class_flood": "moderate",
+        "hazard_class_landslide": "low",
+        "flood_hazard_class": "moderate",
+        "primary_hazard": "flood",
+        "inundation_status": "recovering",
+        "current_population": 10000,
+        "affected_population": 6200,
+        "safe_land_area_hectares": 8.5,
+        "max_safe_density_per_hectare": 350,
+        "vulnerability_index": 0.44,
+        "resource_multiplier": 1,
+        "data_confidence": "OFFICIAL",
+        "data_sources": ["Dhading DDMA SitRep", "Trishuli Hydrological Data"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [85.008, 27.818]
+      }
+    }
+  ]
+}

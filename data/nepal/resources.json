@@ -1,0 +1,205 @@
+{
+  "region": "nepal",
+  "site_resources": [
+    {
+      "site_id": "nep-site-dhunche-high",
+      "site_name": "Dhunche Highland Staging Camp",
+      "resources": [
+        {
+          "resource": "water_liters_per_day",
+          "name": "Emergency Potable Water",
+          "available_quantity": 380000,
+          "unit": "liters/day",
+          "daily_requirement_per_person": 50,
+          "population_supported": 7600,
+          "coverage_days": 10,
+          "status": "adequate",
+          "data_source": "Nepal Red Cross Water Purification Unit"
+        },
+        {
+          "resource": "emergency_meals",
+          "name": "High-Energy Ready-to-Eat Rations",
+          "available_quantity": 18000,
+          "unit": "rations",
+          "daily_requirement_per_person": 3,
+          "population_supported": 6000,
+          "coverage_days": 7,
+          "status": "adequate",
+          "data_source": "WFP Nepal Contingency Stockpile"
+        },
+        {
+          "resource": "temporary_shelter_units",
+          "name": "Winterized Weatherproof Tents",
+          "available_quantity": 1200,
+          "unit": "units",
+          "daily_requirement_per_person": 0.2,
+          "population_supported": 6000,
+          "coverage_days": 30,
+          "status": "adequate",
+          "data_source": "NDRRMA Emergency Cache Dhunche"
+        },
+        {
+          "resource": "medical_support_teams",
+          "name": "High-Altitude Trauma & WASH Team",
+          "available_quantity": 4,
+          "unit": "teams",
+          "daily_requirement_per_person": 0.001,
+          "population_supported": 4000,
+          "coverage_days": 14,
+          "status": "warning",
+          "data_source": "Nepal Army Medical Corps Deployable Team"
+        }
+      ]
+    },
+    {
+      "site_id": "nep-site-battar",
+      "site_name": "Battar Alluvial Safe Terrace Hub",
+      "resources": [
+        {
+          "resource": "water_liters_per_day",
+          "name": "Emergency Potable Water",
+          "available_quantity": 750000,
+          "unit": "liters/day",
+          "daily_requirement_per_person": 50,
+          "population_supported": 15000,
+          "coverage_days": 14,
+          "status": "adequate",
+          "data_source": "Nuwakot PHE Water Storage System"
+        },
+        {
+          "resource": "emergency_meals",
+          "name": "Standard Food Rations",
+          "available_quantity": 39000,
+          "unit": "rations",
+          "daily_requirement_per_person": 3,
+          "population_supported": 13000,
+          "coverage_days": 10,
+          "status": "adequate",
+          "data_source": "Nepal Food Management & Trading Company"
+        },
+        {
+          "resource": "temporary_shelter_units",
+          "name": "Standard Emergency Family Tents",
+          "available_quantity": 2600,
+          "unit": "units",
+          "daily_requirement_per_person": 0.2,
+          "population_supported": 13000,
+          "coverage_days": 45,
+          "status": "adequate",
+          "data_source": "NRCS Central Warehouse Cache"
+        },
+        {
+          "resource": "medical_support_teams",
+          "name": "District Disaster Medical Squad",
+          "available_quantity": 8,
+          "unit": "teams",
+          "daily_requirement_per_person": 0.001,
+          "population_supported": 8000,
+          "coverage_days": 21,
+          "status": "adequate",
+          "data_source": "Trishuli District Hospital Emergency Staff"
+        }
+      ]
+    },
+    {
+      "site_id": "nep-site-galchhi-high",
+      "site_name": "Galchhi Highland Evacuation Center",
+      "resources": [
+        {
+          "resource": "water_liters_per_day",
+          "name": "Emergency Potable Water",
+          "available_quantity": 420000,
+          "unit": "liters/day",
+          "daily_requirement_per_person": 50,
+          "population_supported": 8400,
+          "coverage_days": 12,
+          "status": "adequate",
+          "data_source": "Dhading District PHE Tankers"
+        },
+        {
+          "resource": "emergency_meals",
+          "name": "Emergency Food Rations",
+          "available_quantity": 21000,
+          "unit": "rations",
+          "daily_requirement_per_person": 3,
+          "population_supported": 7000,
+          "coverage_days": 7,
+          "status": "warning",
+          "data_source": "Local Red Cross Sub-branch"
+        },
+        {
+          "resource": "temporary_shelter_units",
+          "name": "Multi-Purpose Shelter Tents",
+          "available_quantity": 1500,
+          "unit": "units",
+          "daily_requirement_per_person": 0.2,
+          "population_supported": 7500,
+          "coverage_days": 30,
+          "status": "adequate",
+          "data_source": "Dhading DDMA Emergency Store"
+        },
+        {
+          "resource": "medical_support_teams",
+          "name": "Mobile Health Clinic",
+          "available_quantity": 5,
+          "unit": "teams",
+          "daily_requirement_per_person": 0.001,
+          "population_supported": 5000,
+          "coverage_days": 14,
+          "status": "warning",
+          "data_source": "Nepal Health Emergency Operation Center"
+        }
+      ]
+    },
+    {
+      "site_id": "nep-site-gyirong-plateau",
+      "site_name": "Gyirong High Plateau Staging Base",
+      "resources": [
+        {
+          "resource": "water_liters_per_day",
+          "name": "Thermal Insulated Water Supplies",
+          "available_quantity": 250000,
+          "unit": "liters/day",
+          "daily_requirement_per_person": 50,
+          "population_supported": 5000,
+          "coverage_days": 14,
+          "status": "adequate",
+          "data_source": "Gyirong County Emergency Management Cache"
+        },
+        {
+          "resource": "emergency_meals",
+          "name": "High-Calorie Ready-to-Eat Packages",
+          "available_quantity": 14000,
+          "unit": "rations",
+          "daily_requirement_per_person": 3,
+          "population_supported": 4600,
+          "coverage_days": 10,
+          "status": "adequate",
+          "data_source": "Regional Disaster Stockpile"
+        },
+        {
+          "resource": "temporary_shelter_units",
+          "name": "Cold-Climate Relief Tents",
+          "available_quantity": 900,
+          "unit": "units",
+          "daily_requirement_per_person": 0.2,
+          "population_supported": 4500,
+          "coverage_days": 45,
+          "status": "adequate",
+          "data_source": "Gyirong Relief Logistics Depot"
+        },
+        {
+          "resource": "medical_support_teams",
+          "name": "Plateau Emergency Medical Unit",
+          "available_quantity": 3,
+          "unit": "teams",
+          "daily_requirement_per_person": 0.001,
+          "population_supported": 3000,
+          "coverage_days": 14,
+          "status": "adequate",
+          "data_source": "Border Health Quarantine Station"
+        }
+      ]
+    }
+  ]
+}
