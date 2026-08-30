@@ -22,101 +22,102 @@ export function AssamOverview({
   ) ?? floodStats.historical_snapshots[1];
 
   return (
-    <section className="space-y-4">
-      {/* Time-sensitive Official Situation Snapshot Banner */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-teal-700/60 bg-gradient-to-r from-teal-950/60 via-slate-900 to-slate-900 p-4">
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">🌊</span>
+    <section className="space-y-3">
+      {/* Official Situation Report Header Banner */}
+      <div className="rounded-md border border-slate-800 border-l-4 border-l-teal-500 bg-slate-900/90 p-3.5 shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-teal-300">
-                Official ASDMA Situation Snapshot
+              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-400">
+                ASDMA Official Situation Snapshot
               </span>
-              <span className="rounded bg-teal-500/20 border border-teal-500/40 px-2 py-0.5 text-[10px] font-semibold text-teal-200">
-                OFFICIAL · {peakSnapshot.date}
+              <span className="text-slate-500">|</span>
+              <span className="text-xs text-slate-300 font-mono">Date: {peakSnapshot.date}</span>
+              <span className="rounded bg-teal-950 border border-teal-800/80 px-1.5 py-0.2 text-[9px] font-semibold text-teal-300">
+                OFFICIAL
               </span>
             </div>
-            <p className="mt-0.5 text-sm text-slate-200">{peakSnapshot.headline}</p>
+            <p className="mt-1 text-xs text-slate-300 leading-snug">{peakSnapshot.headline}</p>
           </div>
-        </div>
-        <div className="text-right text-xs text-slate-400">
-          <span className="block font-medium text-slate-300">Source: {peakSnapshot.source}</span>
-          <span className="text-[11px] text-slate-500">Rivers in spate: {peakSnapshot.rivers_above_danger.slice(0, 3).join(", ")}</span>
+          <div className="text-right text-xs text-slate-400">
+            <span className="block font-medium text-slate-300">Doc: {peakSnapshot.source}</span>
+            <span className="text-[11px] text-slate-500">Rivers exceeding danger: {peakSnapshot.rivers_above_danger.slice(0, 3).join(", ")}</span>
+          </div>
         </div>
       </div>
 
       {/* Primary KPI Grid */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4 lg:grid-cols-8">
         {/* 1. Affected Population */}
-        <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-3">
-          <p className="text-[11px] text-slate-400">Affected Population</p>
-          <p className="mt-1 text-xl font-bold text-slate-100">
+        <div className="rounded-md border border-slate-800 bg-slate-900/90 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Affected Pop.</p>
+          <p className="mt-1 text-lg font-bold font-mono text-slate-100">
             {peakSnapshot.affected_population.toLocaleString()}
           </p>
-          <p className="text-[10px] text-teal-400">ASDMA 08 Aug 2026</p>
+          <p className="text-[10px] text-teal-400 mt-0.5">ASDMA 08 Aug</p>
         </div>
 
         {/* 2. Affected Villages */}
-        <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-3">
-          <p className="text-[11px] text-slate-400">Affected Villages</p>
-          <p className="mt-1 text-xl font-bold text-slate-100">
+        <div className="rounded-md border border-slate-800 bg-slate-900/90 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Inundated Habitations</p>
+          <p className="mt-1 text-lg font-bold font-mono text-slate-100">
             {peakSnapshot.affected_villages_count}
           </p>
-          <p className="text-[10px] text-slate-400">Revenue mouzas</p>
+          <p className="text-[10px] text-slate-400 mt-0.5">Revenue mouzas</p>
         </div>
 
         {/* 3. Active Districts */}
-        <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-3">
-          <p className="text-[11px] text-slate-400">Active Districts</p>
-          <p className="mt-1 text-xl font-bold text-sky-400">
+        <div className="rounded-md border border-slate-800 bg-slate-900/90 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Flood Districts</p>
+          <p className="mt-1 text-lg font-bold font-mono text-slate-100">
             {peakSnapshot.affected_districts_count}
           </p>
-          <p className="text-[10px] text-slate-400">Flood-declared</p>
+          <p className="text-[10px] text-slate-400 mt-0.5">Declared active</p>
         </div>
 
         {/* 4. Displaced Demand */}
-        <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-3">
-          <p className="text-[11px] text-slate-400">Requiring Relocation</p>
-          <p className="mt-1 text-xl font-bold text-orange-300">
+        <div className="rounded-md border border-slate-800 bg-slate-900/90 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Evacuation Target</p>
+          <p className="mt-1 text-lg font-bold font-mono text-orange-300">
             {demandedPopulation.toLocaleString()}
           </p>
-          <p className="text-[10px] text-slate-400">Displaced target</p>
+          <p className="text-[10px] text-slate-400 mt-0.5">Displaced persons</p>
         </div>
 
         {/* 5. Available Capacity */}
-        <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-3">
-          <p className="text-[11px] text-slate-400">Safe Headroom</p>
-          <p className="mt-1 text-xl font-bold text-emerald-300">
+        <div className="rounded-md border border-slate-800 bg-slate-900/90 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Safe Headroom</p>
+          <p className="mt-1 text-lg font-bold font-mono text-emerald-400">
             {availableCapacity.toLocaleString()}
           </p>
-          <p className="text-[10px] text-slate-400">Candidate sites</p>
+          <p className="text-[10px] text-slate-400 mt-0.5">Candidate sites</p>
         </div>
 
         {/* 6. Capacity Gap */}
-        <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-3">
-          <p className="text-[11px] text-slate-400">Capacity Gap</p>
-          <p className={`mt-1 text-xl font-bold ${capacityDeficit > 0 ? "text-red-400" : "text-emerald-400"}`}>
+        <div className="rounded-md border border-slate-800 bg-slate-900/90 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Capacity Gap</p>
+          <p className={`mt-1 text-lg font-bold font-mono ${capacityDeficit > 0 ? "text-red-400" : "text-emerald-400"}`}>
             {capacityDeficit > 0 ? `-${capacityDeficit.toLocaleString()}` : "Sufficient"}
           </p>
-          <p className="text-[10px] text-slate-400">{capacityDeficit > 0 ? "Deficit" : "Surplus buffer"}</p>
+          <p className="text-[10px] text-slate-400 mt-0.5">{capacityDeficit > 0 ? "Deficit shortfall" : "Covered"}</p>
         </div>
 
         {/* 7. Relief Camps */}
-        <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-3">
-          <p className="text-[11px] text-slate-400">Relief Camps</p>
-          <p className="mt-1 text-xl font-bold text-slate-100">
+        <div className="rounded-md border border-slate-800 bg-slate-900/90 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Relief Camps</p>
+          <p className="mt-1 text-lg font-bold font-mono text-slate-100">
             {peakSnapshot.relief_camps_active}
           </p>
-          <p className="text-[10px] text-slate-400">+{peakSnapshot.distribution_centers_active} food centers</p>
+          <p className="text-[10px] text-slate-400 mt-0.5">+{peakSnapshot.distribution_centers_active} dist. hubs</p>
         </div>
 
         {/* 8. Resource Status */}
-        <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-3">
-          <p className="text-[11px] text-slate-400">Stock Status</p>
-          <p className={`mt-1 text-xl font-bold ${criticalResourceCount > 0 ? "text-amber-400" : "text-emerald-400"}`}>
-            {criticalResourceCount > 0 ? `${criticalResourceCount} Critical` : "Stable"}
+        <div className="rounded-md border border-slate-800 bg-slate-900/90 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Critical Stocks</p>
+          <p className={`mt-1 text-lg font-bold font-mono ${criticalResourceCount > 0 ? "text-amber-400" : "text-emerald-400"}`}>
+            {criticalResourceCount > 0 ? `${criticalResourceCount} Critical` : "Adequate"}
           </p>
-          <p className="text-[10px] text-slate-400">WASH & Medical</p>
+          <p className="text-[10px] text-slate-400 mt-0.5">Lifeline buffers</p>
         </div>
       </div>
     </section>

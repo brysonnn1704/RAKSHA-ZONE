@@ -10,9 +10,9 @@ import type { RegionId } from "@/lib/types";
 import { RegionSelector } from "@/components/RegionSelector";
 
 const statusTone: Record<CapacityStatus, { badge: string; text: string; bg: string }> = {
-  SUFFICIENT: { badge: "bg-emerald-950/80 text-emerald-300 border-emerald-700", text: "text-emerald-300", bg: "bg-emerald-500" },
-  LIMITED: { badge: "bg-orange-950/80 text-orange-300 border-orange-700", text: "text-orange-300", bg: "bg-orange-500" },
-  INSUFFICIENT: { badge: "bg-red-950/80 text-red-300 border-red-700", text: "text-red-300", bg: "bg-red-500" },
+  SUFFICIENT: { badge: "bg-emerald-950/80 text-emerald-300 border-emerald-800", text: "text-emerald-400", bg: "bg-emerald-500" },
+  LIMITED: { badge: "bg-amber-950/80 text-amber-300 border-amber-800", text: "text-amber-400", bg: "bg-amber-500" },
+  INSUFFICIENT: { badge: "bg-red-950/80 text-red-300 border-red-800", text: "text-red-400", bg: "bg-red-500" },
   UNKNOWN: { badge: "bg-slate-800 text-slate-400 border-slate-700", text: "text-slate-400", bg: "bg-slate-500" }
 };
 
@@ -71,29 +71,31 @@ export default function CapacityPage() {
   const totalCapacity = allAssessments.reduce((sum, item) => sum + (item.assessment.final_capacity ?? 0), 0);
 
   return (
-    <main className="min-h-screen bg-[#07111f] p-4 text-slate-100 md:p-7">
-      <div className="mx-auto max-w-7xl">
+    <main className="min-h-screen bg-[#070d18] p-3 text-slate-100 md:p-6">
+      <div className="mx-auto max-w-7xl space-y-4">
         {/* Navigation & Header */}
-        <header className="mb-6 border-b border-slate-700 pb-4 space-y-3">
+        <header className="border-b border-slate-800 pb-3 space-y-2.5">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[.2em] text-sky-400">SIH26191 · SDMA / NDRF Decision Support</p>
-              <h1 className="mt-1 text-3xl font-bold">Relocation Site Carrying Capacity Dashboard</h1>
-              <p className="text-sm text-slate-400">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-sky-400">SIH26191 · SDMA / NDRF Decision Support</p>
+              <h1 className="mt-1 text-xl md:text-2xl font-bold tracking-tight text-white">
+                Relocation Site Carrying Capacity & Infrastructure Stress Model
+              </h1>
+              <p className="text-xs text-slate-400">
                 Multi-criteria carrying capacity model: safe land area, density limits, and infrastructure stress constraints.
               </p>
             </div>
-            <nav className="flex items-center gap-3 text-sm">
-              <Link href="/" className="rounded-lg border border-slate-700 bg-slate-800/80 px-3 py-2 text-sky-300 hover:bg-slate-700">
+            <nav className="flex items-center gap-3 text-xs">
+              <Link href="/" className="rounded border border-slate-700 bg-slate-850 px-3 py-1.5 text-sky-400 hover:bg-slate-800">
                 ← Main Platform
               </Link>
-              <Link href="/resources" className="rounded-lg border border-slate-700 bg-slate-800/80 px-3 py-2 text-sky-300 hover:bg-slate-700">
-                Resource Dashboard →
+              <Link href="/resources" className="rounded border border-slate-700 bg-slate-850 px-3 py-1.5 text-sky-400 hover:bg-slate-800">
+                Relief Logistics Matrix →
               </Link>
             </nav>
           </div>
 
-          <div className="flex items-center justify-between pt-2 border-t border-slate-800">
+          <div className="flex items-center justify-between pt-1 border-t border-slate-850">
             <RegionSelector
               region={region}
               onSelectRegion={(r) => {
@@ -105,46 +107,46 @@ export default function CapacityPage() {
         </header>
 
         {/* Global Summary Cards */}
-        <div className="mb-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <div className="rounded-xl border border-slate-700 bg-slate-900/70 p-4">
-            <p className="text-xs text-slate-400">Total Candidate Sites</p>
-            <p className="mt-1 text-2xl font-bold text-sky-300">{candidateFeatures.length}</p>
-            <p className="text-xs text-slate-500">{region === "assam" ? "Assam regional shelters" : "Wayanad safe zones"}</p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="rounded border border-slate-800 bg-slate-900 p-3">
+            <p className="text-[10px] uppercase font-semibold text-slate-400">Total Candidate Hubs</p>
+            <p className="mt-1 text-xl font-bold font-mono text-sky-400">{candidateFeatures.length}</p>
+            <p className="text-[10px] text-slate-400 mt-0.5">{region === "assam" ? "Assam regional shelters" : "Wayanad safe zones"}</p>
           </div>
-          <div className="rounded-xl border border-slate-700 bg-slate-900/70 p-4">
-            <p className="text-xs text-slate-400">Combined Final Capacity</p>
-            <p className="mt-1 text-2xl font-bold text-slate-100">{totalCapacity.toLocaleString()}</p>
-            <p className="text-xs text-slate-500">Maximum safe intake</p>
+          <div className="rounded border border-slate-800 bg-slate-900 p-3">
+            <p className="text-[10px] uppercase font-semibold text-slate-400">Combined Capacity</p>
+            <p className="mt-1 text-xl font-bold font-mono text-slate-100">{totalCapacity.toLocaleString()}</p>
+            <p className="text-[10px] text-slate-400 mt-0.5">Maximum safe intake</p>
           </div>
-          <div className="rounded-xl border border-slate-700 bg-slate-900/70 p-4">
-            <p className="text-xs text-slate-400">Combined Headroom</p>
-            <p className="mt-1 text-2xl font-bold text-emerald-300">{totalHeadroom.toLocaleString()}</p>
-            <p className="text-xs text-slate-500">Available across all sites</p>
+          <div className="rounded border border-slate-800 bg-slate-900 p-3">
+            <p className="text-[10px] uppercase font-semibold text-slate-400">Combined Headroom</p>
+            <p className="mt-1 text-xl font-bold font-mono text-emerald-400">{totalHeadroom.toLocaleString()}</p>
+            <p className="text-[10px] text-slate-400 mt-0.5">Available across all sites</p>
           </div>
-          <div className="rounded-xl border border-slate-700 bg-slate-900/70 p-4">
-            <p className="text-xs text-slate-400">Displaced Target</p>
-            <p className="mt-1 text-2xl font-bold text-orange-300">{targetPopulation.toLocaleString()}</p>
-            <p className="text-xs text-slate-500">People needing relocation</p>
+          <div className="rounded border border-slate-800 bg-slate-900 p-3">
+            <p className="text-[10px] uppercase font-semibold text-slate-400">Displaced Target</p>
+            <p className="mt-1 text-xl font-bold font-mono text-orange-400">{targetPopulation.toLocaleString()}</p>
+            <p className="text-[10px] text-slate-400 mt-0.5">People needing relocation</p>
           </div>
         </div>
 
         {/* Candidate Sites Comparison Grid */}
-        <section className="mb-6 rounded-xl border border-slate-700 bg-slate-900/70 p-5">
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+        <section className="rounded-lg border border-slate-800 bg-slate-900 p-4 md:p-5 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
             <div>
-              <h2 className="text-lg font-semibold text-slate-100">Candidate Relocation Sites Overview</h2>
-              <p className="text-xs text-slate-400">Click a site card to inspect detailed bottleneck constraints and stress test scenarios.</p>
+              <h2 className="text-sm font-bold uppercase tracking-wider text-slate-200">Candidate Relocation Sites Overview</h2>
+              <p className="text-xs text-slate-400">Select a site card to inspect detailed bottleneck constraints and run stress test scenarios.</p>
             </div>
-            <div className="flex items-center gap-2 text-xs">
-              <span className="text-slate-400">Preset Origin Pop:</span>
+            <div className="flex items-center gap-1.5 text-xs">
+              <span className="text-slate-400 text-[11px]">Preset Origins:</span>
               {originFeatures.slice(0, 4).map((f) => (
                 <button
                   key={f.properties.id}
                   onClick={() => setTargetPopulation(f.properties.affected_population ?? f.properties.current_population)}
-                  className={`rounded border px-2 py-1 transition ${
+                  className={`rounded border px-2 py-0.5 text-xs transition ${
                     targetPopulation === (f.properties.affected_population ?? f.properties.current_population)
-                      ? "border-sky-400 bg-sky-500/20 text-sky-200"
-                      : "border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700"
+                      ? "border-sky-500 bg-sky-950 text-sky-300 font-semibold"
+                      : "border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-750"
                   }`}
                 >
                   {f.properties.name} ({f.properties.affected_population ?? f.properties.current_population})
@@ -153,8 +155,8 @@ export default function CapacityPage() {
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3">
-            {allAssessments.map(({ feature, site, assessment: itemAssessment }) => {
+          <div className="grid gap-3 md:grid-cols-3">
+            {allAssessments.map(({ site, assessment: itemAssessment }) => {
               const isSelected = site.site_id === activeSelectedSiteId;
               const tone = statusTone[itemAssessment.capacity_status];
               const occupancyPct =
@@ -172,48 +174,48 @@ export default function CapacityPage() {
                     setHealthcareOverride(null);
                     setInfrastructureOverride(null);
                   }}
-                  className={`cursor-pointer rounded-xl border p-5 transition ${
+                  className={`cursor-pointer rounded-md border p-3.5 transition space-y-3 ${
                     isSelected
-                      ? "border-sky-400 bg-sky-950/30 shadow-lg ring-1 ring-sky-400"
-                      : "border-slate-800 bg-slate-900/90 hover:border-slate-700 hover:bg-slate-850"
+                      ? "border-sky-500 bg-slate-850 ring-1 ring-sky-500/20"
+                      : "border-slate-800 bg-slate-850/60 hover:border-slate-700"
                   }`}
                 >
                   <div className="flex items-start justify-between">
                     <div>
-                      <h3 className="text-lg font-bold text-slate-100">{site.site_name}</h3>
-                      <p className="text-xs text-slate-400">Safe land: {site.safe_land_area_hectares} ha</p>
+                      <h3 className="text-sm font-bold text-slate-100">{site.site_name}</h3>
+                      <p className="text-[11px] text-slate-400">Safe land: <b className="font-mono">{site.safe_land_area_hectares} ha</b></p>
                     </div>
-                    <span className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold ${tone.badge}`}>
+                    <span className={`rounded border px-2 py-0.5 text-[9px] font-semibold font-mono ${tone.badge}`}>
                       {itemAssessment.capacity_status}
                     </span>
                   </div>
 
-                  <div className="mt-4 space-y-2 text-sm">
+                  <div className="space-y-1.5 text-xs border-t border-slate-800 pt-2">
                     <div className="flex justify-between text-slate-300">
-                      <span>Available Headroom:</span>
-                      <b className={tone.text}>{itemAssessment.available_headroom?.toLocaleString() ?? "N/A"} people</b>
+                      <span className="text-slate-400">Available Headroom:</span>
+                      <b className={`font-mono ${tone.text}`}>{itemAssessment.available_headroom?.toLocaleString() ?? "N/A"}</b>
                     </div>
-                    <div className="flex justify-between text-slate-400 text-xs">
-                      <span>Final Safe Capacity:</span>
-                      <span>{itemAssessment.final_capacity?.toLocaleString() ?? "N/A"}</span>
+                    <div className="flex justify-between text-slate-300">
+                      <span className="text-slate-400">Safe Capacity:</span>
+                      <span className="font-mono text-slate-200">{itemAssessment.final_capacity?.toLocaleString() ?? "N/A"}</span>
                     </div>
-                    <div className="flex justify-between text-slate-400 text-xs">
-                      <span>Current Occupancy:</span>
-                      <span>{site.current_population?.toLocaleString() ?? "0"}</span>
+                    <div className="flex justify-between text-slate-300">
+                      <span className="text-slate-400">Current Occupancy:</span>
+                      <span className="font-mono text-slate-400">{site.current_population?.toLocaleString() ?? "0"}</span>
                     </div>
-                    <div className="flex justify-between text-slate-400 text-xs">
-                      <span>Hazard Safety Score:</span>
-                      <span className="text-sky-300">{((site.hazard_safety_score ?? 0.85) * 100).toFixed(0)}%</span>
+                    <div className="flex justify-between text-slate-300">
+                      <span className="text-slate-400">Hazard Safety Score:</span>
+                      <span className="font-mono text-sky-400">{((site.hazard_safety_score ?? 0.85) * 100).toFixed(0)}%</span>
                     </div>
                   </div>
 
                   {/* Visual Capacity Bar */}
-                  <div className="mt-4">
-                    <div className="flex justify-between text-xs text-slate-400 mb-1">
-                      <span>Current Load</span>
-                      <span>{occupancyPct}%</span>
+                  <div>
+                    <div className="flex justify-between text-[10px] text-slate-400 mb-1">
+                      <span>Occupancy Load</span>
+                      <span className="font-mono">{occupancyPct}%</span>
                     </div>
-                    <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800">
+                    <div className="h-1.5 w-full overflow-hidden rounded bg-slate-800">
                       <div
                         className={`h-full ${tone.bg}`}
                         style={{ width: `${occupancyPct}%` }}
@@ -228,102 +230,104 @@ export default function CapacityPage() {
 
         {/* Detailed Single Site Deep-Dive & Sandbox */}
         {assessment && baseSite && selectedFeature && (
-          <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
+          <div className="grid gap-4 lg:grid-cols-[1.3fr_1fr]">
             {/* Left Column: Detailed Site Assessment */}
-            <section className="space-y-6">
-              <div className="rounded-xl border border-slate-700 bg-slate-900/70 p-5">
-                <div className="flex items-center justify-between">
+            <section className="space-y-4">
+              <div className="rounded-lg border border-slate-800 bg-slate-900 p-4 space-y-4">
+                <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
                   <div>
-                    <p className="text-xs uppercase tracking-wider text-sky-400">Deep-Dive Analysis</p>
-                    <h2 className="text-2xl font-bold text-slate-100">{assessment.site_name}</h2>
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-sky-400">Site Assessment Breakdown</span>
+                    <h2 className="text-lg font-bold text-slate-100 mt-0.5">{assessment.site_name}</h2>
                   </div>
-                  <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${statusTone[assessment.capacity_status].badge}`}>
+                  <span className={`rounded border px-2.5 py-0.5 text-[10px] font-semibold font-mono ${statusTone[assessment.capacity_status].badge}`}>
                     {assessment.capacity_status}
                   </span>
                 </div>
 
                 {/* Step-by-Step Breakdown */}
-                <div className="mt-6 space-y-4">
-                  <div className="rounded-lg bg-slate-800/80 p-4">
-                    <div className="flex justify-between text-sm">
+                <div className="space-y-2.5">
+                  <div className="rounded border border-slate-800 bg-slate-850 p-3">
+                    <div className="flex justify-between text-xs">
                       <span className="font-semibold text-slate-200">1. Physical Capacity</span>
-                      <span className="font-mono text-sky-300">{assessment.physical_capacity?.toLocaleString()} people</span>
+                      <span className="font-mono font-bold text-sky-400">{assessment.physical_capacity?.toLocaleString()} persons</span>
                     </div>
-                    <p className="mt-1 text-xs text-slate-400">
+                    <p className="mt-1 text-[11px] text-slate-400">
                       Safe Land Area ({baseSite.safe_land_area_hectares} ha) × Density ({densityOverride} people/ha)
                     </p>
                   </div>
 
-                  <div className="rounded-lg bg-slate-800/80 p-4">
-                    <div className="flex justify-between text-sm">
+                  <div className="rounded border border-slate-800 bg-slate-850 p-3">
+                    <div className="flex justify-between text-xs">
                       <span className="font-semibold text-slate-200">2. Adjusted Capacity (Resource Buffer)</span>
-                      <span className="font-mono text-sky-300">{assessment.adjusted_capacity?.toLocaleString()} people</span>
+                      <span className="font-mono font-bold text-sky-400">{assessment.adjusted_capacity?.toLocaleString()} persons</span>
                     </div>
-                    <p className="mt-1 text-xs text-slate-400">
+                    <p className="mt-1 text-[11px] text-slate-400">
                       Physical Capacity × Resource Multiplier ({multiplierOverride})
                     </p>
                   </div>
 
-                  <div className="rounded-lg bg-slate-800/80 p-4">
-                    <div className="flex justify-between text-sm">
+                  <div className="rounded border border-slate-800 bg-slate-850 p-3">
+                    <div className="flex justify-between text-xs">
                       <span className="font-semibold text-slate-200">3. Sector Infrastructure Caps</span>
-                      <span className="text-xs text-slate-400">Limiting Constraints</span>
+                      <span className="text-[10px] text-slate-400">Limiting Constraints</span>
                     </div>
-                    <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
-                      <div className="rounded border border-slate-700 bg-slate-900 p-2">
-                        <span className="text-slate-400">🏠 Shelter Cap:</span>
-                        <p className="font-semibold text-slate-200">{assessment.constraints.shelter_capacity?.toLocaleString() ?? "N/A"}</p>
+                    <div className="mt-2 grid grid-cols-2 gap-2 text-xs">
+                      <div className="rounded border border-slate-800 bg-slate-900 p-2">
+                        <span className="text-[10px] uppercase font-semibold text-slate-400 block">Shelter Cap</span>
+                        <p className="font-mono font-semibold text-slate-200 mt-0.5">{assessment.constraints.shelter_capacity?.toLocaleString() ?? "N/A"}</p>
                       </div>
-                      <div className="rounded border border-slate-700 bg-slate-900 p-2">
-                        <span className="text-slate-400">💧 Water Cap:</span>
-                        <p className="font-semibold text-slate-200">{assessment.constraints.water_capacity?.toLocaleString() ?? "N/A"}</p>
+                      <div className="rounded border border-slate-800 bg-slate-900 p-2">
+                        <span className="text-[10px] uppercase font-semibold text-slate-400 block">Water Cap</span>
+                        <p className="font-mono font-semibold text-slate-200 mt-0.5">{assessment.constraints.water_capacity?.toLocaleString() ?? "N/A"}</p>
                       </div>
-                      <div className="rounded border border-slate-700 bg-slate-900 p-2">
-                        <span className="text-slate-400">🚑 Healthcare Cap:</span>
-                        <p className="font-semibold text-slate-200">{assessment.constraints.healthcare_capacity?.toLocaleString() ?? "N/A"}</p>
+                      <div className="rounded border border-slate-800 bg-slate-900 p-2">
+                        <span className="text-[10px] uppercase font-semibold text-slate-400 block">Healthcare Cap</span>
+                        <p className="font-mono font-semibold text-slate-200 mt-0.5">{assessment.constraints.healthcare_capacity?.toLocaleString() ?? "N/A"}</p>
                       </div>
-                      <div className="rounded border border-slate-700 bg-slate-900 p-2">
-                        <span className="text-slate-400">⚡ Infra Cap:</span>
-                        <p className="font-semibold text-slate-200">{assessment.constraints.infrastructure_capacity?.toLocaleString() ?? "N/A"}</p>
+                      <div className="rounded border border-slate-800 bg-slate-900 p-2">
+                        <span className="text-[10px] uppercase font-semibold text-slate-400 block">Infra Cap</span>
+                        <p className="font-mono font-semibold text-slate-200 mt-0.5">{assessment.constraints.infrastructure_capacity?.toLocaleString() ?? "N/A"}</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="rounded-lg border border-sky-500/40 bg-sky-950/30 p-4">
-                    <div className="flex justify-between text-sm">
-                      <span className="font-bold text-sky-300">Final Binding Capacity</span>
-                      <span className="font-mono text-lg font-bold text-sky-200">
-                        {assessment.final_capacity?.toLocaleString() ?? "N/A"} people
+                  <div className="rounded border border-sky-600/60 bg-sky-950/30 p-3">
+                    <div className="flex justify-between text-xs">
+                      <span className="font-bold text-sky-300">Final Safe Carrying Capacity</span>
+                      <span className="font-mono text-base font-bold text-sky-200">
+                        {assessment.final_capacity?.toLocaleString() ?? "N/A"} persons
                       </span>
                     </div>
-                    <div className="mt-2 flex justify-between text-xs text-slate-300">
-                      <span>Available Headroom for Relocation:</span>
-                      <b className={statusTone[assessment.capacity_status].text}>
-                        {assessment.available_headroom?.toLocaleString() ?? "N/A"} people
+                    <div className="mt-1.5 flex justify-between text-xs text-slate-300 border-t border-slate-800/80 pt-1.5">
+                      <span>Available Safe Headroom:</span>
+                      <b className={`font-mono ${statusTone[assessment.capacity_status].text}`}>
+                        {assessment.available_headroom?.toLocaleString() ?? "N/A"} persons
                       </b>
                     </div>
                   </div>
                 </div>
 
                 {/* Methodology details */}
-                <div className="mt-5 rounded-lg border border-slate-800 bg-slate-950/50 p-3 text-xs text-slate-400">
-                  <b>Calculation Methodology:</b> {assessment.calculation_details}
+                <div className="rounded border border-slate-800 bg-slate-950 p-2.5 text-[11px] text-slate-400">
+                  <span className="text-slate-300 font-medium">Methodology: </span> {assessment.calculation_details}
                 </div>
               </div>
             </section>
 
             {/* Right Column: Interactive Scenario & Override Controls */}
-            <section className="space-y-6">
-              <div className="rounded-xl border border-slate-700 bg-slate-900/70 p-5">
-                <h3 className="font-semibold text-slate-100">Live Scenario & Stress Testing</h3>
-                <p className="mt-1 text-xs text-slate-400">
-                  Adjust demographic, land planning, and critical infrastructure assumptions in real-time.
-                </p>
+            <section className="space-y-4">
+              <div className="rounded-lg border border-slate-800 bg-slate-900 p-4 space-y-3.5">
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200">Scenario Parameter Controls</h3>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    Modify demographic assumptions, planning density, and infrastructure constraints in real-time.
+                  </p>
+                </div>
 
-                <div className="mt-4 space-y-4 text-sm">
+                <div className="space-y-3 text-xs">
                   <div>
-                    <label className="block text-slate-300">
-                      Target Displaced Population to Relocate
+                    <label className="block text-slate-300 font-medium mb-1">
+                      Target Displaced Population to Relocate:
                     </label>
                     <input
                       type="number"
@@ -331,14 +335,14 @@ export default function CapacityPage() {
                       max="20000"
                       value={targetPopulation}
                       onChange={(e) => setTargetPopulation(Math.max(1, Number(e.target.value)))}
-                      className="mt-1 w-full rounded bg-slate-800 p-2 text-slate-100 border border-slate-700 focus:border-sky-400 focus:outline-none"
+                      className="w-full rounded bg-slate-850 p-2 text-slate-100 border border-slate-700 focus:border-sky-500 focus:outline-none font-mono text-sm"
                     />
                   </div>
 
                   <div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-300">Planning Density (people/ha)</span>
-                      <b className="text-sky-300">{densityOverride}</b>
+                    <div className="flex justify-between text-slate-300">
+                      <span>Planning Density (people/ha):</span>
+                      <b className="text-sky-400 font-mono">{densityOverride}</b>
                     </div>
                     <input
                       type="range"
@@ -352,9 +356,9 @@ export default function CapacityPage() {
                   </div>
 
                   <div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-300">Resource Multiplier</span>
-                      <b className="text-sky-300">{multiplierOverride.toFixed(2)}</b>
+                    <div className="flex justify-between text-slate-300">
+                      <span>Resource Multiplier:</span>
+                      <b className="text-sky-400 font-mono">{multiplierOverride.toFixed(2)}</b>
                     </div>
                     <input
                       type="range"
@@ -367,54 +371,54 @@ export default function CapacityPage() {
                     />
                   </div>
 
-                  <div className="border-t border-slate-800 pt-3">
-                    <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-                      Site-Specific Constraint Overrides ({selectedFeature.properties.name})
+                  <div className="border-t border-slate-800 pt-3 space-y-2">
+                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                      Site Specific Constraint Overrides ({selectedFeature.properties.name})
                     </h4>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-2">
                       <div>
-                        <label className="text-xs text-slate-400">Shelter Cap</label>
+                        <label className="text-[10px] text-slate-400 block mb-0.5">Shelter Cap</label>
                         <input
                           type="number"
                           placeholder={String(baseSite.shelter_capacity ?? "")}
                           value={shelterOverride ?? ""}
                           onChange={(e) => setShelterOverride(e.target.value ? Number(e.target.value) : null)}
-                          className="mt-1 w-full rounded bg-slate-800 p-1.5 text-xs text-slate-100 border border-slate-700"
+                          className="w-full rounded bg-slate-850 p-1.5 text-xs text-slate-100 border border-slate-700 font-mono"
                         />
                       </div>
                       <div>
-                        <label className="text-xs text-slate-400">Water Cap</label>
+                        <label className="text-[10px] text-slate-400 block mb-0.5">Water Cap</label>
                         <input
                           type="number"
                           placeholder={String(baseSite.water_capacity ?? "")}
                           value={waterOverride ?? ""}
                           onChange={(e) => setWaterOverride(e.target.value ? Number(e.target.value) : null)}
-                          className="mt-1 w-full rounded bg-slate-800 p-1.5 text-xs text-slate-100 border border-slate-700"
+                          className="w-full rounded bg-slate-850 p-1.5 text-xs text-slate-100 border border-slate-700 font-mono"
                         />
                       </div>
                       <div>
-                        <label className="text-xs text-slate-400">Healthcare Cap</label>
+                        <label className="text-[10px] text-slate-400 block mb-0.5">Healthcare Cap</label>
                         <input
                           type="number"
                           placeholder={String(baseSite.healthcare_capacity ?? "")}
                           value={healthcareOverride ?? ""}
                           onChange={(e) => setHealthcareOverride(e.target.value ? Number(e.target.value) : null)}
-                          className="mt-1 w-full rounded bg-slate-800 p-1.5 text-xs text-slate-100 border border-slate-700"
+                          className="w-full rounded bg-slate-850 p-1.5 text-xs text-slate-100 border border-slate-700 font-mono"
                         />
                       </div>
                       <div>
-                        <label className="text-xs text-slate-400">Infrastructure Cap</label>
+                        <label className="text-[10px] text-slate-400 block mb-0.5">Infra Cap</label>
                         <input
                           type="number"
                           placeholder={String(baseSite.infrastructure_capacity ?? "")}
                           value={infrastructureOverride ?? ""}
                           onChange={(e) => setInfrastructureOverride(e.target.value ? Number(e.target.value) : null)}
-                          className="mt-1 w-full rounded bg-slate-800 p-1.5 text-xs text-slate-100 border border-slate-700"
+                          className="w-full rounded bg-slate-850 p-1.5 text-xs text-slate-100 border border-slate-700 font-mono"
                         />
                       </div>
                     </div>
 
-                    <div className="mt-3 flex items-center justify-between">
+                    <div className="mt-2.5 flex items-center justify-between pt-2 border-t border-slate-800">
                       <label className="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
                         <input
                           type="checkbox"
@@ -422,7 +426,7 @@ export default function CapacityPage() {
                           onChange={(e) => setIsAvailable(e.target.checked)}
                           className="rounded bg-slate-800 text-sky-500"
                         />
-                        Site Available for Relocation
+                        Hub Available
                       </label>
                       <button
                         onClick={() => {
@@ -432,7 +436,7 @@ export default function CapacityPage() {
                           setInfrastructureOverride(null);
                           setIsAvailable(true);
                         }}
-                        className="text-xs text-sky-400 hover:underline"
+                        className="text-[11px] text-sky-400 hover:underline"
                       >
                         Reset Overrides
                       </button>

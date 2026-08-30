@@ -1,6 +1,6 @@
 "use client";
 
-import type { CapacityGapResult } from "@/lib/capacity";
+import type { CapacityGapResult } from "@/lib/types";
 
 interface CapacityGapPanelProps {
   gapResult: CapacityGapResult;
@@ -8,139 +8,140 @@ interface CapacityGapPanelProps {
 
 export function CapacityGapPanel({ gapResult }: CapacityGapPanelProps) {
   const isDeficit = gapResult.capacity_deficit > 0;
+  const coveragePct =
+    gapResult.total_requiring_relocation > 0
+      ? Math.min(
+          100,
+          Math.round(
+            (gapResult.total_available_capacity / gapResult.total_requiring_relocation) * 100
+          )
+        )
+      : 100;
 
   return (
-    <section className="rounded-xl border border-slate-700 bg-slate-900/70 p-5 space-y-6">
+    <section className="rounded-lg border border-slate-800 bg-slate-900/90 p-4 md:p-5 space-y-5">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3.5">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-sky-400">
-            Regional Carrying-Capacity Model
+          <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400">
+            Carrying Capacity & Relocation Demand Analysis
           </span>
-          <h2 className="text-xl font-bold text-slate-100 mt-0.5">
-            Relocation Capacity Gap Analysis
+          <h2 className="text-lg font-bold text-slate-100 mt-0.5">
+            Regional Relocation Capacity Gap Analysis
           </h2>
           <p className="text-xs text-slate-400">
-            Aggregate comparison between regional displaced population demand and verified safe shelter headroom.
+            Aggregate comparison of total displaced population requiring relocation versus safe highland candidate shelter headroom.
           </p>
         </div>
 
-        <span
-          className={`rounded-full border px-3 py-1 text-xs font-bold uppercase ${
-            isDeficit
-              ? "bg-red-950/80 text-red-300 border-red-700"
-              : "bg-emerald-950/80 text-emerald-300 border-emerald-700"
-          }`}
-        >
-          {gapResult.capacity_status}
-        </span>
-      </div>
-
-      {/* Primary KPI Metrics */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <div className="rounded-xl border border-slate-800 bg-slate-900 p-4">
-          <p className="text-xs text-slate-400">Total People Requiring Relocation</p>
-          <p className="mt-1 text-3xl font-bold text-orange-300 font-mono">
-            {gapResult.total_requiring_relocation.toLocaleString()}
-          </p>
-          <p className="text-xs text-slate-500 mt-1">Displaced population across selected origins</p>
-        </div>
-
-        <div className="rounded-xl border border-slate-800 bg-slate-900 p-4">
-          <p className="text-xs text-slate-400">Total Available Safe Capacity</p>
-          <p className="mt-1 text-3xl font-bold text-emerald-300 font-mono">
-            {gapResult.total_available_capacity.toLocaleString()}
-          </p>
-          <p className="text-xs text-slate-500 mt-1">Verified headroom in candidate safe zones</p>
-        </div>
-
-        <div
-          className={`rounded-xl border p-4 ${
-            isDeficit
-              ? "border-red-800/80 bg-red-950/30"
-              : "border-emerald-800/80 bg-emerald-950/30"
-          }`}
-        >
-          <p className="text-xs text-slate-400">Capacity Gap</p>
-          <p
-            className={`mt-1 text-3xl font-bold font-mono ${
-              isDeficit ? "text-red-400" : "text-emerald-300"
+        <div className="flex items-center gap-2">
+          <span
+            className={`rounded border px-2.5 py-1 text-xs font-bold font-mono ${
+              isDeficit
+                ? "bg-red-950/80 text-red-300 border-red-800"
+                : "bg-emerald-950/80 text-emerald-300 border-emerald-800"
             }`}
           >
-            {isDeficit
-              ? `-${gapResult.capacity_deficit.toLocaleString()}`
-              : `+${(gapResult.total_available_capacity - gapResult.total_requiring_relocation).toLocaleString()}`}
-          </p>
-          <p className="text-xs text-slate-400 mt-1">
-            {isDeficit ? "Capacity Deficit Shortfall" : "Safe Surplus Headroom"}
-          </p>
+            {gapResult.capacity_status}
+          </span>
         </div>
       </div>
 
-      {/* Operational Callout Message */}
-      <div
-        className={`rounded-lg border p-4 text-sm ${
-          isDeficit
-            ? "border-red-800 bg-red-950/40 text-red-200"
-            : "border-emerald-800 bg-emerald-950/40 text-emerald-200"
-        }`}
-      >
-        <div className="flex items-start gap-3">
-          <span className="text-xl">{isDeficit ? "⚠️" : "✅"}</span>
+      {/* Aggregate Metrics Callouts */}
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="rounded border border-slate-800 bg-slate-850 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+            Total Displaced Demand
+          </p>
+          <p className="mt-1 text-xl font-bold font-mono text-orange-300">
+            {gapResult.total_requiring_relocation.toLocaleString()}
+          </p>
+          <p className="text-[10px] text-slate-400 mt-0.5">Persons requiring shelter</p>
+        </div>
+
+        <div className="rounded border border-slate-800 bg-slate-850 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+            Total Safe Capacity
+          </p>
+          <p className="mt-1 text-xl font-bold font-mono text-emerald-400">
+            {gapResult.total_available_capacity.toLocaleString()}
+          </p>
+          <p className="text-[10px] text-slate-400 mt-0.5">Safe Highland Headroom</p>
+        </div>
+
+        <div className="rounded border border-slate-800 bg-slate-850 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+            Net Regional Balance
+          </p>
+          <p className={`mt-1 text-xl font-bold font-mono ${isDeficit ? "text-red-400" : "text-emerald-400"}`}>
+            {isDeficit ? `-${gapResult.capacity_deficit.toLocaleString()}` : `+${(gapResult.total_available_capacity - gapResult.total_requiring_relocation).toLocaleString()}`}
+          </p>
+          <p className="text-[10px] text-slate-400 mt-0.5">{isDeficit ? "Shortfall deficit" : "Surplus headroom"}</p>
+        </div>
+
+        <div className="rounded border border-slate-800 bg-slate-850 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+            Regional Intake Rate
+          </p>
+          <p className="mt-1 text-xl font-bold font-mono text-sky-400">
+            {coveragePct}%
+          </p>
+          <p className="text-[10px] text-slate-400 mt-0.5">Capacity demand ratio</p>
+        </div>
+      </div>
+
+      {/* Capacity Deficit Warning Callout */}
+      {isDeficit && (
+        <div className="rounded border border-red-800/80 bg-red-950/40 p-3.5 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div>
-            <h4 className="font-bold text-slate-100">
-              {isDeficit ? "Shelter Capacity Shortfall Identified" : "Regional Capacity Sufficient"}
-            </h4>
-            <p className="mt-1 text-xs">{gapResult.summary_message}</p>
-            {isDeficit && (
-              <p className="mt-2 text-xs text-slate-300">
-                <b>Recommended SDMA Action:</b> Identify additional high-elevation public infrastructure (e.g. colleges, stadiums) or expand temporary shelter density buffers in adjacent non-inundated sub-districts.
-              </p>
-            )}
+            <b className="text-red-300 font-semibold">Operational Deficit Alert:</b>
+            <p className="text-red-200/90 text-[11px] mt-0.5">
+              Available safe candidate hubs cannot safely absorb {gapResult.capacity_deficit.toLocaleString()} displaced persons. Additional highland grounds, higher temporary density factors, or inter-district transit corridors required.
+            </p>
           </div>
+          <span className="rounded bg-red-900/60 px-2 py-1 text-[10px] font-mono font-bold text-red-200 border border-red-700">
+            SHORTFALL: {gapResult.capacity_deficit.toLocaleString()}
+          </span>
         </div>
-      </div>
+      )}
 
-      {/* District Deficit Breakdown Table */}
-      <div>
-        <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-300 mb-3">
-          District-Level Demand vs. Relocation Headroom
+      {/* District-by-District Breakdown Table */}
+      <div className="space-y-2.5">
+        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+          District-by-District Displacement Demand vs. Candidate Safe Capacity
         </h3>
-        <div className="overflow-x-auto rounded-lg border border-slate-800">
+
+        <div className="overflow-x-auto rounded border border-slate-800">
           <table className="w-full text-left text-xs text-slate-300">
             <thead className="bg-slate-800/80 text-slate-400 uppercase text-[10px]">
               <tr>
                 <th className="p-3">District</th>
                 <th className="p-3">Displaced Demand</th>
-                <th className="p-3">Available Safe Headroom</th>
-                <th className="p-3">Net District Gap</th>
+                <th className="p-3">Safe Headroom</th>
+                <th className="p-3">Net District Balance</th>
                 <th className="p-3">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800 bg-slate-900/60">
               {gapResult.district_breakdown.map((row) => {
-                const districtDeficit = row.gap > 0;
+                const isDistrictDeficit = row.gap > 0;
                 return (
-                  <tr key={row.district} className="hover:bg-slate-800/50">
+                  <tr key={row.district} className="hover:bg-slate-850 transition">
                     <td className="p-3 font-semibold text-slate-100">{row.district}</td>
-                    <td className="p-3 font-mono">{row.population_demanding.toLocaleString()}</td>
-                    <td className="p-3 font-mono">{row.available_capacity.toLocaleString()}</td>
-                    <td
-                      className={`p-3 font-mono font-bold ${
-                        districtDeficit ? "text-red-400" : "text-emerald-300"
-                      }`}
-                    >
-                      {districtDeficit ? `-${row.gap.toLocaleString()}` : `+${(-row.gap).toLocaleString()}`}
+                    <td className="p-3 font-mono text-orange-300">{row.population_demanding.toLocaleString()}</td>
+                    <td className="p-3 font-mono text-emerald-400">{row.available_capacity.toLocaleString()}</td>
+                    <td className={`p-3 font-mono font-bold ${isDistrictDeficit ? "text-red-400" : "text-emerald-400"}`}>
+                      {isDistrictDeficit ? `-${row.gap.toLocaleString()}` : `+${Math.abs(row.gap).toLocaleString()}`}
                     </td>
                     <td className="p-3">
                       <span
                         className={`rounded px-2 py-0.5 text-[10px] font-semibold ${
-                          districtDeficit
-                            ? "bg-red-950/80 text-red-300 border border-red-800"
-                            : "bg-emerald-950/80 text-emerald-300 border border-emerald-800"
+                          isDistrictDeficit
+                            ? "bg-red-950 text-red-300 border border-red-800"
+                            : "bg-emerald-950 text-emerald-300 border border-emerald-800"
                         }`}
                       >
-                        {districtDeficit ? "Deficit" : "Covered"}
+                        {isDistrictDeficit ? "Deficit" : "Sufficient"}
                       </span>
                     </td>
                   </tr>

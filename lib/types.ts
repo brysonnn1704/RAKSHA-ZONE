@@ -178,3 +178,7 @@ export interface SourcesRegistryData {
   region: string;
   sources: SourceRecord[];
 }
+
+export type { CapacityGapResult } from "./capacity";
+export type { SiteResourceGap } from "./resources";
+

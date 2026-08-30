@@ -25,7 +25,7 @@ import { SourcesPanel } from "./SourcesPanel";
 
 const MapView = dynamic(() => import("./MapView").then((m) => m.MapView), {
   ssr: false,
-  loading: () => <div className="h-[520px] rounded-xl bg-slate-800 animate-pulse" />
+  loading: () => <div className="h-[480px] rounded-lg bg-slate-850 animate-pulse border border-slate-800" />
 });
 
 type TabKey =
@@ -38,16 +38,6 @@ type TabKey =
   | "timeline"
   | "sources";
 
-const tone: Record<string, string> = {
-  Immediate: "text-red-300",
-  "Short-term": "text-orange-300",
-  "Medium-term": "text-emerald-300",
-  SUFFICIENT: "text-emerald-300",
-  LIMITED: "text-orange-300",
-  INSUFFICIENT: "text-red-300",
-  UNKNOWN: "text-slate-400"
-};
-
 export function Dashboard() {
   const [region, setRegion] = useState<RegionId>("assam");
   const [activeTab, setActiveTab] = useState<TabKey>("overview");
@@ -55,7 +45,6 @@ export function Dashboard() {
   const [multiplier, setMultiplier] = useState(0.9);
   const [density, setDensity] = useState(140);
   const [affectedOverride, setAffectedOverride] = useState<number | null>(null);
-  const [generate, setGenerate] = useState(false);
 
   // Load features based on active region
   const features = useMemo(() => getRegionFeatures(region), [region]);
@@ -124,26 +113,21 @@ export function Dashboard() {
   const priorityTitle = isAssam ? "Flood Relocation Priority Score" : "Relocation Priority Score";
 
   return (
-    <main className="min-h-screen bg-[#07111f] p-3 text-slate-100 md:p-6">
-      <div className="mx-auto max-w-7xl space-y-5">
+    <main className="min-h-screen bg-[#070d18] p-3 text-slate-100 md:p-6">
+      <div className="mx-auto max-w-7xl space-y-4">
         {/* Top App Header & Region Switcher */}
-        <header className="border-b border-slate-700/80 pb-4 space-y-3">
+        <header className="border-b border-slate-800 pb-3 space-y-2.5">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">
-                <span className="rounded bg-sky-500/20 border border-sky-500/40 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-sky-300">
-                  SIH26191 · NDRF / MHA Decision Support
+                <span className="rounded bg-sky-950 border border-sky-800/80 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-sky-400">
+                  SIH26191 · NDRF / SDMA Decision Support System
                 </span>
-                <span className="rounded bg-slate-800 px-2 py-0.5 text-[10px] font-semibold text-slate-400">
-                  Prototype v2.1
-                </span>
+                <span className="text-[10px] font-mono text-slate-500">v2.1 Operational Release</span>
               </div>
-              <h1 className="mt-1 text-2xl md:text-3xl font-extrabold tracking-tight">
-                RAKSHA-ZONE <span className="text-sky-400 font-normal">| Multi-Hazard Decision Platform</span>
+              <h1 className="mt-1 text-xl md:text-2xl font-bold tracking-tight text-white">
+                RAKSHA-ZONE <span className="text-slate-400 font-normal text-lg">| Multi-Hazard Relocation & Carrying-Capacity Platform</span>
               </h1>
-              <p className="text-xs text-slate-400">
-                Connecting multi-hazard exposure with vulnerable populations, safe carrying capacity, and lifeline resources.
-              </p>
             </div>
 
             {/* Region Selector */}
@@ -152,61 +136,59 @@ export function Dashboard() {
               onSelectRegion={(r) => {
                 setRegion(r);
                 setAffectedOverride(null);
-                setGenerate(false);
                 setSelectedId(r === "assam" ? "assam-nagaon-kaliabor" : "mundakkai");
               }}
             />
           </div>
 
-          {/* Quick Sub-navigation */}
-          <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs text-slate-400">
+          {/* Sub-bar with Navigation Links */}
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs text-slate-400 border-t border-slate-850">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-slate-300">Active Scenario:</span>
-              <span className="text-teal-300 font-medium">
-                {isAssam ? "Assam Monsoon Riverine Flood Inundation" : "Wayanad Mountain Landslide & Debris Flow"}
+              <span className="text-slate-200">
+                {isAssam ? "Assam Riverine Flood Inundation (Brahmaputra Basin)" : "Wayanad Debris Flow & Landslide Vulnerability (Western Ghats)"}
               </span>
             </div>
-            <nav className="flex items-center gap-4 text-sky-300">
-              <Link href="/capacity" className="hover:text-sky-200 hover:underline">
-                Standalone Capacity Dashboard →
+            <nav className="flex items-center gap-4 text-sky-400">
+              <Link href="/capacity" className="hover:text-sky-300 hover:underline">
+                Capacity Deep Dive →
               </Link>
-              <Link href="/resources" className="hover:text-sky-200 hover:underline">
-                Standalone Resource Dashboard →
+              <Link href="/resources" className="hover:text-sky-300 hover:underline">
+                Relief Logistics Matrix →
               </Link>
             </nav>
           </div>
         </header>
 
         {/* 8 Tab Navigation Bar */}
-        <nav className="flex flex-wrap gap-1 rounded-xl bg-slate-900/90 p-1.5 border border-slate-800 shadow-md">
+        <nav className="flex flex-wrap gap-1 rounded-md bg-slate-900 p-1 border border-slate-800">
           {[
-            { id: "overview", label: "Overview", icon: "📊" },
-            { id: "risk_map", label: "Risk Map", icon: "🗺️" },
-            { id: "relocation", label: "Relocation Planning", icon: "🧭" },
-            { id: "capacity", label: "Population & Capacity", icon: "🏢" },
-            { id: "resources", label: "Resource Planning", icon: "📦" },
-            { id: "priority_villages", label: "Priority Villages", icon: "📋" },
-            ...(isAssam ? [{ id: "timeline", label: "Assam Flood Situation", icon: "⏱️" }] : []),
-            { id: "sources", label: "Sources & Provenance", icon: "🔍" }
+            { id: "overview", label: "Operational Overview" },
+            { id: "risk_map", label: "GIS Hazard Map" },
+            { id: "relocation", label: "Relocation Planning" },
+            { id: "capacity", label: "Population & Capacity" },
+            { id: "resources", label: "Relief Resources & Stocks" },
+            { id: "priority_villages", label: "Prioritized Settlements" },
+            ...(isAssam ? [{ id: "timeline", label: "Situation Timeline" }] : []),
+            { id: "sources", label: "Data Provenance" }
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as TabKey)}
-              className={`flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold transition ${
+              className={`rounded px-3 py-1.5 text-xs font-medium transition ${
                 activeTab === tab.id
-                  ? "bg-sky-500 text-slate-950 shadow-md"
-                  : "text-slate-300 hover:bg-slate-800 hover:text-slate-100"
+                  ? "bg-slate-800 text-sky-400 border border-slate-700 shadow-sm font-semibold"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-850"
               }`}
             >
-              <span>{tab.icon}</span>
-              <span>{tab.label}</span>
+              {tab.label}
             </button>
           ))}
         </nav>
 
         {/* Tab 1: Overview */}
         {activeTab === "overview" && (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {isAssam && (
               <AssamOverview
                 floodStats={assamFloodStats}
@@ -218,8 +200,8 @@ export function Dashboard() {
             )}
 
             {/* Split Screen Map + Selected Settlement Quick View */}
-            <div className="grid gap-5 lg:grid-cols-[1.5fr_1fr]">
-              <div className="h-[480px]">
+            <div className="grid gap-4 lg:grid-cols-[1.5fr_1fr]">
+              <div className="h-[460px]">
                 <MapView
                   features={features}
                   assessments={assessments}
@@ -237,68 +219,65 @@ export function Dashboard() {
                 />
               </div>
 
-              <section className="rounded-xl border border-slate-700 bg-slate-900/80 p-5 space-y-4 flex flex-col justify-between">
+              <section className="rounded-lg border border-slate-800 bg-slate-900 p-4 space-y-3.5 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold uppercase tracking-wider text-sky-400">
-                      Active Inundation Zone
+                  <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400">
+                      Selected Habitation Profile
                     </span>
                     <span
-                      className={`rounded border px-2 py-0.5 text-[10px] font-bold ${
+                      className={`rounded px-2 py-0.5 text-[10px] font-semibold ${
                         assessment?.priority_tier === "Immediate"
-                          ? "bg-red-950 text-red-300 border-red-800"
-                          : "bg-orange-950 text-orange-300 border-orange-800"
+                          ? "bg-red-950 text-red-300 border border-red-800"
+                          : "bg-amber-950 text-amber-300 border border-amber-800"
                       }`}
                     >
-                      {assessment?.priority_tier}
+                      Tier: {assessment?.priority_tier}
                     </span>
                   </div>
 
-                  <h2 className="mt-1 text-2xl font-bold text-slate-100">{assessment?.name}</h2>
+                  <h2 className="mt-2 text-xl font-bold text-slate-100">{assessment?.name}</h2>
                   {assessment?.district && (
                     <p className="text-xs text-slate-400">District: {assessment.district} ({assessment.state ?? "Assam"})</p>
                   )}
 
-                  <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-lg bg-slate-800/80 p-3">
-                      <p className="text-xs text-slate-400">{priorityTitle}</p>
-                      <p className="mt-1 text-xl font-bold font-mono text-sky-300">
+                  <div className="mt-3 grid grid-cols-2 gap-2.5">
+                    <div className="rounded border border-slate-800 bg-slate-850 p-2.5">
+                      <p className="text-[10px] uppercase font-semibold text-slate-400">{priorityTitle}</p>
+                      <p className="mt-0.5 text-lg font-bold font-mono text-sky-400">
                         {assessment?.rps.toFixed(3)}
                       </p>
                     </div>
-                    <div className="rounded-lg bg-slate-800/80 p-3">
-                      <p className="text-xs text-slate-400">Displaced Evacuees</p>
-                      <p className="mt-1 text-xl font-bold font-mono text-slate-100">
+                    <div className="rounded border border-slate-800 bg-slate-850 p-2.5">
+                      <p className="text-[10px] uppercase font-semibold text-slate-400">Evacuation Target</p>
+                      <p className="mt-0.5 text-lg font-bold font-mono text-slate-100">
                         {requiredPop.toLocaleString()}
                       </p>
                     </div>
-                    <div className="rounded-lg bg-slate-800/80 p-3">
-                      <p className="text-xs text-slate-400">Hazard Exposure (HSS)</p>
-                      <p className="mt-1 text-lg font-bold font-mono text-orange-300">
+                    <div className="rounded border border-slate-800 bg-slate-850 p-2.5">
+                      <p className="text-[10px] uppercase font-semibold text-slate-400">Hazard Exposure (HSS)</p>
+                      <p className="mt-0.5 text-base font-bold font-mono text-orange-400">
                         {assessment?.hss.toFixed(2)}
                       </p>
                     </div>
-                    <div className="rounded-lg bg-slate-800/80 p-3">
-                      <p className="text-xs text-slate-400">Top Recommended Site</p>
-                      <p className="mt-1 text-xs font-bold text-emerald-300 truncate">
+                    <div className="rounded border border-slate-800 bg-slate-850 p-2.5">
+                      <p className="text-[10px] uppercase font-semibold text-slate-400">Optimal Destination</p>
+                      <p className="mt-0.5 text-xs font-bold text-emerald-400 truncate">
                         {assessment?.smart_relocation_options?.[0]?.site_name ?? "Evaluating..."}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-3 pt-3 border-t border-slate-800">
+                <div className="space-y-2 pt-3 border-t border-slate-800">
                   <button
-                    onClick={() => {
-                      setGenerate(true);
-                      setActiveTab("relocation");
-                    }}
-                    className="w-full rounded-lg bg-sky-500 px-4 py-2.5 font-bold text-slate-950 hover:bg-sky-400 transition shadow-lg"
+                    onClick={() => setActiveTab("relocation")}
+                    className="w-full rounded bg-sky-600 px-3.5 py-2 font-semibold text-xs text-white hover:bg-sky-500 transition shadow-sm"
                   >
-                    Generate Relocation Plan & Smart Matching →
+                    Open Multi-Criteria Relocation Planner →
                   </button>
-                  <p className="text-[11px] text-slate-500 text-center">
-                    Uses multi-factor composite suitability: distance, safe headroom, and resource readiness.
+                  <p className="text-[10px] text-slate-500 text-center">
+                    Automated allocation matching origin settlements to candidate safe zones by geodesic distance and capacity headroom.
                   </p>
                 </div>
               </section>
@@ -308,24 +287,24 @@ export function Dashboard() {
 
         {/* Tab 2: Risk Map */}
         {activeTab === "risk_map" && (
-          <div className="space-y-4">
-            <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900/80 p-4">
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center justify-between gap-2.5 rounded-lg border border-slate-800 bg-slate-900 p-3">
               <div>
-                <h3 className="text-base font-bold text-slate-100">Interactive GIS Multi-Hazard Map</h3>
+                <h3 className="text-sm font-bold text-slate-100">GIS Inundation & Relocation Corridor Map</h3>
                 <p className="text-xs text-slate-400">
-                  Visualizing flood inundation zones, candidate safe highlands, and automated relocation vectors.
+                  Spatial distribution of origin habitations, designated safe highland hubs, and modeled evacuation vectors.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3 text-xs">
-                <span className="flex items-center gap-1.5"><span className="h-3 w-3 rounded-full bg-red-500" /> Immediate Risk</span>
-                <span className="flex items-center gap-1.5"><span className="h-3 w-3 rounded-full bg-orange-500" /> Short-term</span>
-                <span className="flex items-center gap-1.5"><span className="h-3 w-3 rounded-full bg-emerald-500" /> Medium-term</span>
-                <span className="flex items-center gap-1.5"><span className="h-3 w-3 rounded-full bg-sky-400" /> Candidate Safe Zone</span>
-                <span className="flex items-center gap-1.5"><span className="h-3 w-3 rounded-full bg-purple-500" /> Resource Constrained</span>
+                <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-red-500" /> Immediate Risk</span>
+                <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-amber-500" /> Short-term</span>
+                <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-emerald-500" /> Medium-term</span>
+                <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-sky-500" /> Candidate Safe Zone</span>
+                <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-purple-500" /> Resource Constrained</span>
               </div>
             </div>
 
-            <div className="h-[600px] rounded-xl overflow-hidden border border-slate-700">
+            <div className="h-[560px] rounded-lg overflow-hidden border border-slate-800">
               <MapView
                 features={features}
                 assessments={assessments}
@@ -373,35 +352,35 @@ export function Dashboard() {
 
         {/* Tab 6: Priority Villages Table */}
         {activeTab === "priority_villages" && (
-          <section className="rounded-xl border border-slate-700 bg-slate-900/70 p-5 space-y-4">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <section className="rounded-lg border border-slate-800 bg-slate-900 p-4 md:p-5 space-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3.5">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-sky-400">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400">
                   Priority Scoring Registry
                 </span>
-                <h2 className="text-xl font-bold text-slate-100 mt-0.5">
-                  Ranked Priority Settlements ({assessments.length} Habitations)
+                <h2 className="text-lg font-bold text-slate-100 mt-0.5">
+                  Prioritized Settlement Registry ({assessments.length} Habitations)
                 </h2>
                 <p className="text-xs text-slate-400">
-                  Sorted by {priorityTitle} descending based on current alpha, beta, and gamma weightings.
+                  Ranked by {priorityTitle} descending based on current alpha, beta, and gamma weightings.
                 </p>
               </div>
             </div>
 
-            <div className="overflow-x-auto rounded-lg border border-slate-800">
+            <div className="overflow-x-auto rounded border border-slate-800">
               <table className="w-full text-left text-xs text-slate-300">
                 <thead className="bg-slate-800/80 text-slate-400 uppercase text-[10px]">
                   <tr>
                     <th className="p-3">Rank</th>
-                    <th className="p-3">Settlement Name</th>
+                    <th className="p-3">Habitation</th>
                     <th className="p-3">District</th>
-                    <th className="p-3">Displaced Count</th>
+                    <th className="p-3">Displaced Pop.</th>
                     <th className="p-3">Hazard (HSS)</th>
                     <th className="p-3">Stress Index</th>
                     <th className="p-3">Vulnerability</th>
                     <th className="p-3">RPS Score</th>
                     <th className="p-3">Priority Tier</th>
-                    <th className="p-3">Top Recommended Site</th>
+                    <th className="p-3">Optimal Shelter Hub</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-800 bg-slate-900/60">
@@ -414,7 +393,7 @@ export function Dashboard() {
                           setSelectedId(item.id);
                           setActiveTab("relocation");
                         }}
-                        className="cursor-pointer hover:bg-slate-800/60 transition"
+                        className="cursor-pointer hover:bg-slate-850 transition"
                       >
                         <td className="p-3 font-mono font-bold text-sky-400">#{idx + 1}</td>
                         <td className="p-3 font-bold text-slate-100">{item.name}</td>
@@ -422,24 +401,24 @@ export function Dashboard() {
                         <td className="p-3 font-mono text-slate-200">
                           {(item.affected_population ?? item.population).toLocaleString()}
                         </td>
-                        <td className="p-3 font-mono text-orange-300">{item.hss.toFixed(2)}</td>
+                        <td className="p-3 font-mono text-orange-400">{item.hss.toFixed(2)}</td>
                         <td className="p-3 font-mono text-slate-300">{item.stress_index.toFixed(2)}</td>
                         <td className="p-3 font-mono text-slate-300">{item.vulnerability_index.toFixed(2)}</td>
-                        <td className="p-3 font-mono font-bold text-sky-300 text-sm">{item.rps.toFixed(3)}</td>
+                        <td className="p-3 font-mono font-bold text-sky-400 text-sm">{item.rps.toFixed(3)}</td>
                         <td className="p-3">
                           <span
-                            className={`rounded px-2 py-0.5 text-[10px] font-bold ${
+                            className={`rounded px-2 py-0.5 text-[10px] font-semibold ${
                               item.priority_tier === "Immediate"
                                 ? "bg-red-950/80 text-red-300 border border-red-800"
                                 : item.priority_tier === "Short-term"
-                                ? "bg-orange-950/80 text-orange-300 border border-orange-800"
+                                ? "bg-amber-950/80 text-amber-300 border border-amber-800"
                                 : "bg-emerald-950/80 text-emerald-300 border border-emerald-800"
                             }`}
                           >
                             {item.priority_tier}
                           </span>
                         </td>
-                        <td className="p-3 text-emerald-300 font-medium">
+                        <td className="p-3 text-emerald-400 font-medium">
                           {topMatch ? `${topMatch.site_name} (${topMatch.distance_km} km)` : "—"}
                         </td>
                       </tr>

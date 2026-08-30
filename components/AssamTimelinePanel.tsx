@@ -8,36 +8,36 @@ interface AssamTimelinePanelProps {
 
 export function AssamTimelinePanel({ floodStats }: AssamTimelinePanelProps) {
   return (
-    <section className="rounded-xl border border-slate-700 bg-slate-900/70 p-5 space-y-6">
+    <section className="rounded-lg border border-slate-800 bg-slate-900/90 p-4 md:p-5 space-y-5">
       {/* Header */}
-      <div className="border-b border-slate-800 pb-4">
-        <span className="text-xs font-bold uppercase tracking-wider text-teal-400">
-          Historical Situation Snapshots (2026 Monsoon Season)
+      <div className="border-b border-slate-800 pb-3.5">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-teal-400">
+          Monsoon Inundation Audit Log (2026 Season)
         </span>
-        <h2 className="text-xl font-bold text-slate-100 mt-0.5">
-          Assam Flood Impact Timeline & ASDMA Situation Reports
+        <h2 className="text-lg font-bold text-slate-100 mt-0.5">
+          Assam Flood Situation Evolution & ASDMA Bulletins
         </h2>
         <p className="text-xs text-slate-400">
-          Chronological record of monsoon flood waves across Assam river basins based on official disaster management authority bulletins.
+          Chronological record of monsoon flood waves across Assam river basins based on official disaster management authority daily bulletins.
         </p>
       </div>
 
       {/* Timeline Steps */}
-      <div className="relative border-l-2 border-slate-700 ml-4 space-y-8 pl-6">
-        {floodStats.historical_snapshots.map((snap, i) => (
+      <div className="relative border-l border-slate-800 ml-3 space-y-6 pl-5">
+        {floodStats.historical_snapshots.map((snap) => (
           <div key={snap.date} className="relative">
             {/* Dot icon */}
-            <div className="absolute -left-[31px] top-1 h-4 w-4 rounded-full border-2 border-teal-400 bg-slate-900" />
+            <div className="absolute -left-[25px] top-1 h-3 w-3 rounded-full border border-teal-500 bg-slate-900" />
 
-            <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-5 space-y-3">
+            <div className="rounded-md border border-slate-800 bg-slate-850 p-4 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <span className="text-xs font-mono font-bold text-teal-300">
+                  <span className="text-[11px] font-mono font-bold text-teal-400">
                     {snap.period} · {snap.date}
                   </span>
-                  <h3 className="text-base font-bold text-slate-100 mt-0.5">{snap.phase}</h3>
+                  <h3 className="text-sm font-bold text-slate-100 mt-0.5">{snap.phase}</h3>
                 </div>
-                <span className="rounded bg-teal-950/60 border border-teal-600/60 px-2.5 py-1 text-xs font-bold text-teal-200">
+                <span className="rounded bg-teal-950/80 border border-teal-800 px-2 py-0.5 text-[10px] font-semibold text-teal-300">
                   {snap.confidence}
                 </span>
               </div>
@@ -45,30 +45,30 @@ export function AssamTimelinePanel({ floodStats }: AssamTimelinePanelProps) {
               <p className="text-xs text-slate-300 leading-relaxed">{snap.headline}</p>
 
               {/* Snapshot Stats Grid */}
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 rounded-lg bg-slate-800/60 p-3 border border-slate-800 text-xs">
+              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4 rounded bg-slate-900 p-2.5 border border-slate-800 text-xs">
                 <div>
-                  <span className="text-slate-400">Affected Population:</span>
-                  <p className="font-bold text-slate-100 font-mono text-sm">{snap.affected_population.toLocaleString()}</p>
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Affected Pop.</span>
+                  <p className="font-bold text-slate-100 font-mono text-sm mt-0.5">{snap.affected_population.toLocaleString()}</p>
                 </div>
                 <div>
-                  <span className="text-slate-400">Affected Villages:</span>
-                  <p className="font-bold text-slate-100 font-mono text-sm">{snap.affected_villages_count}</p>
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Inundated Mouzas</span>
+                  <p className="font-bold text-slate-100 font-mono text-sm mt-0.5">{snap.affected_villages_count}</p>
                 </div>
                 <div>
-                  <span className="text-slate-400">Declared Districts:</span>
-                  <p className="font-bold text-sky-300 font-mono text-sm">{snap.affected_districts_count}</p>
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Declared Districts</span>
+                  <p className="font-bold text-slate-200 font-mono text-sm mt-0.5">{snap.affected_districts_count}</p>
                 </div>
                 <div>
-                  <span className="text-slate-400">Relief Camps Active:</span>
-                  <p className="font-bold text-emerald-300 font-mono text-sm">{snap.relief_camps_active}</p>
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Relief Camps Active</span>
+                  <p className="font-bold text-emerald-400 font-mono text-sm mt-0.5">{snap.relief_camps_active}</p>
                 </div>
               </div>
 
               {/* Rivers & Source Link */}
               <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400 pt-2 border-t border-slate-800">
                 <div>
-                  <span className="text-red-400 font-semibold">Rivers Above Danger Mark: </span>
-                  {snap.rivers_above_danger.join(", ")}
+                  <span className="text-red-400 font-medium">Rivers Above Danger Mark: </span>
+                  <span className="text-slate-300">{snap.rivers_above_danger.join(", ")}</span>
                 </div>
                 <div>
                   <span>Source: </span>
@@ -76,7 +76,7 @@ export function AssamTimelinePanel({ floodStats }: AssamTimelinePanelProps) {
                     href={snap.source_url}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-sky-400 underline hover:text-sky-300"
+                    className="text-sky-400 hover:underline"
                   >
                     {snap.source}
                   </a>

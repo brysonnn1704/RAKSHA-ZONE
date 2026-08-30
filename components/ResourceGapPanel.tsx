@@ -1,156 +1,183 @@
 "use client";
 
-import type { SiteResourceGap } from "@/lib/resources";
-import type { ResourceStatus } from "@/lib/types";
+import type { ResourceStatus, SiteResourceGap } from "@/lib/types";
 
 interface ResourceGapPanelProps {
   siteGaps: SiteResourceGap[];
 }
 
-const statusBadge: Record<ResourceStatus, { label: string; className: string }> = {
-  adequate: { label: "ADEQUATE", className: "bg-emerald-950/80 text-emerald-300 border-emerald-700" },
-  warning: { label: "WARNING", className: "bg-amber-950/80 text-amber-300 border-amber-700" },
-  critical: { label: "CRITICAL", className: "bg-red-950/80 text-red-300 border-red-700" }
+const statusBadgeStyles: Record<ResourceStatus, string> = {
+  adequate: "bg-emerald-950/80 text-emerald-300 border-emerald-800",
+  warning: "bg-amber-950/80 text-amber-300 border-amber-800",
+  critical: "bg-red-950/80 text-red-300 border-red-800"
 };
 
 export function ResourceGapPanel({ siteGaps }: ResourceGapPanelProps) {
+  // Aggregate status counts across all sites
+  let criticalCount = 0;
+  let warningCount = 0;
+  let adequateCount = 0;
+
+  siteGaps.forEach((site) => {
+    Object.values(site.statuses).forEach((s) => {
+      if (s === "critical") criticalCount++;
+      else if (s === "warning") warningCount++;
+      else if (s === "adequate") adequateCount++;
+    });
+  });
+
   return (
-    <section className="rounded-xl border border-slate-700 bg-slate-900/70 p-5 space-y-6">
+    <section className="rounded-lg border border-slate-800 bg-slate-900/90 p-4 md:p-5 space-y-5">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3.5">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-sky-400">
-            Emergency Logistics & Lifeline Support
+          <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400">
+            Lifeline Relief Logistics & Stock Readiness
           </span>
-          <h2 className="text-xl font-bold text-slate-100 mt-0.5">
-            Resource Gap Analysis & Operational Action List
+          <h2 className="text-lg font-bold text-slate-100 mt-0.5">
+            Resource Gap & Stock Sufficiency Matrix
           </h2>
           <p className="text-xs text-slate-400">
-            Site-by-site commodity coverage thresholds evaluated against Sphere Humanitarian Standards.
+            Sphere Minimum Standards & NDRF operational norms: Drinking Water (50L/p/d), Food Rations (3 meals/d), Medical Triage, Sanitation, and Backup Power.
           </p>
         </div>
 
-        <div className="flex items-center gap-3 text-xs">
-          <span className="flex items-center gap-1.5 text-slate-300">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" /> &ge;120% (Adequate)
+        {/* Global Summary Badges */}
+        <div className="flex items-center gap-2 text-xs">
+          <span className="rounded border border-red-800 bg-red-950/80 px-2 py-1 font-mono font-semibold text-red-300">
+            {criticalCount} Critical Deficits
           </span>
-          <span className="flex items-center gap-1.5 text-slate-300">
-            <span className="h-2 w-2 rounded-full bg-amber-500" /> 80–119% (Warning)
+          <span className="rounded border border-amber-800 bg-amber-950/80 px-2 py-1 font-mono font-semibold text-amber-300">
+            {warningCount} Warnings
           </span>
-          <span className="flex items-center gap-1.5 text-slate-300">
-            <span className="h-2 w-2 rounded-full bg-red-500" /> &lt;80% (Critical)
+          <span className="rounded border border-emerald-800 bg-emerald-950/80 px-2 py-1 font-mono font-semibold text-emerald-300">
+            {adequateCount} Adequate
           </span>
         </div>
       </div>
 
-      {/* Site Cards with Resource Matrix & Action Plans */}
-      <div className="grid gap-6">
-        {siteGaps.map((site) => (
-          <div
-            key={site.site_id}
-            className="rounded-xl border border-slate-800 bg-slate-900/90 p-5 transition hover:border-slate-700"
-          >
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
-              <div>
-                <h3 className="text-base font-bold text-slate-100">{site.site_name}</h3>
-                <p className="text-xs text-slate-400">
-                  Allocated Displaced Load: <b className="text-sky-300">{site.population.toLocaleString()} people</b>
-                </p>
+      {/* Threshold Reference Legend */}
+      <div className="flex flex-wrap items-center gap-4 text-xs rounded border border-slate-800 bg-slate-850 p-2.5">
+        <span className="text-slate-400 font-medium">Standard Coverage Thresholds:</span>
+        <span className="flex items-center gap-1.5 text-emerald-300">
+          <span className="h-2 w-2 rounded-full bg-emerald-500" /> Adequate (≥ 120% target)
+        </span>
+        <span className="flex items-center gap-1.5 text-amber-300">
+          <span className="h-2 w-2 rounded-full bg-amber-500" /> Warning Buffer (80% – 119%)
+        </span>
+        <span className="flex items-center gap-1.5 text-red-300">
+          <span className="h-2 w-2 rounded-full bg-red-500" /> Critical Deficit (&lt; 80%)
+        </span>
+      </div>
+
+      {/* Site-by-Site Matrix */}
+      <div className="space-y-4">
+        {siteGaps.map((site) => {
+          return (
+            <div
+              key={site.site_id}
+              className="rounded-md border border-slate-800 bg-slate-850 p-4 space-y-3"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <h3 className="text-sm font-bold text-slate-100">{site.site_name}</h3>
+                  <p className="text-xs text-slate-400">
+                    Allocated Population Intake:{" "}
+                    <b className="font-mono text-slate-200">
+                      {site.population.toLocaleString()} people
+                    </b>
+                  </p>
+                </div>
               </div>
-              <span className="text-xs text-slate-400 font-mono">ID: {site.site_id}</span>
+
+              {/* 6 Lifeline Commodities Grid */}
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6 text-xs">
+                {/* 1. Drinking Water */}
+                <div className="rounded border border-slate-800 bg-slate-900 p-2.5 space-y-1">
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Drinking Water</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-slate-200">{site.water_coverage_pct}%</span>
+                    <span className={`rounded border px-1.5 py-0.2 text-[9px] font-semibold uppercase ${statusBadgeStyles[site.statuses.water]}`}>
+                      {site.statuses.water}
+                    </span>
+                  </div>
+                </div>
+
+                {/* 2. Food Rations */}
+                <div className="rounded border border-slate-800 bg-slate-900 p-2.5 space-y-1">
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Food Rations</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-slate-200">{site.food_coverage_pct}%</span>
+                    <span className={`rounded border px-1.5 py-0.2 text-[9px] font-semibold uppercase ${statusBadgeStyles[site.statuses.food]}`}>
+                      {site.statuses.food}
+                    </span>
+                  </div>
+                </div>
+
+                {/* 3. Medical Teams */}
+                <div className="rounded border border-slate-800 bg-slate-900 p-2.5 space-y-1">
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Medical Teams</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-slate-200">{site.medical_coverage_pct}%</span>
+                    <span className={`rounded border px-1.5 py-0.2 text-[9px] font-semibold uppercase ${statusBadgeStyles[site.statuses.medical]}`}>
+                      {site.statuses.medical}
+                    </span>
+                  </div>
+                </div>
+
+                {/* 4. Shelter Units */}
+                <div className="rounded border border-slate-800 bg-slate-900 p-2.5 space-y-1">
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Shelter Units</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-slate-200">{site.shelter_coverage_pct}%</span>
+                    <span className={`rounded border px-1.5 py-0.2 text-[9px] font-semibold uppercase ${statusBadgeStyles[site.statuses.shelter]}`}>
+                      {site.statuses.shelter}
+                    </span>
+                  </div>
+                </div>
+
+                {/* 5. Sanitation */}
+                <div className="rounded border border-slate-800 bg-slate-900 p-2.5 space-y-1">
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Sanitation Units</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-slate-200">{site.sanitation_coverage_pct}%</span>
+                    <span className={`rounded border px-1.5 py-0.2 text-[9px] font-semibold uppercase ${statusBadgeStyles[site.statuses.sanitation]}`}>
+                      {site.statuses.sanitation}
+                    </span>
+                  </div>
+                </div>
+
+                {/* 6. Power Backup */}
+                <div className="rounded border border-slate-800 bg-slate-900 p-2.5 space-y-1">
+                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Power Gen-sets</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-slate-200">{site.electricity_coverage_pct}%</span>
+                    <span className={`rounded border px-1.5 py-0.2 text-[9px] font-semibold uppercase ${statusBadgeStyles[site.statuses.electricity]}`}>
+                      {site.statuses.electricity}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Model-Derived Priority Actions */}
+              {site.priority_actions.length > 0 && (
+                <div className="rounded bg-slate-900/90 p-3 border border-slate-800 space-y-1.5">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    Recommended Operational Actions
+                  </p>
+                  <ul className="space-y-1 text-xs">
+                    {site.priority_actions.map((act: string, i: number) => (
+                      <li key={i} className="flex items-start gap-2 text-slate-300">
+                        <span className="text-sky-400 font-mono">▸</span>
+                        <span>{act}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
-
-            {/* 6 Lifeline Commodities Grid */}
-            <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-              {/* Drinking Water */}
-              <div className="rounded-lg bg-slate-800/70 p-3 border border-slate-700/60">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400">💧 Water</span>
-                  <span className={`rounded border px-1.5 py-0.2 text-[9px] font-bold ${statusBadge[site.statuses.water].className}`}>
-                    {statusBadge[site.statuses.water].label}
-                  </span>
-                </div>
-                <p className="mt-2 text-lg font-bold font-mono text-slate-100">{site.water_coverage_pct}%</p>
-                <p className="text-[10px] text-slate-400">50 L/person/day</p>
-              </div>
-
-              {/* Food / Meals */}
-              <div className="rounded-lg bg-slate-800/70 p-3 border border-slate-700/60">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400">🍲 Food</span>
-                  <span className={`rounded border px-1.5 py-0.2 text-[9px] font-bold ${statusBadge[site.statuses.food].className}`}>
-                    {statusBadge[site.statuses.food].label}
-                  </span>
-                </div>
-                <p className="mt-2 text-lg font-bold font-mono text-slate-100">{site.food_coverage_pct}%</p>
-                <p className="text-[10px] text-slate-400">3 meals/day</p>
-              </div>
-
-              {/* Medical Teams */}
-              <div className="rounded-lg bg-slate-800/70 p-3 border border-slate-700/60">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400">🚑 Medical</span>
-                  <span className={`rounded border px-1.5 py-0.2 text-[9px] font-bold ${statusBadge[site.statuses.medical].className}`}>
-                    {statusBadge[site.statuses.medical].label}
-                  </span>
-                </div>
-                <p className="mt-2 text-lg font-bold font-mono text-slate-100">{site.medical_coverage_pct}%</p>
-                <p className="text-[10px] text-slate-400">1 team/1000 pop</p>
-              </div>
-
-              {/* Shelter */}
-              <div className="rounded-lg bg-slate-800/70 p-3 border border-slate-700/60">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400">⛺ Shelter</span>
-                  <span className={`rounded border px-1.5 py-0.2 text-[9px] font-bold ${statusBadge[site.statuses.shelter].className}`}>
-                    {statusBadge[site.statuses.shelter].label}
-                  </span>
-                </div>
-                <p className="mt-2 text-lg font-bold font-mono text-slate-100">{site.shelter_coverage_pct}%</p>
-                <p className="text-[10px] text-slate-400">5 people/unit</p>
-              </div>
-
-              {/* Sanitation / Latrines */}
-              <div className="rounded-lg bg-slate-800/70 p-3 border border-slate-700/60">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400">🚻 Sanitation</span>
-                  <span className={`rounded border px-1.5 py-0.2 text-[9px] font-bold ${statusBadge[site.statuses.sanitation].className}`}>
-                    {statusBadge[site.statuses.sanitation].label}
-                  </span>
-                </div>
-                <p className="mt-2 text-lg font-bold font-mono text-slate-100">{site.sanitation_coverage_pct}%</p>
-                <p className="text-[10px] text-slate-400">20 people/toilet</p>
-              </div>
-
-              {/* Electricity & Grid */}
-              <div className="rounded-lg bg-slate-800/70 p-3 border border-slate-700/60">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400">⚡ Power</span>
-                  <span className={`rounded border px-1.5 py-0.2 text-[9px] font-bold ${statusBadge[site.statuses.electricity].className}`}>
-                    {statusBadge[site.statuses.electricity].label}
-                  </span>
-                </div>
-                <p className="mt-2 text-lg font-bold font-mono text-slate-100">{site.electricity_coverage_pct}%</p>
-                <p className="text-[10px] text-slate-400">Gen-Set & Solar</p>
-              </div>
-            </div>
-
-            {/* Model-Derived Priority Action List */}
-            <div className="mt-4 rounded-lg bg-slate-950/60 p-3 border border-slate-800">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
-                <span>📋</span> Priority Operational Actions
-              </h4>
-              <ul className="mt-2 space-y-1 text-xs text-slate-300 list-disc list-inside">
-                {site.priority_actions.map((act, i) => (
-                  <li key={i}>{act}</li>
-                ))}
-              </ul>
-              <p className="mt-2 text-[10px] text-slate-500 italic">
-                * Model-derived planning recommendations for relief coordinators; not an official government dispatch order.
-              </p>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
