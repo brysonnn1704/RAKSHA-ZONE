@@ -20,6 +20,7 @@ import type { RegionId, WeightSet } from "@/lib/types";
 
 import { Sidebar, type DashboardTab } from "./Sidebar";
 import { RegionSelector } from "./RegionSelector";
+import { RegionBackground } from "./RegionBackground";
 import { CommandCenter } from "./CommandCenter";
 import { HazardCascadePanel } from "./HazardCascadePanel";
 import { SmartMatchingPanel } from "./SmartMatchingPanel";
@@ -139,7 +140,10 @@ export function Dashboard() {
       : "Relocation Priority Score";
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex">
+    <div className="relative min-h-screen text-slate-900 flex">
+      {/* Subtle Photographic Regional Background Layer */}
+      <RegionBackground region={region} />
+
       {/* 1. Left Sidebar Navigation */}
       <Sidebar
         activeTab={activeTab}
@@ -161,7 +165,7 @@ export function Dashboard() {
       />
 
       {/* 2. Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="relative z-10 flex-1 flex flex-col min-w-0">
         {/* Top Header Bar */}
         <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/95 backdrop-blur-xs px-4 md:px-8">
           <div className="flex items-center gap-3">

@@ -8,6 +8,7 @@ import { assessCapacity } from "@/lib/capacity";
 import type { CapacityStatus } from "@/types/relocation";
 import type { RegionId } from "@/lib/types";
 import { RegionSelector } from "@/components/RegionSelector";
+import { RegionBackground } from "@/components/RegionBackground";
 
 const statusTone: Record<CapacityStatus, { badge: string; text: string; bg: string }> = {
   SUFFICIENT: { badge: "bg-emerald-50 text-emerald-700 border-emerald-200", text: "text-emerald-700", bg: "bg-emerald-500" },
@@ -71,8 +72,9 @@ export default function CapacityPage() {
   const totalCapacity = allAssessments.reduce((sum, item) => sum + (item.assessment.final_capacity ?? 0), 0);
 
   return (
-    <main className="min-h-screen bg-slate-50 p-4 text-slate-900 md:p-8">
-      <div className="mx-auto max-w-7xl space-y-6">
+    <main className="relative min-h-screen p-4 text-slate-900 md:p-8">
+      <RegionBackground region={region} />
+      <div className="relative z-10 mx-auto max-w-7xl space-y-6">
         {/* Navigation & Header */}
         <header className="border-b border-slate-200 pb-4 space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-4">

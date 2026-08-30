@@ -8,6 +8,7 @@ import { RESOURCE_ASSUMPTIONS } from "@/lib/resourceConfig";
 import type { ResourceEstimate } from "@/types/relocation";
 import type { RegionId } from "@/lib/types";
 import { RegionSelector } from "@/components/RegionSelector";
+import { RegionBackground } from "@/components/RegionBackground";
 
 interface ResourceConfigState {
   water_litres: number;
@@ -141,8 +142,9 @@ export default function ResourcesPage() {
   }, [activePopulation, assumptions]);
 
   return (
-    <main className="min-h-screen bg-slate-50 p-4 text-slate-900 md:p-8">
-      <div className="mx-auto max-w-7xl space-y-6">
+    <main className="relative min-h-screen p-4 text-slate-900 md:p-8">
+      <RegionBackground region={region} />
+      <div className="relative z-10 mx-auto max-w-7xl space-y-6">
         {/* Navigation & Header */}
         <header className="border-b border-slate-200 pb-4 space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
