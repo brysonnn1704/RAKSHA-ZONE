@@ -141,31 +141,33 @@ export default function ResourcesPage() {
   }, [activePopulation, assumptions]);
 
   return (
-    <main className="min-h-screen bg-[#070d18] p-3 text-slate-100 md:p-6">
-      <div className="mx-auto max-w-7xl space-y-4">
+    <main className="min-h-screen bg-[#090d16] p-4 text-slate-200 md:p-8">
+      <div className="mx-auto max-w-7xl space-y-8">
         {/* Navigation & Header */}
-        <header className="border-b border-slate-800 pb-3 space-y-2.5">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-sky-400">SIH26191 · NDRF / SDMA Logistics Support</p>
-              <h1 className="mt-1 text-xl md:text-2xl font-bold tracking-tight text-white">
+        <header className="border-b border-slate-800 pb-4 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="space-y-0.5">
+              <span className="text-[11px] font-mono uppercase text-slate-400 block tracking-wider">
+                SIH26191 • NDRF / SDMA Logistics Support
+              </span>
+              <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white">
                 Disaster Response Lifeline Resource Planning & Logistics Engine
               </h1>
               <p className="text-xs text-slate-400">
                 Logistics and material requirements modeling for emergency relocation and shelter operations.
               </p>
             </div>
-            <nav className="flex items-center gap-3 text-xs">
-              <Link href="/" className="rounded border border-slate-700 bg-slate-850 px-3 py-1.5 text-sky-400 hover:bg-slate-800">
+            <nav className="flex items-center gap-4 text-xs text-slate-400">
+              <Link href="/" className="hover:text-white transition">
                 ← Main Platform
               </Link>
-              <Link href="/capacity" className="rounded border border-slate-700 bg-slate-850 px-3 py-1.5 text-sky-400 hover:bg-slate-800">
+              <Link href="/capacity" className="hover:text-white transition">
                 Capacity Dashboard →
               </Link>
             </nav>
           </div>
 
-          <div className="flex items-center justify-between pt-1 border-t border-slate-850">
+          <div className="flex items-center justify-between pt-1">
             <RegionSelector
               region={region}
               onSelectRegion={(r) => {
@@ -176,6 +178,7 @@ export default function ResourcesPage() {
             />
           </div>
         </header>
+
 
         {/* Population & Scenario Selector */}
         <section className="rounded-lg border border-slate-800 bg-slate-900 p-4 space-y-3.5">

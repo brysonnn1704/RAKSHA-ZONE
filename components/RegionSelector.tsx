@@ -9,39 +9,35 @@ interface RegionSelectorProps {
 
 export function RegionSelector({ region, onSelectRegion }: RegionSelectorProps) {
   return (
-    <div className="flex flex-wrap items-center gap-2.5">
-      <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+    <div className="flex items-center gap-2">
+      <span className="text-[11px] font-medium uppercase tracking-wider text-slate-400">
         Region:
       </span>
-      <div className="inline-flex rounded-md bg-slate-900/90 p-1 border border-slate-700/80">
+      <div className="inline-flex rounded border border-slate-800 bg-slate-900 p-0.5">
         <button
           type="button"
           onClick={() => onSelectRegion("wayanad")}
-          className={`flex items-center gap-2 rounded px-3 py-1.5 text-xs font-medium transition ${
+          className={`flex items-center gap-1.5 rounded px-2.5 py-1 text-xs transition ${
             region === "wayanad"
-              ? "bg-slate-800 text-sky-400 border border-sky-500/30 shadow-sm"
-              : "text-slate-400 hover:text-slate-200 hover:bg-slate-850"
+              ? "bg-slate-800 text-white font-medium"
+              : "text-slate-400 hover:text-slate-200"
           }`}
         >
-          <span className="font-semibold text-slate-200">Wayanad, Kerala</span>
-          <span className="text-[10px] text-slate-400 border-l border-slate-700 pl-1.5">
-            Slope & Debris Flow
-          </span>
+          <span>Wayanad, Kerala</span>
+          <span className="text-[10px] text-slate-500">• Landslide</span>
         </button>
 
         <button
           type="button"
           onClick={() => onSelectRegion("assam")}
-          className={`flex items-center gap-2 rounded px-3 py-1.5 text-xs font-medium transition ${
+          className={`flex items-center gap-1.5 rounded px-2.5 py-1 text-xs transition ${
             region === "assam"
-              ? "bg-slate-800 text-teal-400 border border-teal-500/30 shadow-sm"
-              : "text-slate-400 hover:text-slate-200 hover:bg-slate-850"
+              ? "bg-slate-800 text-white font-medium"
+              : "text-slate-400 hover:text-slate-200"
           }`}
         >
-          <span className="font-semibold text-slate-200">Assam Scenario</span>
-          <span className="text-[10px] text-slate-400 border-l border-slate-700 pl-1.5">
-            Brahmaputra Inundation
-          </span>
+          <span>Assam Scenario</span>
+          <span className="text-[10px] text-slate-500">• Flood</span>
         </button>
       </div>
     </div>

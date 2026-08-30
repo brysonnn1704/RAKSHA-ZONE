@@ -71,31 +71,33 @@ export default function CapacityPage() {
   const totalCapacity = allAssessments.reduce((sum, item) => sum + (item.assessment.final_capacity ?? 0), 0);
 
   return (
-    <main className="min-h-screen bg-[#070d18] p-3 text-slate-100 md:p-6">
-      <div className="mx-auto max-w-7xl space-y-4">
+    <main className="min-h-screen bg-[#090d16] p-4 text-slate-200 md:p-8">
+      <div className="mx-auto max-w-7xl space-y-8">
         {/* Navigation & Header */}
-        <header className="border-b border-slate-800 pb-3 space-y-2.5">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-sky-400">SIH26191 · SDMA / NDRF Decision Support</p>
-              <h1 className="mt-1 text-xl md:text-2xl font-bold tracking-tight text-white">
+        <header className="border-b border-slate-800 pb-4 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="space-y-0.5">
+              <span className="text-[11px] font-mono uppercase text-slate-400 block tracking-wider">
+                SIH26191 • SDMA / NDRF Decision Support
+              </span>
+              <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white">
                 Relocation Site Carrying Capacity & Infrastructure Stress Model
               </h1>
               <p className="text-xs text-slate-400">
                 Multi-criteria carrying capacity model: safe land area, density limits, and infrastructure stress constraints.
               </p>
             </div>
-            <nav className="flex items-center gap-3 text-xs">
-              <Link href="/" className="rounded border border-slate-700 bg-slate-850 px-3 py-1.5 text-sky-400 hover:bg-slate-800">
+            <nav className="flex items-center gap-4 text-xs text-slate-400">
+              <Link href="/" className="hover:text-white transition">
                 ← Main Platform
               </Link>
-              <Link href="/resources" className="rounded border border-slate-700 bg-slate-850 px-3 py-1.5 text-sky-400 hover:bg-slate-800">
+              <Link href="/resources" className="hover:text-white transition">
                 Relief Logistics Matrix →
               </Link>
             </nav>
           </div>
 
-          <div className="flex items-center justify-between pt-1 border-t border-slate-850">
+          <div className="flex items-center justify-between pt-1">
             <RegionSelector
               region={region}
               onSelectRegion={(r) => {
@@ -108,27 +110,28 @@ export default function CapacityPage() {
 
         {/* Global Summary Cards */}
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <div className="rounded border border-slate-800 bg-slate-900 p-3">
-            <p className="text-[10px] uppercase font-semibold text-slate-400">Total Candidate Hubs</p>
-            <p className="mt-1 text-xl font-bold font-mono text-sky-400">{candidateFeatures.length}</p>
-            <p className="text-[10px] text-slate-400 mt-0.5">{region === "assam" ? "Assam regional shelters" : "Wayanad safe zones"}</p>
+          <div className="rounded border border-slate-800 bg-slate-900 p-4 space-y-1">
+            <span className="text-xs text-slate-400 font-medium">Total Candidate Hubs</span>
+            <p className="text-2xl font-bold font-mono text-white">{candidateFeatures.length}</p>
+            <span className="text-[11px] text-slate-500 block">{region === "assam" ? "Assam regional shelters" : "Wayanad safe zones"}</span>
           </div>
-          <div className="rounded border border-slate-800 bg-slate-900 p-3">
-            <p className="text-[10px] uppercase font-semibold text-slate-400">Combined Capacity</p>
-            <p className="mt-1 text-xl font-bold font-mono text-slate-100">{totalCapacity.toLocaleString()}</p>
-            <p className="text-[10px] text-slate-400 mt-0.5">Maximum safe intake</p>
+          <div className="rounded border border-slate-800 bg-slate-900 p-4 space-y-1">
+            <span className="text-xs text-slate-400 font-medium">Combined Capacity</span>
+            <p className="text-2xl font-bold font-mono text-white">{totalCapacity.toLocaleString()}</p>
+            <span className="text-[11px] text-slate-500 block">Maximum safe intake</span>
           </div>
-          <div className="rounded border border-slate-800 bg-slate-900 p-3">
-            <p className="text-[10px] uppercase font-semibold text-slate-400">Combined Headroom</p>
-            <p className="mt-1 text-xl font-bold font-mono text-emerald-400">{totalHeadroom.toLocaleString()}</p>
-            <p className="text-[10px] text-slate-400 mt-0.5">Available across all sites</p>
+          <div className="rounded border border-slate-800 bg-slate-900 p-4 space-y-1">
+            <span className="text-xs text-slate-400 font-medium">Combined Headroom</span>
+            <p className="text-2xl font-bold font-mono text-white">{totalHeadroom.toLocaleString()}</p>
+            <span className="text-[11px] text-slate-500 block">Available safe headroom</span>
           </div>
-          <div className="rounded border border-slate-800 bg-slate-900 p-3">
-            <p className="text-[10px] uppercase font-semibold text-slate-400">Displaced Target</p>
-            <p className="mt-1 text-xl font-bold font-mono text-orange-400">{targetPopulation.toLocaleString()}</p>
-            <p className="text-[10px] text-slate-400 mt-0.5">People needing relocation</p>
+          <div className="rounded border border-slate-800 bg-slate-900 p-4 space-y-1">
+            <span className="text-xs text-slate-400 font-medium">Displaced Target</span>
+            <p className="text-2xl font-bold font-mono text-white">{targetPopulation.toLocaleString()}</p>
+            <span className="text-[11px] text-slate-500 block">People needing relocation</span>
           </div>
         </div>
+
 
         {/* Candidate Sites Comparison Grid */}
         <section className="rounded-lg border border-slate-800 bg-slate-900 p-4 md:p-5 space-y-4">
