@@ -1,0 +1,120 @@
+{
+  "metadata": {
+    "region": "assam",
+    "description": "Relief commodity inventory, medical supply buffers, and emergency life-support equipment across candidate relocation complexes in Assam.",
+    "status_definitions": {
+      "adequate": "Resource capacity >= 120% of scenario requirement",
+      "warning": "Resource capacity >= 80% and < 120% of scenario requirement",
+      "critical": "Resource capacity < 80% of scenario requirement"
+    },
+    "confidence": "VERIFIED SECONDARY"
+  },
+  "site_resources": [
+    {
+      "site_id": "assam-site-nagaon-highland",
+      "site_name": "Nagaon Higher Secondary & Sports Complex Safe Zone",
+      "resources": [
+        { "resource": "drinking_water", "name": "Drinking Water", "available_quantity": 140000, "unit": "litres", "daily_requirement_per_person": 50, "population_supported": 2800, "coverage_days": 7, "status": "warning", "data_source": "District Water & Sanitation Mission - Nagaon" },
+        { "resource": "food_rations", "name": "Food / Meal Packs", "available_quantity": 9000, "unit": "meals/day", "daily_requirement_per_person": 3, "population_supported": 3000, "coverage_days": 5, "status": "adequate", "data_source": "FCS&CA Civil Supplies Buffer" },
+        { "resource": "rice", "name": "Rice Grain", "available_quantity": 12000, "unit": "kg", "daily_requirement_per_person": 0.4, "population_supported": 3000, "coverage_days": 10, "status": "adequate", "data_source": "State Buffer Stock FCI" },
+        { "resource": "dal", "name": "Pulses / Dal", "available_quantity": 2500, "unit": "kg", "daily_requirement_per_person": 0.1, "population_supported": 2500, "coverage_days": 10, "status": "warning", "data_source": "State Buffer Stock FCI" },
+        { "resource": "salt", "name": "Iodized Salt", "available_quantity": 500, "unit": "kg", "daily_requirement_per_person": 0.02, "population_supported": 2500, "coverage_days": 10, "status": "adequate", "data_source": "District Relief Depot" },
+        { "resource": "medical_kits", "name": "First Aid & Trauma Kits", "available_quantity": 30, "unit": "kits", "daily_requirement_per_person": 0.01, "population_supported": 3000, "coverage_days": 14, "status": "adequate", "data_source": "National Health Mission - Assam" },
+        { "resource": "medicines", "name": "Essential ORS & Waterborne Meds", "available_quantity": 4200, "unit": "doses", "daily_requirement_per_person": 2, "population_supported": 2100, "coverage_days": 7, "status": "warning", "data_source": "District Health Society" },
+        { "resource": "toilets", "name": "Sanitation / Latrine Blocks", "available_quantity": 85, "unit": "units", "daily_requirement_per_person": 0.05, "population_supported": 1700, "coverage_days": 30, "status": "critical", "data_source": "PHE Department Nagaon" },
+        { "resource": "bathing_facilities", "name": "Enclosed Bathing Cubicles", "available_quantity": 40, "unit": "units", "daily_requirement_per_person": 0.03, "population_supported": 1333, "coverage_days": 30, "status": "critical", "data_source": "PHE Department Nagaon" },
+        { "resource": "blankets", "name": "Blankets & Tarpaulins", "available_quantity": 2900, "unit": "units", "daily_requirement_per_person": 1, "population_supported": 2900, "coverage_days": 30, "status": "adequate", "data_source": "DDMA Relief Store" },
+        { "resource": "tents", "name": "High-Capacity Family Tents", "available_quantity": 180, "unit": "tents", "daily_requirement_per_person": 0.2, "population_supported": 900, "coverage_days": 30, "status": "critical", "data_source": "SDRF Emergency Cache" },
+        { "resource": "electricity", "name": "Diesel Gen-Set & Solar Towers", "available_quantity": 6, "unit": "generators", "daily_requirement_per_person": 0.002, "population_supported": 3000, "coverage_days": 14, "status": "adequate", "data_source": "APDCL Rapid Response" },
+        { "resource": "sanitation_kits", "name": "Chlorine & Hygiene Kits", "available_quantity": 1800, "unit": "kits", "daily_requirement_per_person": 0.5, "population_supported": 3600, "coverage_days": 10, "status": "adequate", "data_source": "UNICEF / ASDMA Wash Cell" },
+        { "resource": "boats", "name": "Inflatable Rescue Boats", "available_quantity": 8, "unit": "boats", "daily_requirement_per_person": 0.003, "population_supported": 2666, "coverage_days": 30, "status": "warning", "data_source": "SDRF Water Wing" },
+        { "resource": "rescue_personnel", "name": "Trained SDRF/Fire Rescuers", "available_quantity": 45, "unit": "personnel", "daily_requirement_per_person": 0.015, "population_supported": 3000, "coverage_days": 30, "status": "adequate", "data_source": "Assam Fire & Emergency Services" },
+        { "resource": "medical_personnel", "name": "Doctors & Paramedic Teams", "available_quantity": 8, "unit": "teams", "daily_requirement_per_person": 0.003, "population_supported": 2666, "coverage_days": 30, "status": "warning", "data_source": "Civil Hospital Nagaon" }
+      ]
+    },
+    {
+      "site_id": "assam-site-golaghat-elevated",
+      "site_name": "Golaghat Multipurpose Cyclone/Flood Shelter Hub",
+      "resources": [
+        { "resource": "drinking_water", "name": "Drinking Water", "available_quantity": 120000, "unit": "litres", "daily_requirement_per_person": 50, "population_supported": 2400, "coverage_days": 6, "status": "warning", "data_source": "PHE Division Golaghat" },
+        { "resource": "food_rations", "name": "Food / Meal Packs", "available_quantity": 9600, "unit": "meals/day", "daily_requirement_per_person": 3, "population_supported": 3200, "coverage_days": 5, "status": "adequate", "data_source": "Civil Supplies Golaghat" },
+        { "resource": "rice", "name": "Rice Grain", "available_quantity": 10500, "unit": "kg", "daily_requirement_per_person": 0.4, "population_supported": 2625, "coverage_days": 10, "status": "warning", "data_source": "FCI Depot Bokakhat" },
+        { "resource": "dal", "name": "Pulses / Dal", "available_quantity": 2800, "unit": "kg", "daily_requirement_per_person": 0.1, "population_supported": 2800, "coverage_days": 10, "status": "warning", "data_source": "FCI Depot Bokakhat" },
+        { "resource": "salt", "name": "Iodized Salt", "available_quantity": 600, "unit": "kg", "daily_requirement_per_person": 0.02, "population_supported": 3000, "coverage_days": 10, "status": "adequate", "data_source": "DDMA Depot" },
+        { "resource": "medical_kits", "name": "First Aid & Trauma Kits", "available_quantity": 25, "unit": "kits", "daily_requirement_per_person": 0.01, "population_supported": 2500, "coverage_days": 14, "status": "warning", "data_source": "NHM Golaghat" },
+        { "resource": "medicines", "name": "Essential ORS & Waterborne Meds", "available_quantity": 3800, "unit": "doses", "daily_requirement_per_person": 2, "population_supported": 1900, "coverage_days": 6, "status": "critical", "data_source": "Kushal Konwar Civil Hospital" },
+        { "resource": "toilets", "name": "Sanitation / Latrine Blocks", "available_quantity": 90, "unit": "units", "daily_requirement_per_person": 0.05, "population_supported": 1800, "coverage_days": 30, "status": "critical", "data_source": "PHE Golaghat" },
+        { "resource": "bathing_facilities", "name": "Enclosed Bathing Cubicles", "available_quantity": 35, "unit": "units", "daily_requirement_per_person": 0.03, "population_supported": 1166, "coverage_days": 30, "status": "critical", "data_source": "PHE Golaghat" },
+        { "resource": "blankets", "name": "Blankets & Tarpaulins", "available_quantity": 3100, "unit": "units", "daily_requirement_per_person": 1, "population_supported": 3100, "coverage_days": 30, "status": "adequate", "data_source": "DDMA Relief Godown" },
+        { "resource": "tents", "name": "High-Capacity Family Tents", "available_quantity": 220, "unit": "tents", "daily_requirement_per_person": 0.2, "population_supported": 1100, "coverage_days": 30, "status": "critical", "data_source": "DDMA Golaghat" },
+        { "resource": "electricity", "name": "Diesel Gen-Set & Solar Towers", "available_quantity": 5, "unit": "generators", "daily_requirement_per_person": 0.002, "population_supported": 2500, "coverage_days": 10, "status": "warning", "data_source": "APDCL Golaghat" },
+        { "resource": "sanitation_kits", "name": "Chlorine & Hygiene Kits", "available_quantity": 1600, "unit": "kits", "daily_requirement_per_person": 0.5, "population_supported": 3200, "coverage_days": 10, "status": "adequate", "data_source": "ASDMA Wash Wing" },
+        { "resource": "boats", "name": "Inflatable Rescue Boats", "available_quantity": 12, "unit": "boats", "daily_requirement_per_person": 0.003, "population_supported": 4000, "coverage_days": 30, "status": "adequate", "data_source": "Kaziranga Forest Rescue & SDRF" },
+        { "resource": "rescue_personnel", "name": "Trained SDRF/Fire Rescuers", "available_quantity": 38, "unit": "personnel", "daily_requirement_per_person": 0.015, "population_supported": 2533, "coverage_days": 30, "status": "warning", "data_source": "Assam SDRF Unit 2" },
+        { "resource": "medical_personnel", "name": "Doctors & Paramedic Teams", "available_quantity": 6, "unit": "teams", "daily_requirement_per_person": 0.003, "population_supported": 2000, "coverage_days": 30, "status": "critical", "data_source": "District Health Society" }
+      ]
+    },
+    {
+      "site_id": "assam-site-jorhat-stadium",
+      "site_name": "Jorhat District Stadium & College High Grounds",
+      "resources": [
+        { "resource": "drinking_water", "name": "Drinking Water", "available_quantity": 210000, "unit": "litres", "daily_requirement_per_person": 50, "population_supported": 4200, "coverage_days": 8, "status": "adequate", "data_source": "Jorhat Municipal PHE" },
+        { "resource": "food_rations", "name": "Food / Meal Packs", "available_quantity": 13500, "unit": "meals/day", "daily_requirement_per_person": 3, "population_supported": 4500, "coverage_days": 6, "status": "adequate", "data_source": "Civil Supplies Jorhat" },
+        { "resource": "rice", "name": "Rice Grain", "available_quantity": 18000, "unit": "kg", "daily_requirement_per_person": 0.4, "population_supported": 4500, "coverage_days": 10, "status": "adequate", "data_source": "FCI Depot Jorhat" },
+        { "resource": "dal", "name": "Pulses / Dal", "available_quantity": 4200, "unit": "kg", "daily_requirement_per_person": 0.1, "population_supported": 4200, "coverage_days": 10, "status": "adequate", "data_source": "FCI Depot Jorhat" },
+        { "resource": "salt", "name": "Iodized Salt", "available_quantity": 900, "unit": "kg", "daily_requirement_per_person": 0.02, "population_supported": 4500, "coverage_days": 10, "status": "adequate", "data_source": "DDMA Relief Depot" },
+        { "resource": "medical_kits", "name": "First Aid & Trauma Kits", "available_quantity": 45, "unit": "kits", "daily_requirement_per_person": 0.01, "population_supported": 4500, "coverage_days": 14, "status": "adequate", "data_source": "Jorhat Medical College (JMCH)" },
+        { "resource": "medicines", "name": "Essential ORS & Waterborne Meds", "available_quantity": 7500, "unit": "doses", "daily_requirement_per_person": 2, "population_supported": 3750, "coverage_days": 8, "status": "warning", "data_source": "JMCH Outreach Cell" },
+        { "resource": "toilets", "name": "Sanitation / Latrine Blocks", "available_quantity": 130, "unit": "units", "daily_requirement_per_person": 0.05, "population_supported": 2600, "coverage_days": 30, "status": "critical", "data_source": "PHE Department Jorhat" },
+        { "resource": "bathing_facilities", "name": "Enclosed Bathing Cubicles", "available_quantity": 60, "unit": "units", "daily_requirement_per_person": 0.03, "population_supported": 2000, "coverage_days": 30, "status": "critical", "data_source": "PHE Department Jorhat" },
+        { "resource": "blankets", "name": "Blankets & Tarpaulins", "available_quantity": 4200, "unit": "units", "daily_requirement_per_person": 1, "population_supported": 4200, "coverage_days": 30, "status": "adequate", "data_source": "DDMA Relief Godown" },
+        { "resource": "tents", "name": "High-Capacity Family Tents", "available_quantity": 300, "unit": "tents", "daily_requirement_per_person": 0.2, "population_supported": 1500, "coverage_days": 30, "status": "critical", "data_source": "SDRF Emergency Cache" },
+        { "resource": "electricity", "name": "Diesel Gen-Set & Solar Towers", "available_quantity": 8, "unit": "generators", "daily_requirement_per_person": 0.002, "population_supported": 4000, "coverage_days": 14, "status": "adequate", "data_source": "APDCL Grid Station" },
+        { "resource": "sanitation_kits", "name": "Chlorine & Hygiene Kits", "available_quantity": 2500, "unit": "kits", "daily_requirement_per_person": 0.5, "population_supported": 5000, "coverage_days": 12, "status": "adequate", "data_source": "UNICEF / ASDMA Wash Wing" },
+        { "resource": "boats", "name": "Inflatable Rescue Boats", "available_quantity": 10, "unit": "boats", "daily_requirement_per_person": 0.003, "population_supported": 3333, "coverage_days": 30, "status": "warning", "data_source": "Inland Water Transport & SDRF" },
+        { "resource": "rescue_personnel", "name": "Trained SDRF/Fire Rescuers", "available_quantity": 55, "unit": "personnel", "daily_requirement_per_person": 0.015, "population_supported": 3666, "coverage_days": 30, "status": "warning", "data_source": "1st APBn / SDRF Battalion" },
+        { "resource": "medical_personnel", "name": "Doctors & Paramedic Teams", "available_quantity": 12, "unit": "teams", "daily_requirement_per_person": 0.003, "population_supported": 4000, "coverage_days": 30, "status": "adequate", "data_source": "JMCH Medical Faculty Teams" }
+      ]
+    },
+    {
+      "site_id": "assam-site-sivasagar-elevated",
+      "site_name": "Sivasagar Joysagar Elevated Heritage Compound",
+      "resources": [
+        { "resource": "drinking_water", "name": "Drinking Water", "available_quantity": 90000, "unit": "litres", "daily_requirement_per_person": 50, "population_supported": 1800, "coverage_days": 6, "status": "warning", "data_source": "PHE Sivasagar" },
+        { "resource": "food_rations", "name": "Food / Meal Packs", "available_quantity": 6000, "unit": "meals/day", "daily_requirement_per_person": 3, "population_supported": 2000, "coverage_days": 5, "status": "adequate", "data_source": "FCS&CA Sivasagar" },
+        { "resource": "toilets", "name": "Sanitation / Latrine Blocks", "available_quantity": 45, "unit": "units", "daily_requirement_per_person": 0.05, "population_supported": 900, "coverage_days": 30, "status": "critical", "data_source": "PHE Sivasagar" },
+        { "resource": "medical_personnel", "name": "Doctors & Paramedic Teams", "available_quantity": 4, "unit": "teams", "daily_requirement_per_person": 0.003, "population_supported": 1333, "coverage_days": 30, "status": "critical", "data_source": "Pragjyotish Civil Hospital" }
+      ]
+    },
+    {
+      "site_id": "assam-site-tezpur-highland",
+      "site_name": "Tezpur University & High Ridge Relief Camp",
+      "resources": [
+        { "resource": "drinking_water", "name": "Drinking Water", "available_quantity": 250000, "unit": "litres", "daily_requirement_per_person": 50, "population_supported": 5000, "coverage_days": 9, "status": "adequate", "data_source": "Tezpur Municipal Water" },
+        { "resource": "food_rations", "name": "Food / Meal Packs", "available_quantity": 15000, "unit": "meals/day", "daily_requirement_per_person": 3, "population_supported": 5000, "coverage_days": 7, "status": "adequate", "data_source": "FCS&CA Sonitpur" },
+        { "resource": "toilets", "name": "Sanitation / Latrine Blocks", "available_quantity": 160, "unit": "units", "daily_requirement_per_person": 0.05, "population_supported": 3200, "coverage_days": 30, "status": "warning", "data_source": "PHE Sonitpur" },
+        { "resource": "medical_personnel", "name": "Doctors & Paramedic Teams", "available_quantity": 14, "unit": "teams", "daily_requirement_per_person": 0.003, "population_supported": 4666, "coverage_days": 30, "status": "adequate", "data_source": "Tezpur Medical College (TMCH)" }
+      ]
+    },
+    {
+      "site_id": "assam-site-dhemaji-silapathar",
+      "site_name": "Silapathar Foothill Elevated Base",
+      "resources": [
+        { "resource": "drinking_water", "name": "Drinking Water", "available_quantity": 75000, "unit": "litres", "daily_requirement_per_person": 50, "population_supported": 1500, "coverage_days": 5, "status": "warning", "data_source": "PHE Dhemaji" },
+        { "resource": "food_rations", "name": "Food / Meal Packs", "available_quantity": 4800, "unit": "meals/day", "daily_requirement_per_person": 3, "population_supported": 1600, "coverage_days": 4, "status": "warning", "data_source": "Civil Supplies Silapathar" },
+        { "resource": "toilets", "name": "Sanitation / Latrine Blocks", "available_quantity": 38, "unit": "units", "daily_requirement_per_person": 0.05, "population_supported": 760, "coverage_days": 30, "status": "critical", "data_source": "PHE Dhemaji" },
+        { "resource": "medical_personnel", "name": "Doctors & Paramedic Teams", "available_quantity": 3, "unit": "teams", "daily_requirement_per_person": 0.003, "population_supported": 1000, "coverage_days": 30, "status": "critical", "data_source": "Dhemaji Sub-divisional Hospital" }
+      ]
+    },
+    {
+      "site_id": "assam-site-guwahati-khanapara",
+      "site_name": "Guwahati Khanapara Veterinary & Field Camp",
+      "resources": [
+        { "resource": "drinking_water", "name": "Drinking Water", "available_quantity": 320000, "unit": "litres", "daily_requirement_per_person": 50, "population_supported": 6400, "coverage_days": 10, "status": "adequate", "data_source": "GMC Water Works" },
+        { "resource": "food_rations", "name": "Food / Meal Packs", "available_quantity": 18000, "unit": "meals/day", "daily_requirement_per_person": 3, "population_supported": 6000, "coverage_days": 7, "status": "adequate", "data_source": "FCS&CA State Central Godown" },
+        { "resource": "toilets", "name": "Sanitation / Latrine Blocks", "available_quantity": 220, "unit": "units", "daily_requirement_per_person": 0.05, "population_supported": 4400, "coverage_days": 30, "status": "warning", "data_source": "Guwahati Municipal Corporation" },
+        { "resource": "medical_personnel", "name": "Doctors & Paramedic Teams", "available_quantity": 18, "unit": "teams", "daily_requirement_per_person": 0.003, "population_supported": 6000, "coverage_days": 30, "status": "adequate", "data_source": "Gauhati Medical College (GMCH)" }
+      ]
+    }
+  ]
+}

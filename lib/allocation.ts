@@ -1,0 +1,7 @@
+import type { RelocationAllocation, RelocationCandidate } from "@/types/relocation";
+export interface AllocationResult { population_requiring_relocation: number; allocations: RelocationAllocation[]; total_allocated: number; unallocated_population: number; calculation_details: string; }
+export function allocatePopulation(population: number, candidates: RelocationCandidate[]): AllocationResult {
+  let remaining = population;
+  const allocations = candidates.filter((candidate) => candidate.site.available && candidate.capacity.available_headroom !== null && candidate.capacity.available_headroom > 0).sort((a, b) => b.suitability_score - a.suitability_score || a.distance_km - b.distance_km).map((candidate) => { const available = candidate.capacity.available_headroom ?? 0; const allocated = Math.min(remaining, available); remaining -= allocated; return { site_id: candidate.site.site_id, site_name: candidate.site.site_name, distance_km: candidate.distance_km, suitability_score: candidate.suitability_score, available_headroom: available, allocated_population: allocated }; });
+  return { population_requiring_relocation: population, allocations, total_allocated: population - remaining, unallocated_population: remaining, calculation_details: "Population is allocated in descending suitability order without exceeding each site’s verified available headroom. Any remainder is retained explicitly as unallocated." };
+}

@@ -1,0 +1,69 @@
+{
+  "region": "assam",
+  "title": "2026 Assam Monsoon Flood Impact & Situation Evolution",
+  "historical_snapshots": [
+    {
+      "period": "April - May 2026",
+      "date": "2026-05-28",
+      "phase": "Early Pre-Monsoon Waves",
+      "headline": "First wave triggered by pre-monsoon squalls affecting Kopili and Barak sub-basins",
+      "affected_districts_count": 6,
+      "affected_villages_count": 142,
+      "affected_population": 42500,
+      "relief_camps_active": 14,
+      "distribution_centers_active": 6,
+      "crop_area_hectares": 3850,
+      "rivers_above_danger": ["Kopili (Kampuk)", "Barak (BP Ghat)"],
+      "source": "ASDMA Flood Bulletin No. 12",
+      "source_url": "https://sdmas.assam.gov.in/situation-report-may-2026",
+      "confidence": "OFFICIAL"
+    },
+    {
+      "period": "Early August 2026",
+      "date": "2026-08-08",
+      "phase": "Peak Monsoon Wave — Multi-District Inundation",
+      "headline": "Surging Brahmaputra & tributaries breach embankments across Upper & Central Assam",
+      "affected_districts_count": 13,
+      "affected_villages_count": 464,
+      "affected_population": 155849,
+      "relief_camps_active": 55,
+      "distribution_centers_active": 18,
+      "crop_area_hectares": 18420,
+      "rivers_above_danger": ["Brahmaputra (Nimati Ghat)", "Brahmaputra (Tezpur)", "Dhansiri (Numaligarh)", "Jia-Bharali (NT Road)", "Disang (Nanglamuraghat)"],
+      "source": "ASDMA Daily Situation Report (08 Aug 2026)",
+      "source_url": "https://sdmas.assam.gov.in/flood-report-08-aug-2026",
+      "confidence": "OFFICIAL"
+    },
+    {
+      "period": "Mid August 2026",
+      "date": "2026-08-20",
+      "phase": "Receding Inundation & Relief Stabilization",
+      "headline": "Floodwaters receding in 8 districts; relief distribution and silt clearance underway",
+      "affected_districts_count": 9,
+      "affected_villages_count": 312,
+      "affected_population": 98400,
+      "relief_camps_active": 38,
+      "distribution_centers_active": 22,
+      "crop_area_hectares": 14200,
+      "rivers_above_danger": ["Brahmaputra (Dhubri)", "Kopili (Dharamtul)"],
+      "source": "ASDMA Flood Bulletin No. 34 (20 Aug 2026)",
+      "source_url": "https://sdmas.assam.gov.in/flood-report-20-aug-2026",
+      "confidence": "OFFICIAL"
+    }
+  ],
+  "district_summary_aug08": [
+    { "district": "Nagaon", "affected_population": 38400, "villages_affected": 86, "relief_camps": 12, "status": "active" },
+    { "district": "Golaghat", "affected_population": 29100, "villages_affected": 68, "relief_camps": 11, "status": "active" },
+    { "district": "Jorhat", "affected_population": 21800, "villages_affected": 49, "relief_camps": 8, "status": "active" },
+    { "district": "Dhemaji", "affected_population": 19400, "villages_affected": 52, "relief_camps": 7, "status": "active" },
+    { "district": "Sivasagar", "affected_population": 12600, "villages_affected": 34, "relief_camps": 4, "status": "affected" },
+    { "district": "Lakhimpur", "affected_population": 11200, "villages_affected": 38, "relief_camps": 4, "status": "affected" },
+    { "district": "Sonitpur", "affected_population": 9800, "villages_affected": 28, "relief_camps": 3, "status": "affected" },
+    { "district": "Biswanath", "affected_population": 4600, "villages_affected": 24, "relief_camps": 2, "status": "affected" },
+    { "district": "Darrang", "affected_population": 3900, "villages_affected": 26, "relief_camps": 2, "status": "active" },
+    { "district": "Hojai", "affected_population": 2100, "villages_affected": 22, "relief_camps": 1, "status": "affected" },
+    { "district": "Udalguri", "affected_population": 1400, "villages_affected": 16, "relief_camps": 1, "status": "recovering" },
+    { "district": "Charaideo", "affected_population": 850, "villages_affected": 11, "relief_camps": 0, "status": "recovering" },
+    { "district": "Kamrup Metro", "affected_population": 699, "villages_affected": 10, "relief_camps": 0, "status": "affected" }
+  ]
+}

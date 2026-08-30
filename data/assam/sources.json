@@ -1,0 +1,60 @@
+{
+  "region": "assam",
+  "sources": [
+    {
+      "id": "asdma-sitrep-2026-08-08",
+      "title": "ASDMA Daily Flood Situation Report — 08 August 2026",
+      "organization": "Assam State Disaster Management Authority (ASDMA)",
+      "date": "2026-08-08",
+      "type": "official_situation_report",
+      "confidence": "OFFICIAL",
+      "metrics_covered": ["Affected population (155,849)", "Affected villages (464)", "Active districts (13)", "Relief camps (55)"],
+      "source_url": "https://sdmas.assam.gov.in/situation-reports/2026/08/08",
+      "notes": "Primary official baseline for macro flood displacement counts across Assam."
+    },
+    {
+      "id": "cwc-hydro-brahmaputra",
+      "title": "Central Water Commission (CWC) Daily Hydrological Bulletin — Brahmaputra Basin",
+      "organization": "Ministry of Jal Shakti, Government of India",
+      "date": "2026-08-08",
+      "type": "official_hydrology_data",
+      "confidence": "OFFICIAL",
+      "metrics_covered": ["Water levels at Nimati Ghat, Tezpur, Numaligarh", "Danger mark exceedances"],
+      "source_url": "http://cwc.gov.in/hydro-bulletin",
+      "notes": "River gauge levels and flood velocity warning thresholds."
+    },
+    {
+      "id": "ddma-plans-assam",
+      "title": "District Disaster Management Plans (DDMPs) — Nagaon, Golaghat, Jorhat, Dhemaji",
+      "organization": "District Disaster Management Authorities, Govt. of Assam",
+      "date": "2025-2026",
+      "type": "government_disaster_plan",
+      "confidence": "VERIFIED SECONDARY",
+      "metrics_covered": ["Designated safe highland zones", "Standard relief ration allocations", "PHE water tank capacities"],
+      "source_url": "https://nagaon.assam.gov.in/ddma-plan",
+      "notes": "Planning densities, minimum safe land elevation contours, and shelter typology standards."
+    },
+    {
+      "id": "sphere-india-standards",
+      "title": "Sphere India Minimum Standards in Humanitarian Response & WASH Guidelines",
+      "organization": "Sphere Association / NDMA India",
+      "date": "2018-2024",
+      "type": "humanitarian_standard",
+      "confidence": "VERIFIED SECONDARY",
+      "metrics_covered": ["Water 50L/person/day", "Shelter 5 persons/unit", "Sanitation 20 persons/toilet", "Medical 1 team/1000 pop"],
+      "source_url": "https://spherestandards.org/handbook",
+      "notes": "Global and national humanitarian benchmarks used for resource gap modeling."
+    },
+    {
+      "id": "raksha-prototype-assam-sites",
+      "title": "RAKSHA-ZONE Prototype Carrying-Capacity & Relocation Site Geometry",
+      "organization": "RAKSHA-ZONE Research & Decision Support Team (SIH26191)",
+      "date": "2026-08-30",
+      "type": "prototype_model",
+      "confidence": "PROTOTYPE",
+      "metrics_covered": ["Candidate site centroid coordinates", "Safe land hectares", "Sector bottleneck caps"],
+      "source_url": null,
+      "notes": "Simulated multi-criteria safe zone clusters created for decision-support algorithm testing. Requires field verification by district administration prior to any operational evacuation order."
+    }
+  ]
+}

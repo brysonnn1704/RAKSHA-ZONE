@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #07111f; color: #e5edf5; font-family: Arial, Helvetica, sans-serif; }
+.leaflet-container { height: 100%; width: 100%; background: #102134; }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: #0f2438; color: #e5edf5; }
+input[type="range"] { accent-color: #38bdf8; }
