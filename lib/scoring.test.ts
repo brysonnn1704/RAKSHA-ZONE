@@ -213,3 +213,73 @@ test("assessVillages computes valid RPS and smart relocation matches for Wayanad
   assert.ok(nepalAssessments[0].rps >= 0 && nepalAssessments[0].rps <= 1);
 });
 
+// 12. Routing module calculates geodesic distance and formats route results with fallbacks
+test("calculateGeodesicDistance calculates accurate Turf.js distances", async () => {
+  const { calculateGeodesicDistance, calculateRouteSafetyScore } = await import("./routing");
+  const origin = { lat: 11.53, lon: 76.14 };
+  const destination = { lat: 11.55, lon: 76.12 };
+  const dist = calculateGeodesicDistance(origin, destination);
+  assert.ok(dist > 2 && dist < 5);
+
+  const mockRoute = {
+    status: "success" as const,
+    source: "OSRM",
+    distance_m: 5880,
+    duration_s: 640,
+    distance_km: 5.9,
+    duration_minutes: 11,
+    geometry: null,
+    geodesic_distance_km: dist
+  };
+  const safetyScore = calculateRouteSafetyScore(mockRoute, 0.1, 0.9);
+  assert.ok(safetyScore >= 0 && safetyScore <= 1);
+});
+
+// 13. OSRM Provider returns valid route structure or graceful fallback
+test("getRoadRoute returns valid route response structure", async () => {
+  const { getRoadRoute } = await import("./routing");
+  const origin = { lat: 11.53, lon: 76.14 };
+  const destination = { lat: 11.55, lon: 76.12 };
+  const result = await getRoadRoute(origin, destination, { timeoutMs: 5000 });
+  assert.ok(result);
+  assert.ok(["success", "no_route", "error"].includes(result.status));
+  assert.ok(typeof result.distance_km === "number");
+  assert.ok(typeof result.geodesic_distance_km === "number");
+});
+
+// 14. Predictive Risk: Angular difference and threshold classification
+test("classifyImpactTier accurately assigns screening tiers", async () => {
+  const { classifyImpactTier, getAngularDifference } = await import("./predictiveRisk");
+  assert.equal(classifyImpactTier(0.85), "Potential Red Zone");
+  assert.equal(classifyImpactTier(0.68), "High Potential Impact");
+  assert.equal(classifyImpactTier(0.45), "Moderate Potential Impact");
+  assert.equal(classifyImpactTier(0.20), "Lower Potential Impact");
+
+  assert.equal(getAngularDifference(240, 240), 0);
+  assert.equal(getAngularDifference(0, 180), 180);
+  assert.equal(getAngularDifference(10, 350), 20);
+});
+
+// 15. Predictive Risk: Model generates spatial influence sector and assessments across regions
+test("assessPredictiveRisk generates spatial sector and normalized scores", async () => {
+  const { assessPredictiveRisk, SCIENTIFIC_DISCLAIMER } = await import("./predictiveRisk");
+  const { getWeatherForecast } = await import("./weather");
+
+  const wayanadFeatures = getRegionFeatures("wayanad");
+  const weather = await getWeatherForecast(11.53, 76.12, "wayanad", 3000);
+
+  assert.ok(weather.windSpeed >= 0);
+  assert.ok(typeof weather.windDirection === "number");
+
+  const riskResult = assessPredictiveRisk(wayanadFeatures, weather, "wayanad");
+  assert.ok(riskResult.assessments.length > 0);
+  assert.ok(riskResult.sectorPolygon.geometry.coordinates[0].length > 5);
+  assert.equal(riskResult.disclaimer, SCIENTIFIC_DISCLAIMER);
+
+  // Scores bounded between 0 and 1
+  for (const a of riskResult.assessments) {
+    assert.ok(a.potentialImpactScore >= 0 && a.potentialImpactScore <= 1);
+    assert.ok(["Potential Red Zone", "High Potential Impact", "Moderate Potential Impact", "Lower Potential Impact"].includes(a.impactTier));
+  }
+});
+

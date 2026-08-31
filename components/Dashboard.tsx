@@ -27,6 +27,8 @@ import { CapacityGapPanel } from "./CapacityGapPanel";
 import { ResourceGapPanel } from "./ResourceGapPanel";
 import { AssamTimelinePanel } from "./AssamTimelinePanel";
 import { SourcesPanel } from "./SourcesPanel";
+import { useRoadRoute } from "@/hooks/useRoadRoute";
+import { usePredictiveRisk } from "@/hooks/usePredictiveRisk";
 import dynamic from "next/dynamic";
 
 const MapView = dynamic(() => import("./MapView").then((m) => m.MapView), {
@@ -144,6 +146,39 @@ export function Dashboard() {
       : region === "assam"
       ? "Assam • Flood"
       : "Wayanad • Landslide";
+
+  const topCandidateCoords: [number, number] | null = useMemo(() => {
+    if (!selectedFeature || selectedFeature.properties.role !== "origin") return null;
+    const topSmart = assessment?.smart_relocation_options?.[0];
+    if (topSmart?.coordinates) return topSmart.coordinates;
+    if (plan?.allocation?.allocations?.[0]) {
+      const topAllocSiteId = plan.allocation.allocations[0].site_id;
+      const topSiteFeature = features.find((f) => f.properties.id === topAllocSiteId);
+      if (topSiteFeature) return topSiteFeature.geometry.coordinates;
+    }
+    if (candidateFeatures[0]) return candidateFeatures[0].geometry.coordinates;
+    return null;
+  }, [selectedFeature, assessment, plan, features, candidateFeatures]);
+
+  const originCoords = selectedFeature ? selectedFeature.geometry.coordinates : null;
+  const {
+    route,
+    isLoading: isLoadingRoute,
+    activeGeometryCoords,
+    alternativeGeometries,
+    activeStats
+  } = useRoadRoute({
+    origin: originCoords,
+    destination: topCandidateCoords,
+    enabled: !!originCoords && !!topCandidateCoords && activeTab === "risk_map",
+    alternatives: true
+  });
+
+  const {
+    result: predictiveResult,
+    isEnabled: isPredictiveEnabled,
+    setIsEnabled: setIsPredictiveEnabled
+  } = usePredictiveRisk({ features, region });
 
   return (
     <div className="relative min-h-screen text-slate-900 flex overflow-x-hidden">
@@ -269,6 +304,23 @@ export function Dashboard() {
                   bhuvanLayer={null}
                   plan={plan}
                   region={region}
+                  roadRouteCoords={activeGeometryCoords}
+                  alternativeRouteCoords={alternativeGeometries}
+                  routeStats={
+                    activeStats
+                      ? {
+                          distance_km: activeStats.distance_km,
+                          duration_minutes: activeStats.duration_minutes,
+                          isRoadRoute: !!(route && route.status === "success"),
+                          summary: activeStats.summary,
+                          source: route?.source
+                        }
+                      : null
+                  }
+                  isLoadingRoute={isLoadingRoute}
+                  predictiveResult={predictiveResult}
+                  showPredictiveRisk={isPredictiveEnabled}
+                  onTogglePredictiveRisk={setIsPredictiveEnabled}
                 />
               </div>
             </div>

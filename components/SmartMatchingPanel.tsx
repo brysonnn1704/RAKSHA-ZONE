@@ -134,7 +134,7 @@ export function SmartMatchingPanel({
                     {/* Level 1 Core Metrics */}
                     <div className="space-y-1.5 text-xs border-t border-slate-100 pt-2.5">
                       <div className="flex justify-between text-slate-700">
-                        <span className="text-slate-500">Distance:</span>
+                        <span className="text-slate-500">Geodesic Distance:</span>
                         <b className="font-mono text-slate-900">{opt.distance_km} km</b>
                       </div>
                       <div className="flex justify-between text-slate-700">
